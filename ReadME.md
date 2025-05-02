@@ -9,3 +9,6 @@
 4. Cambiare utils.py da generatore pdf a qualcosa come una chat, oppure una stanza 2D stile videogioco in cui gli agenti comunicano? -----> In generale, capire come far interagire un utente con questo progetto al fine che esso riesca a generare battute.
 
  
+5. Redesign degli agenti: ruoli, cosa fanno.
+
+6. Redesign dei prompt
