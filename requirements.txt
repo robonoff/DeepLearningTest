@@ -1,0 +1,5 @@
+autogen-agentchat
+autogen-ext[ollama]
+python-dotenv
+pyautogen
+mcp
