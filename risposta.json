@@ -1,0 +1,36 @@
+{
+  "id": "llama3.3:latest-afb9f3ba-0c88-4b07-b038-b3f4ed25b006",
+  "created": 1747584457,
+  "model": "llama3.3:latest",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "message": {
+        "content": "La capitale dell'Italia \u00e8 Roma.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "response_token/s": 31.8,
+    "prompt_token/s": 1169.84,
+    "total_duration": 551546929,
+    "load_duration": 15243990,
+    "prompt_eval_count": 259,
+    "prompt_tokens": 259,
+    "prompt_eval_duration": 221397995,
+    "eval_count": 10,
+    "completion_tokens": 10,
+    "eval_duration": 314486933,
+    "approximate_total": "0h0m0s",
+    "total_tokens": 269,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}
