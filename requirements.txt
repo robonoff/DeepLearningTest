@@ -1,8 +1,12 @@
-autogen-agentchat
-autogen-ext[ollama]
-ag2[openai]
-python-dotenv
-pyautogen
-mcp
-python-dotenv
-requests
+# AI Comedy Club Simulator Requirements
+# The main implementation (direct_comedy_club.py) uses only standard library modules
+# These are optional dependencies for extended functionality
+
+# For joke categorization utilities
+pandas>=1.5.0
+
+# For potential future web interface
+requests>=2.28.0
+
+# For environment configuration (optional)
+python-dotenv>=0.19.0
