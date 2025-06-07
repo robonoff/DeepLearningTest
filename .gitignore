@@ -2,3 +2,10 @@
 
 *venv
 /dl-env
+
+*.env
+
+# Ignora i file compilati o temporanei
+*.pyc
+__pycache__/
+*.log

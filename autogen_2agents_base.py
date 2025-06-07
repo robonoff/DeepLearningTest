@@ -1,15 +1,7 @@
 import autogen
 import json
 from datetime import datetime
-
-# Configure Ollama with Llama 3.2
-config_list = [
-    {
-        "model": "llama3.2", 
-        "api_key": "ollama",
-        "base_url": "http://localhost:11434/v1"
-    }
-]
+from config_list import config_list
 
 # Configure agents with the LLM configuration
 assistant = autogen.AssistantAgent(
@@ -22,8 +14,8 @@ assistant = autogen.AssistantAgent(
 user_proxy = autogen.UserProxyAgent(
     name="User",
     human_input_mode="NEVER",  # No human input needed
-    system_message="You are a user interested in AI and machine learning. Ask questions about these topics.",
-    default_auto_reply="That's interesting. Can you tell me more about how this applies to deep learning research?",
+    system_message="You are a comedian interested to make jokes about Artificial intelligence and Machine Learning",
+    default_auto_reply="That's interesting. Nice joke!",
     code_execution_config={"use_docker": False}  # Disable Docker requirement
 )
 
@@ -59,7 +51,7 @@ assistant.receive = assistant_receive_and_save
 # Start the conversation with max_turns=2 to limit to 2 exchanges
 user_proxy.initiate_chat(
     assistant,
-    message="What are the main approaches to deep learning? And what's the difference between CNN and RNN?",
+    message="Can you tell me what clustering and regression have in common? Make me laugh a lot!",
     max_turns=2  # Limit to 2 exchanges (1 from user, 1 from assistant)
 )
 

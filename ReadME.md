@@ -12,3 +12,18 @@
 5. Redesign degli agenti: ruoli, cosa fanno.
 
 6. Redesign dei prompt
+
+
+## 7 GIUGNO 2024
+
+# VIRTUAL ENV and how to use it
+
+To install and activate the venv, run:
+
+chmod +x runme.sh && source ./runme.sh
+
+This will create and activate a virtual environment with these packages: pybind11, pandas, scipy, matplotlib, numpy
+
+You can find the list in the file requirements.txt.
+Source will keep the venv activated after running the bash script.
+

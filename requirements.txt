@@ -1,5 +1,6 @@
 autogen-agentchat
 autogen-ext[ollama]
+ag2[openai]
 python-dotenv
 pyautogen
 mcp
