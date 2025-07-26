@@ -25,6 +25,7 @@ class ComedyClubGUI:
         
         # Simulation state
         self.is_running = False
+        self.is_paused = False  # New pause state for individual jokes
         self.current_show_log = []
         self.current_performer = None
         
@@ -64,15 +65,12 @@ class ComedyClubGUI:
         )
         subtitle_label.pack()
         
-        # Main content area with two columns
+        # Main content area - only stage (no log area)
         main_frame = tk.Frame(self.root, bg='#1a1a1a')
         main_frame.pack(fill='both', expand=True, padx=10, pady=5)
         
-        # Left column - Comedy Club Stage
+        # Only the stage area (log area removed)
         self.setup_stage_area(main_frame)
-        
-        # Right column - Performance Log
-        self.setup_log_area(main_frame)
         
         # Bottom controls
         self.setup_controls()
@@ -80,7 +78,7 @@ class ComedyClubGUI:
     def setup_stage_area(self, parent):
         """Setup the visual stage area"""
         stage_frame = tk.Frame(parent, bg='#2c3e50', relief='raised', bd=2)
-        stage_frame.pack(side='left', fill='both', expand=True, padx=(0, 5))
+        stage_frame.pack(fill='both', expand=True)  # Fill entire area
         
         # Stage title
         stage_title = tk.Label(
@@ -88,9 +86,19 @@ class ComedyClubGUI:
             text="🎤 COMEDY CLUB STAGE",
             font=('Arial', 14, 'bold'),
             fg='white',
-            bg='#2c3e50'
+            bg='#000080'
         )
         stage_title.pack(pady=5)
+        
+        # Show info
+        self.show_info = tk.Label(
+            stage_frame,
+            text="No show running",
+            font=('Arial', 10),
+            fg='#95a5a6',
+            bg='#2c3e50'
+        )
+        self.show_info.pack(pady=2)
         
         # Comedian status area
         self.comedian_frame = tk.Frame(stage_frame, bg='#2c3e50')
@@ -156,13 +164,14 @@ class ComedyClubGUI:
         
         self.current_performance = scrolledtext.ScrolledText(
             perf_frame,
-            height=8,
-            width=50,
-            font=('Arial', 10),
+            height=15,  # Increased height
+            width=80,   # Increased width
+            font=('Arial', 12),  # Larger font
             bg='#2c3e50',
             fg='white',
             insertbackground='white',
-            state='disabled'
+            state='disabled',
+            wrap=tk.WORD  # Word wrap for better readability
         )
         self.current_performance.pack(fill='both', expand=True, padx=10, pady=5)
         
@@ -262,6 +271,40 @@ class ComedyClubGUI:
         )
         self.stop_button.pack(side='left', padx=5)
         
+        # Pause/Play button for individual jokes
+        self.pause_button = tk.Button(
+            control_frame,
+            text="⏸️ Pause Reading",
+            command=self.toggle_pause,
+            font=('Arial', 12, 'bold'),
+            bg='#f39c12',
+            fg='white',
+            padx=20,
+            pady=5,
+            state='disabled'
+        )
+        self.pause_button.pack(side='left', padx=5)
+        
+        # Topic input
+        tk.Label(
+            control_frame,
+            text="Topic:",
+            font=('Arial', 10),
+            fg='white',
+            bg='#1a1a1a'
+        ).pack(side='left', padx=(20, 5))
+        
+        self.topic_entry = tk.Entry(
+            control_frame,
+            font=('Arial', 10),
+            width=25,
+            bg='#2c3e50',
+            fg='white',
+            insertbackground='white'
+        )
+        self.topic_entry.pack(side='left', padx=5)
+        self.topic_entry.insert(0, "technology")  # Default topic
+        
         self.load_button = tk.Button(
             control_frame,
             text="📂 Load Show Log",
@@ -272,7 +315,7 @@ class ComedyClubGUI:
             padx=20,
             pady=5
         )
-        self.load_button.pack(side='left', padx=5)
+        self.load_button.pack(side='left', padx=(20, 5))
         
         # Status indicator
         self.status_label = tk.Label(
@@ -290,8 +333,10 @@ class ComedyClubGUI:
             return
         
         self.is_running = True
+        self.is_paused = False
         self.start_button.config(state='disabled')
         self.stop_button.config(state='normal')
+        self.pause_button.config(state='normal', text="⏸️ Pause Reading", bg='#f39c12')
         self.status_label.config(text="Show in progress...", fg='#f39c12')
         
         # Clear previous content
@@ -304,20 +349,41 @@ class ComedyClubGUI:
     def stop_show(self):
         """Stop the current show"""
         self.is_running = False
+        self.is_paused = False
         self.start_button.config(state='normal')
         self.stop_button.config(state='disabled')
+        self.pause_button.config(state='disabled', text="⏸️ Pause Reading")
         self.status_label.config(text="Show stopped", fg='#e74c3c')
         
         # Reset comedian status
         for name, widget in self.comedian_widgets.items():
             widget['activity'].config(text="💤 Waiting")
     
+    def toggle_pause(self):
+        """Toggle pause state for reading jokes"""
+        if self.is_paused:
+            self.is_paused = False
+            self.pause_button.config(text="⏸️ Pause Reading", bg='#f39c12')
+            self.status_label.config(text="Show resumed...", fg='#27ae60')
+        else:
+            self.is_paused = True
+            self.pause_button.config(text="▶️ Continue Reading", bg='#27ae60')
+            self.status_label.config(text="Reading paused...", fg='#f39c12')
+    
+    def smart_sleep(self, seconds):
+        """Sleep that respects pause state - checks every 0.5 seconds"""
+        total_time = 0
+        while total_time < seconds and self.is_running:
+            if not self.is_paused:
+                time.sleep(0.5)
+                total_time += 0.5
+            else:
+                # While paused, just check every 0.1 seconds
+                time.sleep(0.1)
+    
     def clear_displays(self):
         """Clear all display areas"""
-        self.log_text.config(state='normal')
-        self.log_text.delete(1.0, tk.END)
-        self.log_text.config(state='disabled')
-        
+        # Only clear the performance area since we removed the log
         self.current_performance.config(state='normal')
         self.current_performance.delete(1.0, tk.END)
         self.current_performance.config(state='disabled')
@@ -327,96 +393,178 @@ class ComedyClubGUI:
     def run_simulation(self):
         """Run the actual comedy simulation"""
         try:
-            # Import and run the simulation
+            # Import and run the simulation with Orfeo
             import sys
             import os
             sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-            from src.core.comedy_club import ComedyClubSimulator
             
-            self.add_log("🎭 Initializing comedy club...", "Show_Manager")
-            club = ComedyClubSimulator(use_ollama=True)
+            # Show immediate feedback
+            self.update_current_performance("Show Manager", "🚀 Starting show immediately...")
             
-            self.add_log("🎪 All comedians ready!", "Show_Manager")
+            # Import and initialize
+            from src.core.comedy_club_clean import ComedyClub
+            self.update_current_performance("Show Manager", "🔗 Connecting to Orfeo cluster...")
+            
+            club = ComedyClub()
+            
+            self.update_current_performance("Show Manager", "✅ Connected! Starting performance...")
             self.show_info.config(text=f"Show started: {datetime.now().strftime('%H:%M:%S')}")
             
-            # Run show with visual updates
+            # Start immediately without any delay
             self.run_visual_show(club)
             
         except Exception as e:
-            self.add_log(f"❌ Error: {e}", "Show_Manager")
+            self.update_current_performance("Error", f"System error: {e}")
         finally:
             if self.is_running:
                 self.stop_show()
     
     def run_visual_show(self, club):
-        """Run the show with visual updates"""
+        """Run the show with visual updates and comedian debates"""
+        # Get the user-specified topic
+        user_topic = self.topic_entry.get().strip() or "general comedy"
+        
         # Get the comedians list and shuffle for performance order
-        comedians = club.comedians.copy()
-        random.shuffle(comedians)
+        comedian_names = list(club.comedians.keys())
+        random.shuffle(comedian_names)
         
-        # Opening
-        self.add_log("🎤 Welcome to the AI Comedy Club!", "Show_Manager")
-        time.sleep(2)
+        # Opening - start immediately
+        self.update_audience_reaction("🎤 Welcome to the AI Comedy Club!")
+        self.update_current_performance("Show Manager", f"🎯 Topic: '{user_topic.upper()}' - Let's go!")
+        # No delay - start immediately
         
-        # Main show
+        # Store jokes for debates
+        round_jokes = []
+        
+        # Main show with debates
         for round_num in range(2):  # 2 rounds
             if not self.is_running:
                 break
                 
-            self.add_log(f"\\n🎭 === ROUND {round_num + 1} ===", "Show_Manager")
+            self.update_current_performance("Show Manager", f"🎭 ROUND {round_num + 1} - Topic: {user_topic}")
+            # Start round immediately
             
-            for comedian in comedians:
+            # Each comedian performs on the user's topic
+            current_round_jokes = []
+            
+            for comedian_name in comedian_names:
                 if not self.is_running:
                     break
                 
-                comedian_name = comedian.name
+                # Map GUI names to clean names
+                gui_name = comedian_name
+                if comedian_name == "Jerry":
+                    gui_name = "Jerry_Observational"
+                elif comedian_name == "Raven":
+                    gui_name = "Raven_Dark"
+                elif comedian_name == "Penny":
+                    gui_name = "Penny_Wordplay"
+                elif comedian_name == "Cosmic":
+                    gui_name = "Cosmic_Absurd"
                 
                 # Update status
-                self.update_comedian_status(comedian_name, "🎤 Performing")
+                self.update_comedian_status(gui_name, "🎤 Performing")
                 
-                # Get topic based on comedian style
-                topics = {
-                    'observational': "everyday technology annoyances",
-                    'dark': "silver linings in disasters", 
-                    'wordplay': "animals with jobs",
-                    'absurdist': "what if furniture had personalities"
-                }
-                topic = topics.get(comedian.humor_style, "general comedy")
+                # Show that we're generating
+                self.update_current_performance(comedian_name, "🤔 Thinking of a joke...")
                 
-                self.add_log(f"\\n🎯 {comedian_name} takes the stage!", comedian_name)
-                self.add_log(f"Topic: {topic}", comedian_name)
-                
-                # Get performance
+                # Get performance with user's topic
                 try:
-                    performance = club.get_comedian_performance(comedian, topic)
+                    joke = club.get_joke(comedian_name, user_topic)
+                    
+                    # Store joke for debates
+                    current_round_jokes.append({
+                        'comedian': comedian_name,
+                        'gui_name': gui_name,
+                        'joke': joke
+                    })
                     
                     # Display performance
-                    self.update_current_performance(comedian_name, performance)
-                    self.add_log(f"🗣️  {comedian_name}: {performance}", comedian_name)
+                    self.update_current_performance(comedian_name, joke)
                     
-                    # Simulate audience reaction
+                    # Simulate audience reaction based on comedian style
+                    comedian_info = club.comedians[comedian_name]
                     reactions = {
-                        'observational': ["😂 Big laughs!", "👏 Standing ovation!", "🤣 Audience loves it!"],
-                        'dark': ["😬 Nervous laughter", "😨 Gasps then applause", "🖤 Dark humor appreciated"],
-                        'wordplay': ["🙄 Groans and laughs", "📚 Dad joke energy!", "🎯 Pun perfection!"],
-                        'absurdist': ["🤔 Confused laughter", "🌌 Mind = blown", "👽 What just happened?!"]
+                        'observational humor': ["😂 Big laughs!", "👏 Standing ovation!", "🤣 Audience loves it!"],
+                        'dark humor': ["😬 Nervous laughter", "😨 Gasps then applause", "🖤 Dark humor appreciated"],
+                        'wordplay and puns': ["🙄 Groans and laughs", "📚 Dad joke energy!", "🎯 Pun perfection!"],
+                        'absurd and surreal humor': ["🤔 Confused laughter", "🌌 Mind = blown", "👽 What just happened?!"]
                     }
                     
-                    reaction = random.choice(reactions.get(comedian.humor_style, ["👏 Polite applause"]))
+                    reaction = random.choice(reactions.get(comedian_info['style'], ["👏 Polite applause"]))
                     self.update_audience_reaction(reaction)
-                    self.add_log(f"👥 Audience: {reaction}", "Audience")
                     
-                    time.sleep(3)  # Pause between performers
+                    # Shorter time for jokes in first round to speed up start
+                    if round_num == 0:
+                        self.smart_sleep(15)  # 15 seconds for first round jokes
+                    else:
+                        self.smart_sleep(30)  # 30 seconds for later rounds
                     
                 except Exception as e:
-                    self.add_log(f"❌ {comedian_name} had technical difficulties: {e}", "Show_Manager")
+                    self.update_current_performance("Error", f"{comedian_name} had technical difficulties: {e}")
                 
                 finally:
-                    self.update_comedian_status(comedian_name, "💤 Waiting")
+                    self.update_comedian_status(gui_name, "💤 Waiting")
+            
+            # Now the debate phase!
+            if len(current_round_jokes) > 1 and self.is_running:
+                self.update_current_performance("Show Manager", "💬 DEBATE TIME - Each comedian gets ONE response!")
+                # No delay - instant debate announcement
+                
+                # Each comedian responds to another's joke (ONE TIME ONLY)
+                for i, performer in enumerate(current_round_jokes):
+                    if not self.is_running:
+                        break
+                    
+                    # Pick someone else's joke to respond to
+                    other_jokes = [j for j in current_round_jokes if j['comedian'] != performer['comedian']]
+                    if other_jokes:
+                        target_joke = random.choice(other_jokes)
+                        
+                        # Update status
+                        self.update_comedian_status(performer['gui_name'], "💭 Responding")
+                        
+                        # Show that we're generating a response
+                        self.update_current_performance(f"{performer['comedian']}", "💭 Crafting a comeback...")
+                        
+                        try:
+                            # Create a debate prompt
+                            debate_prompt = f"React to this joke about {user_topic} from another comedian as a {club.comedians[performer['comedian']]['style']} comedian: '{target_joke['joke']}'. Give a witty comeback or build on it with your own joke style. Keep it to 1-2 sentences."
+                            
+                            response = club.client.generate(debate_prompt, max_tokens=100)
+                            
+                            self.update_current_performance(f"{performer['comedian']} responds to {target_joke['comedian']}", response)
+                            
+                            # Audience loves debates!
+                            debate_reactions = ["🔥 Burn!", "😂 Great comeback!", "👏 Brilliant response!", "🎭 Comedy gold!"]
+                            reaction = random.choice(debate_reactions)
+                            self.update_audience_reaction(reaction)
+                            
+                            # Shorter time for debate responses in first round
+                            if round_num == 0:
+                                self.smart_sleep(15)  # 15 seconds for first round debates
+                            else:
+                                self.smart_sleep(30)  # 30 seconds for later rounds
+                            
+                        except Exception as e:
+                            self.update_current_performance("Error", f"{performer['comedian']} couldn't respond: {e}")
+                        
+                        finally:
+                            self.update_comedian_status(performer['gui_name'], "💤 Waiting")
+                
+                # End debate phase explicitly
+                self.update_current_performance("Show Manager", "🎪 End of debate for this round!")
+                # No delay - instant end message
+            
+            round_jokes.extend(current_round_jokes)
+            
+            if round_num < 1 and self.is_running:  # Only pause between rounds, not after last
+                self.update_current_performance("Show Manager", "⏸️ Brief intermission...")
+                # No delay - instant intermission
         
         # Closing
         if self.is_running:
-            self.add_log("\\n🎉 That's our show! Thank you everyone!", "Show_Manager")
+            self.update_current_performance("Show Manager", f"🎉 That's our show! Tonight's topic '{user_topic}' brought out the best in our comedians!")
             self.update_audience_reaction("👏🎉 THUNDEROUS APPLAUSE! 🎉👏")
     
     def update_comedian_status(self, comedian_name, status):
@@ -429,7 +577,11 @@ class ComedyClubGUI:
         def update():
             self.current_performance.config(state='normal')
             self.current_performance.delete(1.0, tk.END)
-            self.current_performance.insert(tk.END, f"{comedian_name}:\\n{performance}")
+            # Don't add comedian name if it's already in the performance text
+            if performance.startswith(comedian_name) or ":" in performance.split('\n')[0]:
+                self.current_performance.insert(tk.END, performance)
+            else:
+                self.current_performance.insert(tk.END, f"{comedian_name}:\n{performance}")
             self.current_performance.config(state='disabled')
         
         self.root.after(0, update)
@@ -439,22 +591,9 @@ class ComedyClubGUI:
         self.root.after(0, lambda: self.audience_reaction.config(text=reaction))
     
     def add_log(self, message, speaker="System"):
-        """Add a message to the log"""
-        def update():
-            self.log_text.config(state='normal')
-            timestamp = datetime.now().strftime("%H:%M:%S")
-            
-            if speaker in self.comedian_colors:
-                self.log_text.insert(tk.END, f"[{timestamp}] ", 'default')
-                self.log_text.insert(tk.END, f"{speaker}: ", speaker)
-                self.log_text.insert(tk.END, f"{message}\\n", 'default')
-            else:
-                self.log_text.insert(tk.END, f"[{timestamp}] {message}\\n")
-            
-            self.log_text.see(tk.END)
-            self.log_text.config(state='disabled')
-        
-        self.root.after(0, update)
+        """Add a message to the log - disabled since log area was removed"""
+        # Log area was removed, so this method does nothing now
+        pass
     
     def load_show_log(self):
         """Load a previous show log"""

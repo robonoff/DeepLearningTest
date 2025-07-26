@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Comedy Club AI - Main Entry Point
-Versione semplificata e funzionante
+Comedy Club AI - Solo modalità Orfeo
 """
 
 import argparse
@@ -16,27 +15,25 @@ from src.core.comedy_club_clean import ComedyClub
 from config.orfeo_config_new import get_ssh_command, is_orfeo_available
 
 def main():
-    parser = argparse.ArgumentParser(description='Comedy Club AI Simulator')
+    parser = argparse.ArgumentParser(description='Comedy Club AI con Orfeo')
     parser.add_argument('--mode', choices=['interactive', 'show', 'test'], default='interactive',
                         help='Modalità di esecuzione')
-    parser.add_argument('--mock', action='store_true',
-                        help='Usa modalità mock (non si connette a Orfeo)')
     parser.add_argument('--rounds', type=int, default=2,
                         help='Numero di round per lo spettacolo')
     
     args = parser.parse_args()
     
     # Controlla configurazione Orfeo
-    if not args.mock and not is_orfeo_available():
-        print("⚠️ Configurazione Orfeo non trovata!")
-        print(f"📡 Per usare Orfeo, esegui prima: {get_ssh_command()}")
-        print("🧪 Uso modalità mock...")
-        args.mock = True
-    
-    # Crea il comedy club
-    club = ComedyClub(use_mock=args.mock)
+    if not is_orfeo_available():
+        print("❌ Configurazione Orfeo non trovata!")
+        print(f"� Esegui prima: source config/set_env.sh")
+        print(f"📡 Poi assicurati che sia attivo: {get_ssh_command()}")
+        return 1
     
     try:
+        # Crea il comedy club
+        club = ComedyClub()
+        
         if args.mode == 'interactive':
             print("\n🎭 Avvio modalità interattiva...")
             club.interactive_mode()
@@ -53,7 +50,12 @@ def main():
     except KeyboardInterrupt:
         print("\n👋 Arrivederci!")
     except Exception as e:
-        print(f"⚠️ Errore: {e}")
+        print(f"❌ Errore: {e}")
+        print("💡 Controlla che:")
+        print("   1. Hai eseguito: source config/set_env.sh")
+        print("   2. Il port forwarding SSH è attivo")
+        print("   3. Orfeo è raggiungibile")
+        return 1
 
 if __name__ == "__main__":
-    main()
+    exit(main() or 0)

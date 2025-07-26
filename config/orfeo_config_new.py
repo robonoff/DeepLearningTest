@@ -12,12 +12,15 @@ load_dotenv()
 
 # Recupera il token JWT dal file .env
 token = os.getenv("TOKEN")
-model = os.getenv("ORFEO_MODEL", "llama3.3:latest")
-base_url = os.getenv("ORFEO_BASE_URL", "http://10.128.2.165:8080/api")
+model = os.getenv("ORFEO_MODEL")
+base_url = os.getenv("ORFEO_BASE_URL")
 
 if not token:
     raise ValueError("TOKEN non definito. Esegui: export TOKEN='...' o crea file .env")
-
+if not model:
+    raise ValueError("ORFEO_MODEL non definito. Esegui: export ORFEO_MODEL='...' o crea file .env")
+if not base_url:
+    raise ValueError("ORFEO_BASE_URL non definito. Esegui: export ORFEO_BASE_URL='...' o crea file .env")
 # Configurazione per cluster Orfeo con llama3.3:latest
 config_list = [
     {

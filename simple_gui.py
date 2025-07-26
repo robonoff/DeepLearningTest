@@ -137,10 +137,10 @@ class SimpleComedyGUI:
     def run_simulation(self):
         """Run the comedy simulation"""
         try:
-            from src.core import ComedyClubSimulator
+            from src.core.comedy_club_clean import ComedyClub
             
-            self.add_log("🎭 Initializing comedy club...", "Show_Manager")
-            club = ComedyClubSimulator(use_ollama=True)
+            self.add_log("🎭 Initializing comedy club with Orfeo...", "Show_Manager")
+            club = ComedyClub()
             
             self.add_log("🎪 All comedians ready!", "Show_Manager")
             
@@ -152,19 +152,19 @@ class SimpleComedyGUI:
                 self.add_log(f"\n🎭 === ROUND {round_num + 1} ===", "Show_Manager")
                 
                 # Shuffle comedians
-                comedians = club.comedians.copy()
-                random.shuffle(comedians)
+                comedian_names = list(club.comedians.keys())
+                random.shuffle(comedian_names)
                 
-                for comedian in comedians:
+                for comedian_name in comedian_names:
                     if not self.is_running:
                         break
                     
-                    self.add_log(f"\n🎤 {comedian.name} takes the stage!", comedian.name)
+                    self.add_log(f"\n🎤 {comedian_name} takes the stage!", comedian_name)
                     
                     # Get performance
                     try:
-                        performance = club.get_comedian_performance(comedian, "general comedy")
-                        self.add_log(f"🗣️ {performance}", comedian.name)
+                        joke = club.get_joke(comedian_name)
+                        self.add_log(f"🗣️ {joke}", comedian_name)
                         
                         # Simulate audience reaction
                         reactions = ["😂 Big laughs!", "👏 Applause!", "🤣 Great stuff!"]
@@ -174,7 +174,7 @@ class SimpleComedyGUI:
                         time.sleep(2)  # Pause
                         
                     except Exception as e:
-                        self.add_log(f"❌ Technical difficulties: {e}", comedian.name)
+                        self.add_log(f"❌ Technical difficulties: {e}", comedian_name)
             
             if self.is_running:
                 self.add_log("\n🎉 That's our show! Thank you everyone!", "Show_Manager")

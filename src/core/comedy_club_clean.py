@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Comedy Club Simulator - Versione semplificata e funzionante
+Comedy Club Simulator - Solo modalità Orfeo
 """
 
 import sys
@@ -12,36 +12,19 @@ import time
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(current_dir, '..', '..'))
 
-try:
-    from src.core.orfeo_client_new import OrfeoClient, MockClient
-    from config.orfeo_config_new import is_orfeo_available
-except ImportError as e:
-    print(f"Import error: {e}")
-    # Fallback semplice
-    class MockClient:
-        def generate(self, prompt, **kwargs):
-            return "Mock joke: Why did the AI cross the road? To get to the other dataset!"
-    
-    def is_orfeo_available():
-        return False
+from src.core.orfeo_client_new import OrfeoClient
+from config.orfeo_config_new import is_orfeo_available
 
 class ComedyClub:
-    """Simulatore comedy club"""
+    """Simulatore comedy club - solo modalità Orfeo"""
     
-    def __init__(self, use_mock=False):
+    def __init__(self):
         """Inizializza il comedy club"""
         
-        try:
-            if use_mock or not is_orfeo_available():
-                self.client = MockClient()
-                self.mode = "Mock"
-            else:
-                from src.core.orfeo_client_new import OrfeoClient
-                self.client = OrfeoClient()
-                self.mode = "Orfeo"
-        except:
-            self.client = MockClient()
-            self.mode = "Mock"
+        if not is_orfeo_available():
+            raise ValueError("⚠️ Token non configurato. Esegui: source config/set_env.sh")
+        
+        self.client = OrfeoClient()
         
         self.comedians = {
             "Jerry": {
@@ -67,8 +50,7 @@ class ComedyClub:
             "work", "relationships", "travel", "weather", "coffee", "smartphones"
         ]
         
-        print(f"🎭 Comedy Club inizializzato")
-        print(f"   Modalità: {self.mode}")
+        print(f"🎭 Comedy Club inizializzato con Orfeo")
         print(f"   Comici: {len(self.comedians)}")
     
     def get_joke(self, comedian_name=None, topic=None):
@@ -78,7 +60,7 @@ class ComedyClub:
         topic = topic or random.choice(self.topics)
         
         if comedian_name not in self.comedians:
-            return f"⚠️ Comico {comedian_name} non trovato!"
+            raise ValueError(f"⚠️ Comico {comedian_name} non trovato!")
         
         comedian = self.comedians[comedian_name]
         
@@ -100,7 +82,7 @@ Your joke:"""
         """Esegui uno spettacolo completo"""
         
         print("\n" + "="*60)
-        print("🎭 BENVENUTI AL COMEDY CLUB AI! 🎭")
+        print("🎭 BENVENUTI AL COMEDY CLUB AI CON ORFEO! 🎭")
         print("   Stasera abbiamo 4 fantastici comici AI!")
         print("="*60)
         
@@ -117,12 +99,16 @@ Your joke:"""
             
             for comedian in comedians_order:
                 print(f"\n🎤 Sul palco: {comedian}!")
-                joke = self.get_joke(comedian, topic)
-                print(f"   {joke}")
-                
-                # Reazione del pubblico
-                reactions = ["👏 Grandi risate!", "🎉 Applausi!", "⭐ Fantastico!", "😂 Il pubblico impazzisce!"]
-                print(f"   {random.choice(reactions)}")
+                try:
+                    joke = self.get_joke(comedian, topic)
+                    print(f"   {joke}")
+                    
+                    # Reazione del pubblico
+                    reactions = ["👏 Grandi risate!", "🎉 Applausi!", "⭐ Fantastico!", "😂 Il pubblico impazzisce!"]
+                    print(f"   {random.choice(reactions)}")
+                    
+                except Exception as e:
+                    print(f"   ⚠️ {comedian} ha avuto problemi tecnici: {e}")
                 
                 time.sleep(1)  # Pausa tra performance
         
@@ -132,7 +118,7 @@ Your joke:"""
 
     def interactive_mode(self):
         """Modalità interattiva"""
-        print("\n🎭 MODALITÀ INTERATTIVA")
+        print("\n🎭 MODALITÀ INTERATTIVA CON ORFEO")
         print("Comandi disponibili:")
         print("  - Premi ENTER per una battuta casuale")
         print("  - 'show' per uno spettacolo completo")
@@ -150,18 +136,27 @@ Your joke:"""
                     break
                 elif user_input == '':
                     # Battuta casuale
-                    joke = self.get_joke()
-                    print(f"🎤 {joke}")
+                    try:
+                        joke = self.get_joke()
+                        print(f"🎤 {joke}")
+                    except Exception as e:
+                        print(f"⚠️ Errore: {e}")
                 elif user_input.startswith('show'):
                     # Spettacolo
                     parts = user_input.split()
                     rounds = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 2
-                    self.run_show(rounds)
+                    try:
+                        self.run_show(rounds)
+                    except Exception as e:
+                        print(f"⚠️ Errore durante lo spettacolo: {e}")
                 elif user_input.capitalize() in self.comedians:
                     # Battuta di un comico specifico
                     comedian = user_input.capitalize()
-                    joke = self.get_joke(comedian)
-                    print(f"🎤 {joke}")
+                    try:
+                        joke = self.get_joke(comedian)
+                        print(f"🎤 {joke}")
+                    except Exception as e:
+                        print(f"⚠️ Errore: {e}")
                 else:
                     print("⚠️ Comando non riconosciuto. Prova 'quit', 'show', o il nome di un comico.")
                     
@@ -172,12 +167,14 @@ Your joke:"""
                 print(f"⚠️ Errore: {e}")
 
 if __name__ == "__main__":
-    # Test veloce
-    club = ComedyClub(use_mock=True)  # Usa mock per test veloce
-    
-    print("\n🧪 Test battuta singola:")
-    joke = club.get_joke()
-    print(joke)
-    
-    print("\n🧪 Test spettacolo breve:")
-    club.run_show(rounds=1)
+    # Test
+    try:
+        club = ComedyClub()
+        
+        print("\n🧪 Test battuta singola:")
+        joke = club.get_joke()
+        print(joke)
+        
+    except Exception as e:
+        print(f"⚠️ Errore: {e}")
+        print("💡 Assicurati di aver eseguito: source config/set_env.sh")

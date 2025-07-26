@@ -49,12 +49,12 @@ class ComedyClubSimulator:
         except Exception as e:
             print(f"❌ Error loading jokes: {e}")
             self.joke_data = None
-    
+   
     def _call_ollama(self, prompt: str, system_prompt: str = "") -> str:
         """Call Ollama directly via subprocess"""
         if not self.use_ollama:
             return self._generate_mock_response()
-        
+    
         try:
             # Create full prompt with system message
             full_prompt = f"{system_prompt}\n\nUser: {prompt}\nAssistant:"
