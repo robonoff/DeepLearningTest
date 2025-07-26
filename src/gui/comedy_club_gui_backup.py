@@ -28,6 +28,24 @@ class ComedyClubGUI:
         self.is_paused = False  # New pause state for individual jokes
         self.current_show_log = []
         self.current_performer = None
+            self.update_current_performance("Show Manager", f"🧠 {rag_status} initialized")
+            self.update_current_performance("Show Manager", "✅ Connected! Starting performance...")
+            self.show_info.config(text=f"Show started: {datetime.now().strftime('%H:%M:%S')}")
+            
+            # Start immediately without any delay
+            self.run_visual_show(club)
+    
+    def __init__(self, root):
+        self.root = root
+        self.root.title("🎭 AI Comedy Club Simulation")
+        self.root.geometry("1200x800")
+        self.root.configure(bg='#1a1a1a')  # Dark comedy club theme
+        
+        # Simulation state
+        self.is_running = False
+        self.is_paused = False  # New pause state for individual jokes
+        self.current_show_log = []
+        self.current_performer = None
         
         # Comedian colors for visual distinction
         self.comedian_colors = {
@@ -305,10 +323,21 @@ class ComedyClubGUI:
         self.topic_entry.pack(side='left', padx=5)
         self.topic_entry.insert(0, "technology")  # Default topic
         
-        # RAG Control
+        # RAG Controls
+        rag_frame = tk.Frame(control_frame, bg='#1a1a1a')
+        rag_frame.pack(side='left', padx=(20, 5))
+        
+        tk.Label(
+            rag_frame,
+            text="🧠 RAG:",
+            font=('Arial', 10, 'bold'),
+            fg='#4ECDC4',
+            bg='#1a1a1a'
+        ).pack()
+        
         self.web_search_var = tk.BooleanVar(value=True)
         self.web_search_check = tk.Checkbutton(
-            control_frame,
+            rag_frame,
             text="🌐 Web Search",
             variable=self.web_search_var,
             font=('Arial', 9),
@@ -316,7 +345,7 @@ class ComedyClubGUI:
             bg='#1a1a1a',
             selectcolor='#2c3e50'
         )
-        self.web_search_check.pack(side='left', padx=(10, 5))
+        self.web_search_check.pack()
         
         self.load_button = tk.Button(
             control_frame,
@@ -418,12 +447,8 @@ class ComedyClubGUI:
             from src.core.comedy_club_clean import ComedyClub
             self.update_current_performance("Show Manager", "🔗 Connecting to Orfeo cluster...")
             
-            # Get RAG settings from GUI
-            use_web_search = self.web_search_var.get()
-            club = ComedyClub(use_web_search=use_web_search)
+            club = ComedyClub()
             
-            rag_status = "🧠 RAG + Web Search" if use_web_search else "🧠 RAG Only"
-            self.update_current_performance("Show Manager", f"✅ {rag_status} ready!")
             self.update_current_performance("Show Manager", "✅ Connected! Starting performance...")
             self.show_info.config(text=f"Show started: {datetime.now().strftime('%H:%M:%S')}")
             

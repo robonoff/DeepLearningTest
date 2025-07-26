@@ -43,3 +43,18 @@ def is_orfeo_available():
 def get_ssh_command():
     """Restituisce il comando SSH per il port forwarding"""
     return config_list[0]["ssh_command"]
+
+# Configurazione RAG
+RAG_CONFIG = {
+    "USE_WEB_SEARCH": True,
+    "SEARCH_CACHE_DURATION": 3600,  # 1 ora
+    "MAX_SEARCH_RESULTS": 3,
+    "WEB_CONTEXT_MAX_LENGTH": 400,
+    "SEARCH_TIMEOUT": 10,
+    "EMBEDDING_MODEL": "all-MiniLM-L6-v2",
+    "TOP_K_JOKES": 3
+}
+
+def get_rag_config():
+    """Get RAG configuration"""
+    return RAG_CONFIG
