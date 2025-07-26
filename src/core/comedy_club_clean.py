@@ -26,7 +26,7 @@ except ImportError:
 class ComedyClub:
     """Simulatore comedy club - modalità Orfeo con RAG Enhancement"""
     
-    def __init__(self, use_web_search: bool = True):
+    def __init__(self, use_web_search: bool = True, use_rag: bool = True):
         """Inizializza il comedy club con supporto RAG opzionale"""
         
         if not is_orfeo_available():
@@ -37,42 +37,80 @@ class ComedyClub:
         
         # Inizializza sistema RAG se disponibile
         self.enhanced_rag = None
-        if RAG_AVAILABLE:
+        # RAG Enhancement (opzionale)
+        if use_rag:
             try:
+                sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+                from src.utils.enhanced_joke_rag import EnhancedJokeRAG
                 self.enhanced_rag = EnhancedJokeRAG()
-                if self.enhanced_rag.is_available():
-                    print("✅ Sistema RAG inizializzato")
-                else:
-                    print("⚠️ Sistema RAG non completamente disponibile")
-                    self.enhanced_rag = None
+                print("🧠 RAG system caricato per recupero intelligente jokes")
+            except ImportError as e:
+                print(f"⚠️ RAG non disponibile: {e}")
+                self.enhanced_rag = None
             except Exception as e:
-                print(f"⚠️ Inizializzazione RAG fallita: {e}")
+                print(f"⚠️ Errore caricamento RAG: {e}")
                 self.enhanced_rag = None
         
+        # Comedy Tools per ragionamento avanzato
+        try:
+            from src.utils.comedy_tools import ComedyTools
+            self.comedy_tools = ComedyTools()
+            print("🎭 Comedy Tools caricati per ragionamento avanzato")
+        except ImportError as e:
+            print(f"⚠️ Comedy Tools non disponibili: {e}")
+            self.comedy_tools = None
+        except Exception as e:
+            print(f"⚠️ Errore caricamento Comedy Tools: {e}")
+            self.comedy_tools = None
+        
+        # Sistema di Feedback per miglioramento iterativo
+        try:
+            from src.utils.comedy_feedback import ComedyFeedbackSystem
+            self.feedback_system = ComedyFeedbackSystem()
+            print("📊 Sistema di Feedback caricato per miglioramento iterativo")
+        except ImportError as e:
+            print(f"⚠️ Sistema di Feedback non disponibile: {e}")
+            self.feedback_system = None
+        except Exception as e:
+            print(f"⚠️ Errore caricamento Sistema di Feedback: {e}")
+            self.feedback_system = None
+        
         self.comedians = {
-            "Jerry": {
+            "Dave": {
+                "name": "Dave",
                 "style": "observational humor",
-                "persona": "sharp observer of everyday absurdities",
-                "catchphrases": ["What's the deal with", "Have you ever noticed", "Why do we"],
-                "tone": "conversational, incredulous, questioning"
+                "persona": "brutally honest social critic who exposes human hypocrisy",
+                "catchphrases": ["You know what really pisses me off", "Let's be honest here", "Nobody wants to admit this but"],
+                "tone": "edgy, unfiltered, provocative",
+                "signature_style": "Takes normal situations and reveals the uncomfortable truth everyone ignores",
+                "audience_connection": "Makes people laugh then feel guilty about laughing"
             },
-            "Penny": {
-                "style": "wordplay and puns", 
-                "persona": "clever wordsmith who loves linguistic twists",
-                "catchphrases": ["What do you call", "Why did the", "How do you spell"],
-                "tone": "playful, clever, punny"
+            "Sarah": {
+                "name": "Sarah", 
+                "style": "wordplay and puns",
+                "persona": "razor-sharp feminist comedian who weaponizes wit",
+                "catchphrases": ["Men always say", "Dating apps are like", "My therapist says"],
+                "tone": "sarcastic, intelligent, cutting",
+                "signature_style": "Combines clever wordplay with savage social commentary",
+                "audience_connection": "Makes women cheer and men nervous"
             },
-            "Raven": {
-                "style": "dark humor",
-                "persona": "sardonic comedian who finds humor in dark places",
-                "catchphrases": ["Death is", "My ex", "Life's too short"],
-                "tone": "cynical, witty, darkly amusing"
+            "Mike": {
+                "name": "Mike",
+                "style": "dark humor", 
+                "persona": "everyman comedian who finds darkness in mundane life",
+                "catchphrases": ["My wife thinks", "Kids today", "You know you're old when"],
+                "tone": "relatable, dark, surprisingly deep",
+                "signature_style": "Starts with normal family stuff then goes to unexpected dark places",
+                "audience_connection": "Makes parents realize they're not alone in their dark thoughts"
             },
-            "Cosmic": {
+            "Lisa": {
+                "name": "Lisa",
                 "style": "absurd and surreal humor",
-                "persona": "wild comedian with bizarre observations",
-                "catchphrases": ["Imagine if", "What if", "In a parallel universe"],
-                "tone": "surreal, unexpected, random"
+                "persona": "intellectually twisted comedian who makes smart people laugh uncomfortably", 
+                "catchphrases": ["According to my research", "Scientifically speaking", "In my professional opinion"],
+                "tone": "academic, weird, disturbingly logical",
+                "signature_style": "Uses scientific facts and logic to reach completely insane conclusions",
+                "audience_connection": "Makes educated people question their sanity"
             }
         }
        
@@ -87,56 +125,100 @@ class ComedyClub:
         print(f"   Web Search: {'✅ Attivo' if self.use_web_search else '❌ Disabilitato'}")
     
         
-    def get_joke(self, comedian_name=None, topic=None):
-        """Ottieni una battuta da un comico con supporto RAG opzionale"""
+    def get_joke(self, comedian_name=None, topic=None, enhanced_tv_search=False):
+        """Get a joke from a comedian with RAG and advanced reasoning support
+        
+        Args:
+            comedian_name: Name of the comedian
+            topic: Topic for the joke
+            enhanced_tv_search: Use specialized search for TV shows, memes, debates
+        """
         
         comedian_name = comedian_name or random.choice(list(self.comedians.keys()))
         topic = topic or random.choice(self.topics)
         
         if comedian_name not in self.comedians:
-            raise ValueError(f"⚠️ Comico {comedian_name} non trovato!")
+            raise ValueError(f"⚠️ Comedian {comedian_name} not found!")
         
         comedian_info = self.comedians[comedian_name]
         
-        # Usa RAG migliorato se disponibile e topic fornito
+        # Use RAG enhanced if available and topic provided
         if self.enhanced_rag and topic:
             try:
                 rag_result = self.enhanced_rag.retrieve_jokes_with_context(
                     comedian_info['style'], 
                     topic, 
                     use_web_search=self.use_web_search,
-                    top_k=3
+                    top_k=3,
+                    enhanced_tv_search=enhanced_tv_search
                 )
                 
                 sample_jokes = rag_result["jokes"]
                 web_context = rag_result["web_context"]
+                tv_meme_context = rag_result.get("tv_meme_context", {})
                 
-                # Prompt migliorato con personalità e esempi reali
-                base_prompt = f"You are {comedian_name}, a comedian with a {comedian_info['tone']} style. "
-                base_prompt += f"You specialize in {comedian_info['style']}. "
-                
-                # Aggiungi esempi di stile dal dataset
-                if sample_jokes:
-                    base_prompt += f"Here are examples of your comedy style:\n"
-                    for i, joke in enumerate(sample_jokes[:3], 1):
-                        base_prompt += f"{i}. {joke}\n"
-                    base_prompt += "\n"
-                
-                # Aggiungi frasi caratteristiche
-                if comedian_info.get('catchphrases'):
-                    phrase = random.choice(comedian_info['catchphrases'])
-                    base_prompt += f"Use your signature style (like '{phrase}...'). "
-                
-                base_prompt += f"Now create ONE short, funny joke about {topic}. "
-                base_prompt += "Keep it under 30 words. Make it genuinely hilarious and memorable. "
-                
-                if web_context:
-                    base_prompt += f"Current context: {web_context[:150]}. "
+                # Use advanced reasoning system if available
+                if self.comedy_tools:
+                    comedy_prompt = self.comedy_tools.generate_comedy_prompt(
+                        topic, comedian_info['style'], comedian_info, tv_meme_context
+                    )
+                    base_prompt = comedy_prompt
                     
-                base_prompt += f"\nTopic: {topic}\nYour joke:"
+                    # Add examples from dataset
+                    if sample_jokes:
+                        base_prompt += f"\n\nEXAMPLES FROM DATASET for inspiration:\n"
+                        for i, joke in enumerate(sample_jokes[:2], 1):  # Only 2 examples to avoid overloading
+                            base_prompt += f"{i}. {joke}\n"
+                    
+                    base_prompt += f"\nNow generate YOUR original joke about '{topic}' following the process above. RESPOND ONLY IN ENGLISH:"
+                    
+                else:
+                    # Fallback to improved traditional prompt
+                    base_prompt = f"You are {comedian_name}, a comedian with a {comedian_info['tone']} style. "
+                    base_prompt += f"You specialize in {comedian_info['style']}. "
+                    
+                    # Add style examples from dataset
+                    if sample_jokes:
+                        base_prompt += f"Here are examples of your comedy style:\n"
+                        for i, joke in enumerate(sample_jokes[:3], 1):
+                            base_prompt += f"{i}. {joke}\n"
+                        base_prompt += "\n"
+                    
+                    # Add characteristic phrases
+                    if comedian_info.get('catchphrases'):
+                        phrase = random.choice(comedian_info['catchphrases'])
+                        base_prompt += f"Use your signature style (like '{phrase}...'). "
+                    
+                    base_prompt += f"Now create ONE short, funny joke about {topic}. "
+                    base_prompt += "Keep it under 30 words. Make it genuinely hilarious and memorable. "
+                    base_prompt += "RESPOND ONLY IN ENGLISH. "
+                    
+                    if web_context:
+                        base_prompt += f"Current context: {web_context[:150]}. "
+                        
+                    base_prompt += f"\nTopic: {topic}\nYour joke:"
                 
                 print(f"🎤 {comedian_name} sta raccontando una battuta su {topic} (con RAG)...")
                 response = self.client.generate(base_prompt, max_tokens=200)
+                
+                # Valuta la qualità della battuta se gli strumenti sono disponibili
+                if self.comedy_tools and response:
+                    analysis = self.comedy_tools.analyze_joke_quality(response)
+                    print(f"🎯 Qualità battuta: {analysis.overall_score:.2f}/1.0")
+                    print(f"   Tipo: {analysis.humor_type}")
+                    print(f"   Setup: {analysis.setup_strength:.2f}, Punchline: {analysis.punchline_impact:.2f}")
+                    
+                    # Sistema di feedback per apprendimento
+                    if self.feedback_system:
+                        feedback = self.feedback_system.provide_feedback(response, comedian_name, topic, analysis)
+                        print(f"👥 Reazione pubblico: {feedback.audience_score:.2f}/1.0")
+                        if feedback.feedback_notes:
+                            print(f"💡 {feedback.feedback_notes[0]}")  # Mostra solo il primo feedback
+                    
+                    # Se la qualità è bassa, suggerisci miglioramenti
+                    if analysis.overall_score < 0.6:
+                        suggestions = self.comedy_tools.suggest_improvements(response, analysis)
+                        print(f"� Suggerimenti: {', '.join(suggestions[:2])}")
                 
                 return f"{comedian_name}: {response}"
                 
@@ -161,6 +243,11 @@ Your joke:"""
         
         print(f"🎤 {comedian_name} sta raccontando una battuta su {topic}...")
         response = self.client.generate(prompt, max_tokens=80)  # Ancora più corto
+        
+        # Valuta la qualità anche nel fallback
+        if self.comedy_tools and response:
+            analysis = self.comedy_tools.analyze_joke_quality(response)
+            print(f"🎯 Qualità battuta: {analysis.overall_score:.2f}/1.0 (fallback)")
         
         return f"{comedian_name}: {response}"
     
@@ -201,6 +288,43 @@ Your joke:"""
         print(f"\n" + "="*60)
         print("🎭 Grazie a tutti! Spettacolo terminato!")
         print("="*60)
+        
+        # Mostra statistiche se disponibili
+        if self.feedback_system:
+            print("\n📊 STATISTICHE DELLA SERATA:")
+            top_performers = self.feedback_system.get_top_performers()
+            for i, performer in enumerate(top_performers, 1):
+                print(f"   {i}° {performer['comedian']}: {performer['average_score']:.2f}/1.0 "
+                      f"({performer['performances']} performance)")
+
+    def show_comedian_stats(self, comedian_name: str = None):
+        """Mostra statistiche dettagliate di un comico"""
+        if not self.feedback_system:
+            print("⚠️ Sistema di feedback non disponibile")
+            return
+        
+        if comedian_name:
+            stats = self.feedback_system.get_comedian_stats(comedian_name)
+            print(f"\n📊 STATISTICHE - {comedian_name.upper()}")
+            print("-" * 40)
+            
+            if "message" in stats:
+                print(f"   {stats['message']}")
+            else:
+                print(f"   Performance totali: {stats['total_performances']}")
+                print(f"   Qualità media: {stats['average_quality']:.2f}/1.0")
+                print(f"   Gradimento pubblico: {stats['average_audience_score']:.2f}/1.0")
+                print(f"   Miglior battuta: {stats['best_joke'][:80]}...")
+                print(f"   Topic preferito: {stats['best_topic']}")
+                print(f"   Trend: {stats['improvement_trend']}")
+        else:
+            # Mostra classifica generale
+            print("\n🏆 CLASSIFICA GENERALE COMICI")
+            print("-" * 40)
+            top_performers = self.feedback_system.get_top_performers(len(self.comedians))
+            for i, performer in enumerate(top_performers, 1):
+                print(f"   {i}° {performer['comedian']}: {performer['average_score']:.2f}/1.0 "
+                      f"({performer['performances']} performance)")
 
     def interactive_mode(self):
         """Modalità interattiva con comandi RAG"""
@@ -213,6 +337,9 @@ Your joke:"""
         if self.enhanced_rag:
             print("  - 'web on/off' per abilitare/disabilitare ricerca web")
             print("  - 'rag status' per vedere lo stato del sistema RAG")
+        if self.feedback_system:
+            print("  - 'stats' per classifica generale")
+            print("  - 'stats nome_comico' per statistiche specifiche")
         print("  - 'quit' per uscire")
         print("-" * 50)
         

@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """
 Comedy Club Visual Interface
-Creates an animated visualization of the comedy club simulation
+Creates an animated visualization of the comedy club        comedians_data = [
+            ('Dave_Observational', '🔥 Dave\n(Edgy Observational)', '#FF6B6B'),
+            ('Mike_Dark', '🖤 Mike\n(Dark Everyman)', '#4ECDC4'),
+            ('Sarah_Wordplay', '⚡ Sarah\n(Sharp Wordplay)', '#45B7D1'),
+            ('Lisa_Absurd', '🧪 Lisa\n(Twisted Academic)', '#96CEB4')lation
 Similar to Agent Hospital but for a comedy club environment
 """
 
@@ -31,10 +35,10 @@ class ComedyClubGUI:
         
         # Comedian colors for visual distinction
         self.comedian_colors = {
-            'Jerry_Observational': '#FF6B6B',    # Red
-            'Raven_Dark': '#4ECDC4',             # Teal  
-            'Penny_Wordplay': '#45B7D1',         # Blue
-            'Cosmic_Absurd': '#96CEB4',          # Green
+            'Dave_Observational': '#FF6B6B',    # Red - Edgy Dave
+            'Mike_Dark': '#4ECDC4',             # Teal - Dark Mike  
+            'Sarah_Wordplay': '#45B7D1',         # Blue - Sharp Sarah
+            'Lisa_Absurd': '#96CEB4',          # Green - Weird Lisa
             'Show_Manager': '#FECA57'            # Yellow
         }
         
@@ -107,10 +111,10 @@ class ComedyClubGUI:
         # Create comedian status widgets
         self.comedian_widgets = {}
         comedians = [
-            ('Jerry_Observational', '🤵 Jerry\\n(Observational)', '#FF6B6B'),
-            ('Raven_Dark', '🖤 Raven\\n(Dark Humor)', '#4ECDC4'),
-            ('Penny_Wordplay', '🎯 Penny\\n(Wordplay)', '#45B7D1'),
-            ('Cosmic_Absurd', '🌌 Cosmic\\n(Absurdist)', '#96CEB4')
+            ('Dave_Observational', '🔥 Dave\n(Brutally Honest Observer)', '#FF6B6B'),
+            ('Mike_Dark', '🖤 Mike\n(Dark Family Man)', '#4ECDC4'),
+            ('Sarah_Wordplay', '⚡ Sarah\n(Feminist Wordsmith)', '#45B7D1'),
+            ('Lisa_Absurd', '🧪 Lisa\n(Mad Scientist Comic)', '#96CEB4')
         ]
         
         for i, (name, display, color) in enumerate(comedians):
@@ -305,7 +309,7 @@ class ComedyClubGUI:
         self.topic_entry.pack(side='left', padx=5)
         self.topic_entry.insert(0, "technology")  # Default topic
         
-        # RAG Control
+        # RAG Controls
         self.web_search_var = tk.BooleanVar(value=True)
         self.web_search_check = tk.Checkbutton(
             control_frame,
@@ -318,6 +322,19 @@ class ComedyClubGUI:
         )
         self.web_search_check.pack(side='left', padx=(10, 5))
         
+        # Enhanced TV/Meme Search Control
+        self.tv_meme_var = tk.BooleanVar(value=False)
+        self.tv_meme_check = tk.Checkbutton(
+            control_frame,
+            text="📺 TV/Meme Search",
+            variable=self.tv_meme_var,
+            font=('Arial', 9),
+            fg='white',
+            bg='#1a1a1a',
+            selectcolor='#2c3e50'
+        )
+        self.tv_meme_check.pack(side='left', padx=5)
+        
         self.load_button = tk.Button(
             control_frame,
             text="📂 Load Show Log",
@@ -329,6 +346,19 @@ class ComedyClubGUI:
             pady=5
         )
         self.load_button.pack(side='left', padx=(20, 5))
+        
+        # Statistics button for comedy feedback
+        self.stats_button = tk.Button(
+            control_frame,
+            text="📊 Show Stats",
+            command=self.show_statistics,
+            font=('Arial', 12),
+            bg='#9b59b6',
+            fg='white',
+            padx=20,
+            pady=5
+        )
+        self.stats_button.pack(side='left', padx=5)
         
         # Status indicator
         self.status_label = tk.Label(
@@ -420,9 +450,21 @@ class ComedyClubGUI:
             
             # Get RAG settings from GUI
             use_web_search = self.web_search_var.get()
-            club = ComedyClub(use_web_search=use_web_search)
+            club = ComedyClub(use_web_search=use_web_search, use_rag=True)
             
-            rag_status = "🧠 RAG + Web Search" if use_web_search else "🧠 RAG Only"
+            # Check what systems are available
+            systems_active = []
+            if hasattr(club, 'enhanced_rag') and club.enhanced_rag:
+                systems_active.append("RAG")
+            if hasattr(club, 'comedy_tools') and club.comedy_tools:
+                systems_active.append("Comedy Tools")
+            if hasattr(club, 'feedback_system') and club.feedback_system:
+                systems_active.append("Feedback System")
+            if use_web_search:
+                systems_active.append("Web Search")
+            
+            systems_str = " + ".join(systems_active) if systems_active else "Basic"
+            rag_status = f"🧠 {systems_str}"
             self.update_current_performance("Show Manager", f"✅ {rag_status} ready!")
             self.update_current_performance("Show Manager", "✅ Connected! Starting performance...")
             self.show_info.config(text=f"Show started: {datetime.now().strftime('%H:%M:%S')}")
@@ -470,14 +512,17 @@ class ComedyClubGUI:
                 
                 # Map GUI names to clean names
                 gui_name = comedian_name
-                if comedian_name == "Jerry":
-                    gui_name = "Jerry_Observational"
-                elif comedian_name == "Raven":
-                    gui_name = "Raven_Dark"
-                elif comedian_name == "Penny":
-                    gui_name = "Penny_Wordplay"
-                elif comedian_name == "Cosmic":
-                    gui_name = "Cosmic_Absurd"
+                if comedian_name == "Dave":
+                    gui_name = "Dave_Observational"
+                elif comedian_name == "Mike":
+                    gui_name = "Mike_Dark"
+                elif comedian_name == "Sarah":
+                    gui_name = "Sarah_Wordplay"
+                elif comedian_name == "Lisa":
+                    gui_name = "Lisa_Absurd"
+                else:
+                    # Fallback for unknown comedian
+                    gui_name = comedian_name
                 
                 # Update status
                 self.update_comedian_status(gui_name, "🎤 Performing")
@@ -485,9 +530,10 @@ class ComedyClubGUI:
                 # Show that we're generating
                 self.update_current_performance(comedian_name, "🤔 Thinking of a joke...")
                 
-                # Get performance with user's topic
+                # Get performance with user's topic and enhanced search option
                 try:
-                    joke = club.get_joke(comedian_name, user_topic)
+                    enhanced_tv_search = self.tv_meme_var.get()
+                    joke = club.get_joke(comedian_name, user_topic, enhanced_tv_search=enhanced_tv_search)
                     
                     # Store joke for debates
                     current_round_jokes.append({
@@ -639,6 +685,117 @@ class ComedyClubGUI:
                 
             except Exception as e:
                 self.add_log(f"❌ Error loading file: {e}", "Show_Manager")
+
+    def show_statistics(self):
+        """Show comedy performance statistics in a popup window"""
+        try:
+            import sys
+            import os
+            sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+            
+            from src.utils.comedy_feedback import ComedyFeedbackSystem
+            
+            # Create statistics window
+            stats_window = tk.Toplevel(self.root)
+            stats_window.title("📊 Comedy Performance Statistics")
+            stats_window.geometry("600x500")
+            stats_window.configure(bg='#1a1a1a')
+            
+            # Title
+            title_label = tk.Label(
+                stats_window,
+                text="📊 COMEDY PERFORMANCE STATISTICS",
+                font=('Arial', 16, 'bold'),
+                fg='#FECA57',
+                bg='#1a1a1a'
+            )
+            title_label.pack(pady=10)
+            
+            # Create text area with scrollbar
+            text_frame = tk.Frame(stats_window, bg='#1a1a1a')
+            text_frame.pack(fill='both', expand=True, padx=10, pady=10)
+            
+            stats_text = tk.Text(
+                text_frame,
+                font=('Consolas', 10),
+                bg='#2c3e50',
+                fg='white',
+                wrap='word',
+                state='normal'
+            )
+            
+            scrollbar = tk.Scrollbar(text_frame, orient='vertical', command=stats_text.yview)
+            stats_text.configure(yscrollcommand=scrollbar.set)
+            
+            stats_text.pack(side='left', fill='both', expand=True)
+            scrollbar.pack(side='right', fill='y')
+            
+            # Load and display statistics
+            feedback_system = ComedyFeedbackSystem()
+            
+            # General leaderboard
+            stats_text.insert('end', "🏆 COMEDY LEADERBOARD\n")
+            stats_text.insert('end', "=" * 50 + "\n\n")
+            
+            top_performers = feedback_system.get_top_performers(4)
+            if top_performers:
+                for i, performer in enumerate(top_performers, 1):
+                    medal = "🥇" if i == 1 else "🥈" if i == 2 else "🥉" if i == 3 else "🏅"
+                    stats_text.insert('end', f"{medal} {i}° {performer['comedian']}: "
+                                             f"{performer['average_score']:.2f}/1.0 "
+                                             f"({performer['performances']} performances)\n")
+            else:
+                stats_text.insert('end', "No performance data available yet.\n")
+            
+            stats_text.insert('end', "\n" + "=" * 50 + "\n\n")
+            
+            # Individual comedian stats
+            comedians = ["Dave", "Sarah", "Mike", "Lisa"]
+            for comedian in comedians:
+                stats = feedback_system.get_comedian_stats(comedian)
+                
+                stats_text.insert('end', f"🎭 {comedian.upper()}\n")
+                stats_text.insert('end', "-" * 30 + "\n")
+                
+                if "message" in stats:
+                    stats_text.insert('end', f"   {stats['message']}\n")
+                else:
+                    stats_text.insert('end', f"   Total Performances: {stats['total_performances']}\n")
+                    stats_text.insert('end', f"   Quality Average: {stats['average_quality']:.2f}/1.0\n")
+                    stats_text.insert('end', f"   Audience Score: {stats['average_audience_score']:.2f}/1.0\n")
+                    stats_text.insert('end', f"   Best Topic: {stats['best_topic']}\n")
+                    stats_text.insert('end', f"   Trend: {stats['improvement_trend']}\n")
+                    if stats['best_joke']:
+                        best_joke = stats['best_joke'][:80] + "..." if len(stats['best_joke']) > 80 else stats['best_joke']
+                        stats_text.insert('end', f"   Best Joke: {best_joke}\n")
+                
+                stats_text.insert('end', "\n")
+            
+            # System info
+            stats_text.insert('end', "🔧 SYSTEM INFO\n")
+            stats_text.insert('end', "-" * 30 + "\n")
+            stats_text.insert('end', "   RAG System: ✅ Active with Jester Dataset\n")
+            stats_text.insert('end', "   Comedy Tools: ✅ Advanced Reasoning\n")
+            stats_text.insert('end', "   Feedback System: ✅ Iterative Learning\n")
+            stats_text.insert('end', f"   Web Search: {'✅ Enabled' if self.web_search_var.get() else '❌ Disabled'}\n")
+            
+            stats_text.config(state='disabled')
+            
+            # Close button
+            close_button = tk.Button(
+                stats_window,
+                text="Close",
+                command=stats_window.destroy,
+                font=('Arial', 12),
+                bg='#e74c3c',
+                fg='white',
+                padx=20,
+                pady=5
+            )
+            close_button.pack(pady=10)
+            
+        except Exception as e:
+            self.add_log(f"❌ Error loading statistics: {e}", "Show_Manager")
 
 def main():
     """Main function to run the GUI"""

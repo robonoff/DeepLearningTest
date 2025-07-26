@@ -12,8 +12,13 @@ from typing import List, Dict, Optional
 class EnhancedJokeRAG:
     """Sistema RAG per recupero intelligente di jokes con ricerca web"""
     
-    def __init__(self, jokes_file: str = "logs/categorized_jokes_with_embeddings.json"):
+    def __init__(self, jokes_file: str = "datasets/integrated_jokes_with_embeddings.json"):
         self.jokes_file = jokes_file
+        # Prova prima il dataset integrato, poi fallback al vecchio
+        if not os.path.exists(jokes_file) and os.path.exists("logs/categorized_jokes_with_embeddings.json"):
+            self.jokes_file = "logs/categorized_jokes_with_embeddings.json"
+            print("📚 Usando dataset legacy, considera di rigenerare gli embeddings per il dataset integrato")
+        
         self.jokes_data = self._load_jokes_with_embeddings()
         self.search_cache = {}
         self.model = None
@@ -46,21 +51,36 @@ class EnhancedJokeRAG:
             return {}
     
     def retrieve_jokes_with_context(self, humor_style: str, topic: str, 
-                                  use_web_search: bool = True, top_k: int = 3) -> Dict:
-        """Enhanced retrieval con contesto web"""
+                                  use_web_search: bool = True, top_k: int = 3, 
+                                  enhanced_tv_search: bool = False) -> Dict:
+        """Enhanced retrieval con contesto web e ricerca specializzata TV/meme"""
         if not self.model or not self.jokes_data:
             return {
                 "jokes": [],
                 "web_context": "",
+                "tv_meme_context": {},
                 "enhanced_query": f"{humor_style} about {topic}",
                 "timestamp": time.time(),
                 "status": "RAG not available"
             }
         
-        # Ottieni contesto web se richiesto
+        # Ottieni contesto web generale
         web_context = ""
+        tv_meme_context = {}
+        
         if use_web_search:
-            web_context = self._search_current_context(topic)
+            if enhanced_tv_search:
+                # Use specialized TV/meme search
+                tv_meme_context = self.search_tv_and_meme_context(topic)
+                # Combine all contexts for web_context
+                all_contexts = []
+                for context_type, content in tv_meme_context.items():
+                    if content:
+                        all_contexts.append(f"{context_type.upper()}: {content}")
+                web_context = " | ".join(all_contexts)
+            else:
+                # Use general web search
+                web_context = self._search_current_context(topic)
         
         # Crea query migliorata
         enhanced_query = self._create_enhanced_query(humor_style, topic, web_context)
@@ -71,13 +91,14 @@ class EnhancedJokeRAG:
         return {
             "jokes": relevant_jokes,
             "web_context": web_context,
+            "tv_meme_context": tv_meme_context,
             "enhanced_query": enhanced_query,
             "timestamp": time.time(),
             "status": "success"
         }
     
-    def _search_current_context(self, topic: str, max_results: int = 3) -> str:
-        """Ricerca informazioni attuali sul topic"""
+    def _search_current_context(self, topic: str, max_results: int = 5) -> str:
+        """Enhanced search for current context including TV shows, memes, and debates"""
         cache_key = f"search_{topic}_{int(time.time() // 3600)}"
         if cache_key in self.search_cache:
             return self.search_cache[cache_key]
@@ -85,28 +106,102 @@ class EnhancedJokeRAG:
         try:
             from duckduckgo_search import DDGS
             
+            # Create multiple search queries for different types of content
+            search_queries = [
+                f"{topic} latest episode recap reaction 2025",
+                f"{topic} memes viral funny tweets reddit 2025", 
+                f"{topic} controversy debate discussion online 2025",
+                f"{topic} news trending social media 2025"
+            ]
+            
+            all_context_snippets = []
+            
             with DDGS() as ddgs:
-                search_query = f"{topic} news recent trends 2025"
-                results = list(ddgs.text(search_query, max_results=max_results))
+                for query in search_queries:
+                    try:
+                        results = list(ddgs.text(query, max_results=max_results//len(search_queries) + 1))
+                        
+                        for result in results:
+                            title = result.get('title', '')
+                            body = result.get('body', '')[:200]
+                            snippet = f"{title} - {body}..."
+                            all_context_snippets.append(snippet)
+                            
+                    except Exception as e:
+                        print(f"⚠️ Search query failed: {query} - {e}")
+                        continue
                 
-                context_snippets = []
-                for result in results:
-                    title = result.get('title', '')
-                    body = result.get('body', '')[:200]
-                    snippet = f"Recent: {title} - {body}..."
-                    context_snippets.append(snippet)
-                
-                web_context = " | ".join(context_snippets)
+                # Limit total context length
+                web_context = " | ".join(all_context_snippets[:6])  # Max 6 snippets
                 self.search_cache[cache_key] = web_context
-                print(f"🌐 Contesto web recuperato per '{topic}': {len(web_context)} caratteri")
+                print(f"🌐 Enhanced context retrieved for '{topic}': {len(web_context)} chars")
                 return web_context
                 
         except ImportError:
-            print("⚠️ duckduckgo-search non installato. Esegui: pip install duckduckgo-search")
+            print("⚠️ duckduckgo-search not installed. Run: pip install duckduckgo-search")
             return ""
         except Exception as e:
-            print(f"⚠️ Ricerca web fallita: {e}")
+            print(f"⚠️ Web search failed: {e}")
             return ""
+    
+    def search_tv_and_meme_context(self, topic: str) -> Dict[str, str]:
+        """Specialized search for TV shows, memes, viral content, politics, gossip, and science"""
+        try:
+            from duckduckgo_search import DDGS
+            
+            contexts = {
+                "tv_episodes": "",
+                "memes_viral": "",
+                "debates_discussions": "",
+                "social_reactions": "",
+                "political_scandals": "",
+                "celebrity_gossip": "",
+                "science_weird": "",
+                "trending_news": ""
+            }
+            
+            # Expanded specialized search queries
+            search_configs = [
+                ("tv_episodes", f"{topic} episode recap review latest season 2025"),
+                ("memes_viral", f"{topic} memes funny viral TikTok Twitter Reddit 2025"),
+                ("debates_discussions", f"{topic} controversy debate opinions reactions 2025"),
+                ("social_reactions", f"{topic} fans reaction Twitter Instagram comments 2025"),
+                ("political_scandals", f"{topic} political scandal controversy gaffe mistake 2025"),
+                ("celebrity_gossip", f"{topic} celebrity gossip drama relationship breakup 2025"),
+                ("science_weird", f"{topic} science discovery weird funny bizarre research 2025"),
+                ("trending_news", f"{topic} trending news viral story unusual bizarre 2025")
+            ]
+            
+            with DDGS() as ddgs:
+                for context_type, query in search_configs:
+                    try:
+                        results = list(ddgs.text(query, max_results=2))
+                        snippets = []
+                        
+                        for result in results:
+                            title = result.get('title', '')
+                            body = result.get('body', '')[:150]
+                            snippets.append(f"{title}: {body}")
+                        
+                        contexts[context_type] = " | ".join(snippets)
+                        
+                    except Exception as e:
+                        print(f"⚠️ Failed to search {context_type}: {e}")
+                        continue
+            
+            # Print what we found for debugging
+            found_contexts = [k for k, v in contexts.items() if v]
+            if found_contexts:
+                print(f"🔍 Found context types: {', '.join(found_contexts)}")
+            
+            return contexts
+            
+        except ImportError:
+            print("⚠️ duckduckgo-search not installed")
+            return {}
+        except Exception as e:
+            print(f"⚠️ TV/Meme search failed: {e}")
+            return {}
     
     def _create_enhanced_query(self, humor_style: str, topic: str, web_context: str) -> str:
         """Crea query di ricerca migliorata con contesto web"""
