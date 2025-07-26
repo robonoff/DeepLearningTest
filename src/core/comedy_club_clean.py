@@ -44,7 +44,7 @@ class ComedyClub:
                 "persona": "cosmic jester with surreal observations"
             }
         }
-        
+       
         self.topics = [
             "technology", "everyday life", "social media", "food", 
             "work", "relationships", "travel", "weather", "coffee", "smartphones"
@@ -53,6 +53,7 @@ class ComedyClub:
         print(f"🎭 Comedy Club inizializzato con Orfeo")
         print(f"   Comici: {len(self.comedians)}")
     
+        
     def get_joke(self, comedian_name=None, topic=None):
         """Ottieni una battuta da un comico"""
         
@@ -82,7 +83,7 @@ Your joke:"""
         """Esegui uno spettacolo completo"""
         
         print("\n" + "="*60)
-        print("🎭 BENVENUTI AL COMEDY CLUB AI CON ORFEO! 🎭")
+        print("🎭 BENVENUTI AL COMEDY CLUB AI ! 🎭")
         print("   Stasera abbiamo 4 fantastici comici AI!")
         print("="*60)
         

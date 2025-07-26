@@ -5,6 +5,12 @@
 
 *.env
 
+# macOS files
+.DS_Store
+
+# Config files
+config/set_env.sh
+
 # Ignora i file compilati o temporanei
 *.pyc
 __pycache__/
