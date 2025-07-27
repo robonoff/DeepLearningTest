@@ -23,11 +23,20 @@ except ImportError:
     RAG_AVAILABLE = False
     print("⚠️ Sistema RAG non disponibile. Installa: pip install sentence-transformers scikit-learn duckduckgo-search")
 
+# Importa sistema di rating e apprendimento adattivo
+try:
+    from src.utils.human_rating import HumanRatingSystem
+    from src.utils.adaptive_comedy import AdaptiveComedySystem
+    RATING_AVAILABLE = True
+except ImportError:
+    RATING_AVAILABLE = False
+    print("⚠️ Sistema di rating non disponibile")
+
 class ComedyClub:
     """Simulatore comedy club - modalità Orfeo con RAG Enhancement"""
     
-    def __init__(self, use_web_search: bool = True, use_rag: bool = True):
-        """Inizializza il comedy club con supporto RAG opzionale"""
+    def __init__(self, use_web_search: bool = True, use_rag: bool = True, use_rating: bool = True):
+        """Inizializza il comedy club con supporto RAG e rating system"""
         
         if not is_orfeo_available():
             raise ValueError("⚠️ Token non configurato. Esegui: source config/set_env.sh")
@@ -49,6 +58,19 @@ class ComedyClub:
                 self.enhanced_rag = None
             except Exception as e:
                 print(f"⚠️ Errore caricamento RAG: {e}")
+                
+        # Inizializza sistema di rating e apprendimento adattivo
+        self.rating_system = None
+        self.adaptive_system = None
+        if use_rating and RATING_AVAILABLE:
+            try:
+                self.rating_system = HumanRatingSystem()
+                self.adaptive_system = AdaptiveComedySystem()
+                print("⭐ Sistema di rating e apprendimento adattivo caricato")
+            except Exception as e:
+                print(f"⚠️ Errore caricamento sistema rating: {e}")
+                self.rating_system = None
+                self.adaptive_system = None
                 self.enhanced_rag = None
         
         # Comedy Tools per ragionamento avanzato
@@ -123,6 +145,8 @@ class ComedyClub:
         print(f"   Comici: {len(self.comedians)}")
         print(f"   RAG: {'✅ Attivo' if self.enhanced_rag else '❌ Non disponibile'}")
         print(f"   Web Search: {'✅ Attivo' if self.use_web_search else '❌ Disabilitato'}")
+        print(f"   Rating System: {'⭐ Attivo' if self.rating_system else '❌ Non disponibile'}")
+        print(f"   Adaptive Learning: {'🧠 Attivo' if self.adaptive_system else '❌ Non disponibile'}")
     
         
     def get_joke(self, comedian_name=None, topic=None, enhanced_tv_search=False):
@@ -160,7 +184,7 @@ class ComedyClub:
                 # Use advanced reasoning system if available
                 if self.comedy_tools:
                     comedy_prompt = self.comedy_tools.generate_comedy_prompt(
-                        topic, comedian_info['style'], comedian_info, tv_meme_context
+                        topic, comedian_info['style'], comedian_info, tv_meme_context, self.adaptive_system
                     )
                     base_prompt = comedy_prompt
                     
@@ -396,6 +420,45 @@ Your joke:"""
                 break
             except Exception as e:
                 print(f"⚠️ Errore: {e}")
+    
+    def rate_joke(self, joke: str, comedian: str, topic: str, rating: str, comment: str = None) -> bool:
+        """Rate a joke and update the learning system"""
+        if not self.rating_system:
+            return False
+            
+        success = self.rating_system.add_rating(joke, comedian, topic, rating, comment)
+        
+        # Update adaptive system with new patterns
+        if success and self.adaptive_system:
+            self.adaptive_system.analyze_comedian_performance(self.rating_system)
+            
+        return success
+    
+    def get_comedian_feedback(self, comedian: str) -> dict:
+        """Get feedback and suggestions for a comedian"""
+        if not self.rating_system:
+            return {"error": "Rating system not available"}
+            
+        return self.rating_system.get_comedian_suggestions(comedian)
+    
+    def get_rating_stats(self) -> dict:
+        """Get global rating statistics"""
+        if not self.rating_system:
+            return {"error": "Rating system not available"}
+            
+        return self.rating_system.get_global_stats()
+    
+    def get_joke_for_gui(self, comedian_name=None, topic=None, enhanced_tv_search=False):
+        """Wrapper for GUI - returns joke with metadata for rating"""
+        joke = self.get_joke(comedian_name, topic, enhanced_tv_search)
+        
+        # Return structured data for GUI
+        return {
+            'joke': joke,
+            'comedian': comedian_name or 'Random',
+            'topic': topic or 'Random',
+            'timestamp': time.time()
+        }
 
 if __name__ == "__main__":
     # Test con RAG

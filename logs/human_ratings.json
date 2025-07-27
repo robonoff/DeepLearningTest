@@ -1,0 +1,54 @@
+{
+  "ratings": [
+    {
+      "joke": "La nonna di Mike è ebrea e ha ancora l'assicurazione del forno dai tempi di Hitler",
+      "comedian": "Mike",
+      "topic": "family",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": "Battuta geniale, dark ma divertentissima!",
+      "timestamp": 1753610184.6292958,
+      "context": {}
+    },
+    {
+      "joke": "Test joke",
+      "comedian": "Mike",
+      "topic": "test",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": "wordplay",
+      "timestamp": 1753612881.6258366,
+      "context": {}
+    },
+    {
+      "joke": "Tech joke",
+      "comedian": "Mike",
+      "topic": "technology",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": "wordplay",
+      "timestamp": 1753612881.6264544,
+      "context": {}
+    }
+  ],
+  "patterns": {
+    "Mike": {
+      "comedian": "Mike",
+      "successful_elements": [
+        "dark_humor",
+        "family_reference",
+        "medium_joke",
+        "short_joke"
+      ],
+      "failed_elements": [],
+      "preferred_topics": [
+        "family",
+        "test",
+        "technology"
+      ],
+      "avg_rating": 1.3333333333333333,
+      "total_ratings": 3,
+      "last_updated": 1753612881.6264596
+    }
+  }
+}

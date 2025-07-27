@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Comedy Tools: Strumenti avanzati per il ragionamento comico degli agenti
+Comedy Tools: Strumenti avanzati per il ragionamento comico degli agenti  
 Implementa tecniche di analisi e generazione dell'umorismo
 """
 
@@ -199,9 +199,10 @@ class ComedyTools:
             "chicken cross the road", "lightbulb"
         ]
         
+        joke_lower = joke.lower()
         score = 0.8
         for cliche in cliches:
-            if cliche in joke.lower():
+            if cliche in joke_lower:
                 score -= 0.3
         
         return max(score, 0.2)
@@ -269,8 +270,8 @@ class ComedyTools:
         return suggestions
 
     def generate_comedy_prompt(self, topic: str, style: str, comedian_persona: Dict, 
-                              tv_meme_context: Dict = None) -> str:
-        """Generate an advanced prompt for joke creation with TV/meme context and strong personality"""
+                              tv_meme_context: Dict = None, adaptive_system=None) -> str:
+        """Generate an advanced prompt for joke creation with TV/meme context, strong personality, and adaptive learning"""
         
         # Select appropriate technique
         techniques = list(self.comedy_techniques.keys())
@@ -348,6 +349,18 @@ class ComedyTools:
 - Don't explain the joke - let smart people get it
 """
         
+        # Adaptive learning feedback section
+        adaptive_feedback = ""
+        if adaptive_system and hasattr(adaptive_system, 'get_enhanced_prompt'):
+            # Use the adaptive system to get personalized feedback
+            base_for_feedback = f"You are {comedian_name}, performing {style} comedy about {topic}."
+            enhanced = adaptive_system.get_enhanced_prompt(comedian_name, base_for_feedback, adaptive_system.rating_system if hasattr(adaptive_system, 'rating_system') else None)
+            if enhanced != base_for_feedback:
+                adaptive_feedback = f"""
+🎯 AUDIENCE FEEDBACK & LEARNING:
+{enhanced.replace(base_for_feedback, '').strip()}
+"""
+
         # Build advanced prompt with personality boost
         prompt = f"""
 🎪 ADVANCED COMEDY REASONING SYSTEM WITH PERSONALITY INJECTION
@@ -360,6 +373,8 @@ class ComedyTools:
 {personality_boost}
 
 {context_section}
+
+{adaptive_feedback}
 
 🧠 CREATIVE PROCESS:
 1. 🔍 OBSERVATION: What's the most interesting/absurd/controversial aspect of "{topic}"?

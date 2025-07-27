@@ -1,31 +1,32 @@
-# 🎭 AI Comedy Club Simulator
+# 🎭 AI Comedy ## 🚀 Quick Start
 
-An interactive comedy club simulation where multiple AI agents with different comedy styles perform jokes and react to each other using local Ollama LLM models.
+### Prerequisites
 
-## ✨ Features
+1. **Configure Orfeo Access:**
+   Create a `.env` file in the root directory with your Orfeo credentials:
+   ```bash
+   TOKEN=your_jwt_token_here
+   ORFEO_MODEL=llama3.3:latest
+   ORFEO_BASE_URL=your_orfeo_base_url
+   ```
 
-- **4 Unique Comedian Personalities:**
-  - **Jerry** (Observational): Finds humor in everyday situations
-  - **Raven** (Dark Humor): Twisted but clever perspective  
-  - **Penny** (Wordplay): Master of puns and linguistic humor
-  - **Cosmic** (Absurdist): Embraces the weird and unexpected
+2. **Install Python Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ``` Edition
 
-- **Interactive Comedy Show Format:**
-  - Multiple performance rounds
-  - Comedian reactions to each other's jokes
-  - Dynamic topic generation
-  - Performance logging to JSON
+An interactive comedy club simulation where multiple AI agents with different comedy styles perform jokes and react to each other using Orfeo cluster with llama3.3:latest model.
 
-- **Multiple Interfaces:**
-  - Text-based simulation for CLI users
-  - Visual GUI with live updates and real-time performance display
-  - Mock mode when Ollama is unavailable
+## ✨ Key Features
 
-- **Local LLM Integration:**
-  - Uses Ollama with llama3.2:1b model for fast performance
-  - Direct subprocess calls to avoid API timeouts
-  - No external API dependencies
-  - Automatic fallback to mock mode
+- **Four Unique Comedy Agents**: Each with distinct personalities and comedy styles
+- **Real-time Interaction**: Comedians react to each other's jokes dynamically
+- **Enhanced RAG System**: Intelligent joke retrieval with web search capabilities
+- **Advanced Web Search**: TV shows, memes, political content integration
+- **Mock mode when Orfeo is unavailable
+- **Beautiful Terminal UI**: Rich visual presentation with colors and formatting
+- **Performance Analytics**: Track comedian effectiveness over time
+- **Uses Orfeo cluster with llama3.3:latest model for superior performance
 
 ## 🚀 Quick Start
 
@@ -76,42 +77,45 @@ python main.py --mode text
 - Automatic JSON logging
 - Optimized for headless environments
 
-#### 🧪 Test Mode
-Test your Ollama connection and model availability:
+#### 🧪 Test Your Setup
+
+Test your Orfeo connection and model availability:
+
 ```bash
-python main.py --mode test
+python tests/test_enhanced_rag.py
 ```
 
-**Test Mode Features:**
-- Ollama connectivity verification
-- Model availability check
-- Performance timing tests
-- Fallback system validation
+This test verifies:
+- Orfeo connectivity verification
+- RAG system functionality
+- Web search integration
 
 ## 📁 Project Structure
 
 ```
 ├── main.py                      # 🚀 Unified entry point for all modes
-├── src/                         # 📦 Source code modules
-│   ├── core/                    # 🧠 Core simulation logic
-│   │   ├── comedy_club.py       # Main ComedyClubSimulator class
-│   │   └── ollama_client.py     # Ollama CLI client with subprocess calls
-│   ├── agents/                  # 🎭 Comedian agent definitions
-│   │   └── comedians.py         # All 4 comedian personalities
-│   ├── gui/                     # 🎨 Graphical user interface
-│   │   └── comedy_club_gui.py   # Tkinter GUI with live updates
-│   └── utils/                   # 🔧 Utility modules
-│       ├── config.py            # Configuration management
-│       ├── config_list.py       # Model and parameter configs
-│       └── joke_categorizer.py  # Joke categorization utilities
-├── tests/                       # 🧪 Test files
-│   └── test_ollama.py          # Ollama connectivity and model tests
-├── examples/                    # 📖 Example implementations
+├── src/
+│   ├── core/
+│   │   ├── comedy_club_clean.py    # Main ComedyClub class with Orfeo integration
+│   │   └── orfeo_client_new.py     # Orfeo client for llama3.3:latest
+│   ├── agents/
+│   │   └── comedians.py        # Comedian personalities and system prompts
+│   ├── gui/
+│   │   └── comedy_club_gui.py  # Tkinter-based visual interface
+│   └── utils/
+│       ├── enhanced_joke_rag.py    # RAG system with web search
+│       ├── comedy_feedback.py      # Performance tracking system
+│       └── comedy_tools.py         # Advanced comedy reasoning tools
+├── examples/
 │   ├── simple_comedy_club.py   # Simplified version for learning
 │   └── mock_comedy_club.py     # Demo with pre-written jokes
-├── config/                      # ⚙️ Configuration files
-│   ├── Modelfile.llama3.2-m1   # Ollama model configuration
-│   └── start_ollama_m1.sh      # M1 Mac optimization script
+├── tests/
+│   └── test_enhanced_rag.py    # Orfeo connectivity and RAG tests
+├── datasets/
+│   └── shortjokes.csv          # 231k jokes dataset
+├── config/
+│   ├── orfeo_config_new.py     # Orfeo cluster configuration
+│   └── set_env.sh              # Environment setup script
 ├── logs/                        # 📊 Generated performance logs (auto-created)
 ├── datasets/                    # 📝 Joke datasets and categorized content
 ├── papers/                      # 📚 Research papers and documentation
@@ -121,19 +125,19 @@ python main.py --mode test
 
 ### Key Components
 
-- **`main.py`**: Single entry point supporting `--mode` flag (gui/text/test)
-- **`src/core/`**: Heart of the simulation with Ollama integration
+- **`main_clean_rag.py`**: Main entry point with RAG-enhanced comedy system
+- **`src/core/`**: Heart of the simulation with Orfeo integration
 - **`src/agents/`**: All comedian personalities with unique humor styles
-- **`src/gui/`**: Full-featured GUI with real-time updates
+- **`src/gui/`**: Full-featured GUI with real-time updates and rating system
 - **`examples/`**: Standalone examples for learning and testing
-- **`logs/`**: Auto-generated JSON logs of all performances
+- **`logs/`**: Auto-generated JSON logs of all performances and ratings
 
 ## 🎪 How It Works
 
 ### System Architecture
 1. **Agent Initialization**: Four comedian agents are created with unique personalities, humor styles, and system prompts
-2. **Performance Engine**: The ComedyClubSimulator orchestrates multi-round comedy shows
-3. **LLM Integration**: Direct subprocess calls to Ollama CLI bypass API timeouts for reliable generation
+2. **Performance Engine**: The ComedyClub orchestrates multi-round comedy shows with RAG enhancement
+3. **LLM Integration**: Direct API calls to Orfeo cluster with llama3.3:latest for superior comedy generation
 4. **Real-time Display**: GUI or text interface shows live performances with color-coded comedians
 5. **Reaction System**: Comedians generate reactions to each other's performances
 6. **Automatic Logging**: All shows are saved as structured JSON with timestamps and metadata
@@ -146,10 +150,10 @@ Comedian Reactions → Logging → Next Round
 ```
 
 ### Technical Implementation
-- **Direct CLI Calls**: Uses `subprocess.run()` with `ollama run llama3.2:1b` for reliability
-- **Timeout Management**: 15-second timeouts with graceful error handling
-- **Memory Efficient**: Uses lightweight 1.3GB model for fast responses
-- **Cross-Platform**: Works on macOS, Linux, and Windows with Ollama installed
+- **Orfeo Integration**: Direct API calls to Orfeo cluster with llama3.3:latest for superior performance
+- **Timeout Management**: 120-second timeouts with robust error handling  
+- **RAG Enhancement**: Vector-based joke retrieval with real-time web search
+- **Cross-Platform**: Works on macOS, Linux, and Windows with proper Orfeo access
 
 ## 🎨 Interface Modes
 
@@ -170,30 +174,33 @@ Comedian Reactions → Logging → Next Round
 
 ## 🛠️ Troubleshooting
 
-### Ollama Issues
+### Orfeo Connection Issues
 
-**"Model not found" Error:**
+**"TOKEN not found" Error:**
 ```bash
-# Check available models
-ollama list
+# Check your .env file
+cat .env
 
-# Pull the required model
-ollama pull llama3.2:1b
+# Ensure all required variables are set
+TOKEN=your_jwt_token
+ORFEO_MODEL=llama3.3:latest
+ORFEO_BASE_URL=your_orfeo_url
 
-# Test the model
-ollama run llama3.2:1b "Tell me a joke"
+# Source the environment setup
+source config/set_env.sh
 ```
 
 **Connection Timeout:**
 ```bash
-# Start Ollama service (if not running)
-ollama serve
+# Test Orfeo connectivity
+python -c "
+from src.core.orfeo_client_new import OrfeoClient
+client = OrfeoClient()
+print('✅ Orfeo connection successful')
+"
 
-# Test connectivity
-python main.py --mode test
-
-# Check Ollama status
-ps aux | grep ollama
+# Check SSH tunnel if needed
+ssh -L 8080:10.128.2.165:8080 orfeo
 ```
 
 **Slow Performance:**
@@ -243,12 +250,12 @@ sudo systemctl start ollama
 ### Performance Optimization
 
 **Speed Up Generation:**
-- Keep Ollama running: `ollama serve`
-- Use test mode to pre-load model
-- Close other LLM applications
+- Maintain stable Orfeo connection
+- Use SSH tunneling if required: `ssh -L 8080:10.128.2.165:8080 orfeo`
+- Close other resource-intensive applications
 
 **Memory Usage:**
-- llama3.2:1b uses ~2GB RAM
+- RAG system uses vector embeddings in memory
 - Close browser tabs to free memory
 - Monitor with: `htop` or Activity Monitor
 

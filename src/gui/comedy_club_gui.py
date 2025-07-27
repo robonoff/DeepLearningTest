@@ -1,37 +1,46 @@
 #!/usr/bin/env python3
 """
-Comedy Club Visual Interface
-Creates an animated visualization of the comedy club        comedians_data = [
-            ('Dave_Observational', '🔥 Dave\n(Edgy Observational)', '#FF6B6B'),
-            ('Mike_Dark', '🖤 Mike\n(Dark Everyman)', '#4ECDC4'),
-            ('Sarah_Wordplay', '⚡ Sarah\n(Sharp Wordplay)', '#45B7D1'),
-            ('Lisa_Absurd', '🧪 Lisa\n(Twisted Academic)', '#96CEB4')lation
-Similar to Agent Hospital but for a comedy club environment
+Comedy Club Visual Interface with Human Rating System
+Creates an animated visualization of the comedy club with joke rating capabilities
 """
 
 import tkinter as tk
-from tkinter import ttk, scrolledtext
+from tkinter import ttk, scrolledtext, messagebox
 import json
 import threading
 import time
 from datetime import datetime
-from typing import Dict, List
+from typing import Dict, List, Optional
 import random
 
+# Import our human rating system
+try:
+    from src.utils.human_rating import HumanRatingSystem
+except ImportError:
+    print("⚠️ Human rating system not found. Some features may be limited.")
+    HumanRatingSystem = None
+
 class ComedyClubGUI:
-    """Visual interface for the comedy club simulation"""
+    """Visual interface for the comedy club simulation with human rating"""
     
     def __init__(self, root):
         self.root = root
-        self.root.title("🎭 AI Comedy Club Simulation")
-        self.root.geometry("1200x800")
+        self.root.title("🎭 AI Comedy Club Simulation with Rating")
+        self.root.geometry("1400x900")
         self.root.configure(bg='#1a1a1a')  # Dark comedy club theme
+        
+        # Initialize rating system
+        if HumanRatingSystem:
+            self.rating_system = HumanRatingSystem()
+        else:
+            self.rating_system = None
         
         # Simulation state
         self.is_running = False
         self.is_paused = False  # New pause state for individual jokes
         self.current_show_log = []
         self.current_performer = None
+        self.current_joke_data = None  # Store current joke for rating
         
         # Comedian colors for visual distinction
         self.comedian_colors = {
@@ -201,6 +210,87 @@ class ComedyClubGUI:
             wraplength=400
         )
         self.audience_reaction.pack(pady=5)
+        
+        # Human Rating Area
+        self.setup_rating_area(stage_frame)
+    
+    def setup_rating_area(self, parent):
+        """Setup the human rating area for jokes"""
+        if not self.rating_system:
+            return
+            
+        rating_frame = tk.Frame(parent, bg='#8e44ad', relief='raised', bd=2)
+        rating_frame.pack(fill='x', padx=10, pady=5)
+        
+        # Rating title
+        rating_title = tk.Label(
+            rating_frame,
+            text="⭐ RATE THIS JOKE ⭐",
+            font=('Arial', 12, 'bold'),
+            fg='white',
+            bg='#8e44ad'
+        )
+        rating_title.pack(pady=5)
+        
+        # Rating buttons frame
+        buttons_frame = tk.Frame(rating_frame, bg='#8e44ad')
+        buttons_frame.pack(pady=5)
+        
+        # Rating buttons with emojis and colors
+        self.rating_buttons = {}
+        rating_options = [
+            ("😍", "love", "#27ae60", "LOVE IT!"),
+            ("👍", "like", "#2ecc71", "Like"),
+            ("😐", "meh", "#95a5a6", "Meh"),
+            ("👎", "dislike", "#e74c3c", "Dislike"),
+            ("🤮", "hate", "#c0392b", "HATE IT!")
+        ]
+        
+        for emoji, rating, color, text in rating_options:
+            btn = tk.Button(
+                buttons_frame,
+                text=f"{emoji}\n{text}",
+                command=lambda r=rating: self.rate_current_joke(r),
+                font=('Arial', 9, 'bold'),
+                bg=color,
+                fg='white',
+                width=8,
+                height=3,
+                state='disabled'  # Initially disabled
+            )
+            btn.pack(side='left', padx=3)
+            self.rating_buttons[rating] = btn
+        
+        # Comment entry
+        comment_frame = tk.Frame(rating_frame, bg='#8e44ad')
+        comment_frame.pack(fill='x', padx=10, pady=5)
+        
+        tk.Label(
+            comment_frame,
+            text="💬 Comment (optional):",
+            font=('Arial', 9),
+            fg='white',
+            bg='#8e44ad'
+        ).pack(anchor='w')
+        
+        self.comment_entry = tk.Entry(
+            comment_frame,
+            font=('Arial', 9),
+            bg='#34495e',
+            fg='white',
+            insertbackground='white'
+        )
+        self.comment_entry.pack(fill='x', pady=2)
+        
+        # Rating status
+        self.rating_status = tk.Label(
+            rating_frame,
+            text="🎭 No joke to rate yet...",
+            font=('Arial', 9),
+            fg='#ecf0f1',
+            bg='#8e44ad'
+        )
+        self.rating_status.pack(pady=2)
     
     def setup_log_area(self, parent):
         """Setup the performance log area"""
@@ -533,7 +623,21 @@ class ComedyClubGUI:
                 # Get performance with user's topic and enhanced search option
                 try:
                     enhanced_tv_search = self.tv_meme_var.get()
-                    joke = club.get_joke(comedian_name, user_topic, enhanced_tv_search=enhanced_tv_search)
+                    
+                    # Use get_joke_for_gui if available for rating integration
+                    if hasattr(club, 'get_joke_for_gui'):
+                        joke_data = club.get_joke_for_gui(comedian_name, user_topic, enhanced_tv_search=enhanced_tv_search)
+                        joke = joke_data['joke']
+                        
+                        # Update joke data for rating
+                        self.update_joke_for_rating({
+                            'joke': joke,
+                            'comedian': comedian_name,
+                            'topic': user_topic,
+                            'timestamp': joke_data.get('timestamp', time.time())
+                        })
+                    else:
+                        joke = club.get_joke(comedian_name, user_topic, enhanced_tv_search=enhanced_tv_search)
                     
                     # Store joke for debates
                     current_round_jokes.append({
@@ -796,6 +900,67 @@ class ComedyClubGUI:
             
         except Exception as e:
             self.add_log(f"❌ Error loading statistics: {e}", "Show_Manager")
+    
+    def rate_current_joke(self, rating: str):
+        """Rate the current joke"""
+        if not self.current_joke_data or not self.rating_system:
+            return
+            
+        comment = self.comment_entry.get().strip() if hasattr(self, 'comment_entry') else ""
+        
+        success = self.rating_system.add_rating(
+            self.current_joke_data['joke'],
+            self.current_joke_data['comedian'],
+            self.current_joke_data.get('topic', 'general'),
+            rating,
+            comment if comment else None
+        )
+        
+        if success:
+            # Update rating status
+            rating_text = {
+                'love': '😍 LOVED IT!',
+                'like': '👍 Liked it!',
+                'meh': '😐 Meh...',
+                'dislike': '👎 Didn\'t like it',
+                'hate': '🤮 HATED IT!'
+            }
+            
+            if hasattr(self, 'rating_status'):
+                self.rating_status.config(text=f"✅ Rated: {rating_text.get(rating, rating)}")
+            
+            # Clear comment
+            if hasattr(self, 'comment_entry'):
+                self.comment_entry.delete(0, tk.END)
+            
+            # Disable rating buttons until next joke
+            self.disable_rating_buttons()
+            
+            # Add rating to log
+            self.add_log(f"⭐ Human rated joke: {rating_text.get(rating, rating)}", "Rating System")
+            
+        else:
+            messagebox.showerror("Error", "Failed to save rating!")
+    
+    def enable_rating_buttons(self):
+        """Enable rating buttons for a new joke"""
+        if hasattr(self, 'rating_buttons'):
+            for button in self.rating_buttons.values():
+                button.config(state='normal')
+            
+            if hasattr(self, 'rating_status'):
+                self.rating_status.config(text="⭐ Please rate this joke!")
+    
+    def disable_rating_buttons(self):
+        """Disable rating buttons after rating"""
+        if hasattr(self, 'rating_buttons'):
+            for button in self.rating_buttons.values():
+                button.config(state='disabled')
+    
+    def update_joke_for_rating(self, joke_data: dict):
+        """Update current joke data for rating"""
+        self.current_joke_data = joke_data
+        self.enable_rating_buttons()
 
 def main():
     """Main function to run the GUI"""
