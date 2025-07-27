@@ -841,6 +841,14 @@ class ComedyClubGUI:
             # Load and display statistics
             feedback_system = ComedyFeedbackSystem()
             
+            # DEBUG: Mostra tutti i comedian presenti nel feedback
+            all_comedians = set()
+            for feedback in feedback_system.feedback_history:
+                all_comedians.add(feedback.get('comedian', 'Unknown'))
+            
+            stats_text.insert('end', f"📋 DEBUG: Comedians found in feedback: {', '.join(sorted(all_comedians))}\n")
+            stats_text.insert('end', f"📊 Total feedback entries: {len(feedback_system.feedback_history)}\n\n")
+            
             # General leaderboard
             stats_text.insert('end', "🏆 COMEDY LEADERBOARD\n")
             stats_text.insert('end', "=" * 50 + "\n\n")
@@ -927,6 +935,46 @@ class ComedyClubGUI:
             comment if comment else None,
             context=context
         )
+        
+        # AGGIUNTO: Salva anche nel sistema di feedback per le statistiche
+        try:
+            import sys
+            import os
+            sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+            from src.utils.comedy_feedback import ComedyFeedbackSystem
+            
+            feedback_system = ComedyFeedbackSystem()
+            
+            # Converti rating umano a score numerico
+            rating_scores = {
+                'love': 1.0,
+                'like': 0.8,
+                'meh': 0.5,
+                'dislike': 0.2,
+                'hate': 0.0
+            }
+            
+            # Crea un feedback artificiale per le statistiche
+            from dataclasses import asdict
+            from src.utils.comedy_feedback import JokeFeedback
+            import time
+            
+            fake_feedback = JokeFeedback(
+                joke=self.current_joke_data['joke'],
+                comedian=self.current_joke_data['comedian'],
+                topic=self.current_joke_data.get('topic', 'general'),
+                quality_score=rating_scores.get(rating, 0.5),
+                audience_score=rating_scores.get(rating, 0.5),
+                feedback_notes=[f"Human rating: {rating}"],
+                timestamp=time.time()
+            )
+            
+            feedback_system.feedback_history.append(asdict(fake_feedback))
+            feedback_system._save_feedback_history()
+            print(f"📊 Rating salvato per {self.current_joke_data['comedian']}: {rating}")
+            
+        except Exception as e:
+            print(f"⚠️ Errore salvataggio feedback: {e}")
         
         if success:
             # Update rating status with more detailed feedback
