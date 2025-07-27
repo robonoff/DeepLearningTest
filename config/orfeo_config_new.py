@@ -48,11 +48,11 @@ def get_ssh_command():
 RAG_CONFIG = {
     "USE_WEB_SEARCH": True,
     "SEARCH_CACHE_DURATION": 3600,  # 1 ora
-    "MAX_SEARCH_RESULTS": 3,
+    "MAX_SEARCH_RESULTS": 8,
     "WEB_CONTEXT_MAX_LENGTH": 400,
     "SEARCH_TIMEOUT": 10,
-    "EMBEDDING_MODEL": "all-MiniLM-L6-v2",
-    "TOP_K_JOKES": 3
+    "EMBEDDING_MODEL": "all-MiniLM-L6-v2", #hugging face embbeddings
+    "TOP_K_JOKES": 10 # Numero di battute recuperate dai dataset
 }
 
 def get_rag_config():

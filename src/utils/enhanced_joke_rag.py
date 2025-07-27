@@ -106,7 +106,7 @@ class EnhancedJokeRAG:
             return self.search_cache[cache_key]
         
         try:
-            from duckduckgo_search import DDGS
+            from ddgs import DDGS
             
             # Create multiple search queries for different types of content
             search_queries = [
@@ -149,7 +149,7 @@ class EnhancedJokeRAG:
     def search_tv_and_meme_context(self, topic: str) -> Dict[str, str]:
         """Specialized search for TV shows, memes, viral content, politics, gossip, and science"""
         try:
-            from duckduckgo_search import DDGS
+            from ddgs import DDGS
             
             contexts = {
                 "tv_episodes": "",
@@ -251,7 +251,15 @@ class EnhancedJokeRAG:
         similarities = cosine_similarity(query_embedding, all_embeddings)[0]
         top_indices = np.argsort(similarities)[-top_k:][::-1]
         
-        selected_jokes = [all_jokes[i] for i in top_indices]
+        # Restituisci dizionari con la struttura attesa
+        selected_jokes = []
+        for i in top_indices:
+            selected_jokes.append({
+                'joke': all_jokes[i],
+                'text': all_jokes[i],  # Per compatibilità
+                'similarity': float(similarities[i])
+            })
+            
         print(f"🎯 Trovati {len(selected_jokes)} jokes rilevanti")
         return selected_jokes
 

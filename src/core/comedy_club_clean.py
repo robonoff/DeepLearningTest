@@ -148,6 +148,26 @@ class ComedyClub:
         print(f"   Rating System: {'⭐ Attivo' if self.rating_system else '❌ Non disponibile'}")
         print(f"   Adaptive Learning: {'🧠 Attivo' if self.adaptive_system else '❌ Non disponibile'}")
     
+    def _is_ai_refusal(self, response: str) -> bool:
+        """Rileva se l'AI ha rifiutato di creare contenuto"""
+        if not response:
+            return True
+            
+        refusal_patterns = [
+            "I can't create",
+            "I cannot create", 
+            "I'm not able to",
+            "I don't feel comfortable",
+            "I shouldn't make",
+            "That's not appropriate",
+            "I can't make jokes about",
+            "I won't create content",
+            "I'm sorry, but I can't",
+            "Is there something else I can help you with"
+        ]
+        
+        response_lower = response.lower()
+        return any(pattern.lower() in response_lower for pattern in refusal_patterns)
         
     def get_joke(self, comedian_name=None, topic=None, enhanced_tv_search=False):
         """Get a joke from a comedian with RAG and advanced reasoning support
@@ -226,6 +246,20 @@ class ComedyClub:
                 print(f"🎤 {comedian_name} sta raccontando una battuta su {topic} (con RAG)...")
                 response = self.client.generate(base_prompt, max_tokens=200)
                 
+                # Gestisci rifiuti dell'AI per argomenti sensibili
+                if self._is_ai_refusal(response):
+                    print(f"🚫 {comedian_name} ha rifiutato l'argomento, provo con topic alternativo...")
+                    alternative_topics = ["technology", "relationships", "everyday life", "social media", "coffee"]
+                    import random
+                    alt_topic = random.choice(alternative_topics)
+                    
+                    # Prompt alternativo più generale
+                    comedian_info = self.comedians[comedian_name]
+                    alt_prompt = f"You are {comedian_name}, a {comedian_info['style']} comedian. Make a joke about {alt_topic}:"
+                    response = self.client.generate(alt_prompt, max_tokens=200)
+                    print(f"🔄 Switched to alternative topic: {alt_topic}")
+                    topic = alt_topic  # Update topic for feedback
+                
                 # Valuta la qualità della battuta se gli strumenti sono disponibili
                 if self.comedy_tools and response:
                     analysis = self.comedy_tools.analyze_joke_quality(response)
@@ -237,6 +271,7 @@ class ComedyClub:
                     if self.feedback_system:
                         feedback = self.feedback_system.provide_feedback(response, comedian_name, topic, analysis)
                         print(f"👥 Reazione pubblico: {feedback.audience_score:.2f}/1.0")
+                        print(f"📊 Feedback salvato per {comedian_name} su '{topic}'")
                         if feedback.feedback_notes:
                             print(f"💡 {feedback.feedback_notes[0]}")  # Mostra solo il primo feedback
                     
