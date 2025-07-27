@@ -22,10 +22,11 @@ try:
             print("💡 Esegui prima: source config/set_env.sh")
             return 1
         
-        print("🎭 Avvio Comedy Club GUI con RAG Enhancement...")
-        print("   ✅ RAG: Sistema di recupero intelligente delle battute")
-        print("   🌐 Web Search: Contesto attuale dai motori di ricerca")
-        print("   🎪 GUI: Interfaccia visuale interattiva")
+        print("🎭 Avvio Comedy Club GUI - Modalità Completa...")
+        print("   ✅ RAG: ATTIVO per battute intelligenti")
+        print("   ✅ Web Search: ATTIVO per contenuti freschi")
+        print("   ✅ Rating System: Attivo per apprendimento")
+        print("   🎪 GUI: Interfaccia visuale completa")
         
         # Crea e avvia la GUI
         root = tk.Tk()

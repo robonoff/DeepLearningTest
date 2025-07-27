@@ -44,10 +44,10 @@ class ComedyClubGUI:
         
         # Comedian colors for visual distinction
         self.comedian_colors = {
-            'Dave_Observational': '#FF6B6B',    # Red - Edgy Dave
-            'Mike_Dark': '#4ECDC4',             # Teal - Dark Mike  
-            'Sarah_Wordplay': '#45B7D1',         # Blue - Sharp Sarah
-            'Lisa_Absurd': '#96CEB4',          # Green - Weird Lisa
+            'Dave_Observational': "#F10000",    # Red - Edgy Dave
+            'Mike_Dark': "#06001D",             # Teal - Dark Mike  
+            'Sarah_Wordplay': "#87CF8A",         # Blue - Sharp Sarah
+            'Lisa_Absurd': "#9C0060",          # Green - Weird Lisa
             'Show_Manager': '#FECA57'            # Yellow
         }
         
@@ -538,9 +538,9 @@ class ComedyClubGUI:
             from src.core.comedy_club_clean import ComedyClub
             self.update_current_performance("Show Manager", "🔗 Connecting to Orfeo cluster...")
             
-            # Get RAG settings from GUI
-            use_web_search = self.web_search_var.get()
-            club = ComedyClub(use_web_search=use_web_search, use_rag=True)
+            # MODALITÀ COMPLETA: RAG e Web Search riabilitati
+            use_web_search = True  # Riabilitato per contenuti freschi
+            club = ComedyClub(use_web_search=True, use_rag=True, use_rating=True)
             
             # Check what systems are available
             systems_active = []
@@ -661,11 +661,8 @@ class ComedyClubGUI:
                     reaction = random.choice(reactions.get(comedian_info['style'], ["👏 Polite applause"]))
                     self.update_audience_reaction(reaction)
                     
-                    # Shorter time for jokes in first round to speed up start
-                    if round_num == 0:
-                        self.smart_sleep(15)  # 15 seconds for first round jokes
-                    else:
-                        self.smart_sleep(30)  # 30 seconds for later rounds
+                    # Tempo ridotto per tutte le battute - 5 secondi
+                    self.smart_sleep(5)  # 5 seconds for all jokes
                     
                 except Exception as e:
                     self.update_current_performance("Error", f"{comedian_name} had technical difficulties: {e}")
@@ -702,16 +699,23 @@ class ComedyClubGUI:
                             
                             self.update_current_performance(f"{performer['comedian']} responds to {target_joke['comedian']}", response)
                             
+                            # Update joke data for rating the response too!
+                            self.update_joke_for_rating({
+                                'joke': response,
+                                'comedian': performer['comedian'],
+                                'topic': user_topic,
+                                'timestamp': time.time(),
+                                'type': 'response',  # Mark as response for better tracking
+                                'responding_to': target_joke['comedian']
+                            })
+                            
                             # Audience loves debates!
                             debate_reactions = ["🔥 Burn!", "😂 Great comeback!", "👏 Brilliant response!", "🎭 Comedy gold!"]
                             reaction = random.choice(debate_reactions)
                             self.update_audience_reaction(reaction)
                             
-                            # Shorter time for debate responses in first round
-                            if round_num == 0:
-                                self.smart_sleep(15)  # 15 seconds for first round debates
-                            else:
-                                self.smart_sleep(30)  # 30 seconds for later rounds
+                            # Tempo ridotto per tutte le risposte - 5 secondi
+                            self.smart_sleep(5)  # 5 seconds for all responses
                             
                         except Exception as e:
                             self.update_current_performance("Error", f"{performer['comedian']} couldn't respond: {e}")
@@ -902,22 +906,30 @@ class ComedyClubGUI:
             self.add_log(f"❌ Error loading statistics: {e}", "Show_Manager")
     
     def rate_current_joke(self, rating: str):
-        """Rate the current joke"""
+        """Rate the current joke or response"""
         if not self.current_joke_data or not self.rating_system:
             return
             
         comment = self.comment_entry.get().strip() if hasattr(self, 'comment_entry') else ""
+        
+        # Enhanced context for responses
+        context = {}
+        if self.current_joke_data.get('type') == 'response':
+            context['is_response'] = True
+            context['responding_to'] = self.current_joke_data.get('responding_to', 'unknown')
+            context['interaction_type'] = 'comedy_battle'
         
         success = self.rating_system.add_rating(
             self.current_joke_data['joke'],
             self.current_joke_data['comedian'],
             self.current_joke_data.get('topic', 'general'),
             rating,
-            comment if comment else None
+            comment if comment else None,
+            context=context
         )
         
         if success:
-            # Update rating status
+            # Update rating status with more detailed feedback
             rating_text = {
                 'love': '😍 LOVED IT!',
                 'like': '👍 Liked it!',
@@ -927,7 +939,9 @@ class ComedyClubGUI:
             }
             
             if hasattr(self, 'rating_status'):
-                self.rating_status.config(text=f"✅ Rated: {rating_text.get(rating, rating)}")
+                joke_type = "Response" if self.current_joke_data.get('type') == 'response' else "Joke"
+                comedian = self.current_joke_data['comedian']
+                self.rating_status.config(text=f"✅ {joke_type} by {comedian}: {rating_text.get(rating, rating)}")
             
             # Clear comment
             if hasattr(self, 'comment_entry'):
@@ -936,20 +950,26 @@ class ComedyClubGUI:
             # Disable rating buttons until next joke
             self.disable_rating_buttons()
             
-            # Add rating to log
-            self.add_log(f"⭐ Human rated joke: {rating_text.get(rating, rating)}", "Rating System")
+            # Add rating to log with enhanced info
+            joke_type = "response" if self.current_joke_data.get('type') == 'response' else "joke"
+            self.add_log(f"⭐ Rated {comedian}'s {joke_type}: {rating_text.get(rating, rating)}", "Rating System")
             
         else:
             messagebox.showerror("Error", "Failed to save rating!")
     
     def enable_rating_buttons(self):
-        """Enable rating buttons for a new joke"""
+        """Enable rating buttons for a new joke or response"""
         if hasattr(self, 'rating_buttons'):
             for button in self.rating_buttons.values():
                 button.config(state='normal')
             
             if hasattr(self, 'rating_status'):
-                self.rating_status.config(text="⭐ Please rate this joke!")
+                if self.current_joke_data and self.current_joke_data.get('type') == 'response':
+                    comedian = self.current_joke_data['comedian']
+                    responding_to = self.current_joke_data.get('responding_to', 'someone')
+                    self.rating_status.config(text=f"⭐ Rate {comedian}'s response to {responding_to}!")
+                else:
+                    self.rating_status.config(text="⭐ Please rate this joke!")
     
     def disable_rating_buttons(self):
         """Disable rating buttons after rating"""

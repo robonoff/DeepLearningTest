@@ -52,7 +52,8 @@ class EnhancedJokeRAG:
     
     def retrieve_jokes_with_context(self, humor_style: str, topic: str, 
                                   use_web_search: bool = True, top_k: int = 3, 
-                                  enhanced_tv_search: bool = False) -> Dict:
+                                  enhanced_tv_search: bool = False,
+                                  comedian_name: str = None) -> Dict:
         """Enhanced retrieval con contesto web e ricerca specializzata TV/meme"""
         if not self.model or not self.jokes_data:
             return {
@@ -82,11 +83,11 @@ class EnhancedJokeRAG:
                 # Use general web search
                 web_context = self._search_current_context(topic)
         
-        # Crea query migliorata
-        enhanced_query = self._create_enhanced_query(humor_style, topic, web_context)
+        # Crea query migliorata personalizzata per il comico
+        enhanced_query = self._create_personalized_query(humor_style, topic, web_context, comedian_name)
         
-        # Recupera jokes rilevanti
-        relevant_jokes = self._similarity_search(enhanced_query, top_k)
+        # Recupera jokes rilevanti con filtri per personalità
+        relevant_jokes = self._personality_filtered_search(enhanced_query, top_k, comedian_name)
         
         return {
             "jokes": relevant_jokes,
@@ -94,7 +95,8 @@ class EnhancedJokeRAG:
             "tv_meme_context": tv_meme_context,
             "enhanced_query": enhanced_query,
             "timestamp": time.time(),
-            "status": "success"
+            "status": "success",
+            "comedian_filter": comedian_name
         }
     
     def _search_current_context(self, topic: str, max_results: int = 5) -> str:
@@ -252,6 +254,66 @@ class EnhancedJokeRAG:
         selected_jokes = [all_jokes[i] for i in top_indices]
         print(f"🎯 Trovati {len(selected_jokes)} jokes rilevanti")
         return selected_jokes
+
+    def _create_personalized_query(self, humor_style: str, topic: str, web_context: str, comedian_name: str = None) -> str:
+        """Crea query personalizzata per specifici comici"""
+        
+        # Personalizzazioni per comico
+        personality_keywords = {
+            "Dave": ["cynical", "brutal honesty", "uncomfortable truth", "social hypocrisy", "perverted psychology"],
+            "Sarah": ["wordplay", "linguistic", "clever", "savage wit", "alliteration", "metaphor"],
+            "Mike": ["family horror", "parenting nightmare", "domestic terror", "marriage survival", "dark family"],
+            "Lisa": ["academic", "scientific", "research", "study", "intellectual", "fake statistics"]
+        }
+        
+        base_query = f"{humor_style} comedy about {topic}"
+        
+        if comedian_name and comedian_name in personality_keywords:
+            keywords = " ".join(personality_keywords[comedian_name])
+            enhanced_query = f"{base_query} {keywords}"
+        else:
+            enhanced_query = base_query
+            
+        if web_context:
+            enhanced_query += f" current context: {web_context[:200]}"
+            
+        return enhanced_query
+
+    def _personality_filtered_search(self, query: str, top_k: int, comedian_name: str = None) -> List[Dict]:
+        """Ricerca jokes con filtri personalizzati per comico"""
+        if not self.model:
+            return []
+            
+        # Prima fai la ricerca standard
+        standard_results = self._similarity_search(query, top_k * 2)  # Prendi più risultati
+        
+        if not comedian_name:
+            return standard_results[:top_k]
+        
+        # Applica filtri personalizzati
+        personality_filters = {
+            "Dave": ["relationship", "technology", "social", "people", "society"],
+            "Sarah": ["dating", "men", "relationship", "women", "social"],
+            "Mike": ["family", "kids", "marriage", "parent", "children"],
+            "Lisa": ["people", "behavior", "psychology", "social", "modern"]
+        }
+        
+        if comedian_name in personality_filters:
+            keywords = personality_filters[comedian_name]
+            filtered_results = []
+            
+            for joke in standard_results:
+                joke_text = joke.get('joke', '').lower()
+                # Score based on personality keywords
+                personality_score = sum(1 for keyword in keywords if keyword in joke_text)
+                joke['personality_score'] = personality_score
+                filtered_results.append(joke)
+            
+            # Sort by personality score, then by original order
+            filtered_results.sort(key=lambda x: x.get('personality_score', 0), reverse=True)
+            return filtered_results[:top_k]
+        
+        return standard_results[:top_k]
 
     def is_available(self) -> bool:
         """Controlla se il sistema RAG è disponibile"""

@@ -174,7 +174,8 @@ class ComedyClub:
                     topic, 
                     use_web_search=self.use_web_search,
                     top_k=3,
-                    enhanced_tv_search=enhanced_tv_search
+                    enhanced_tv_search=enhanced_tv_search,
+                    comedian_name=comedian_name
                 )
                 
                 sample_jokes = rag_result["jokes"]

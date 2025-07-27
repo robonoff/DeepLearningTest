@@ -58,7 +58,7 @@ class OrfeoClient:
                 endpoint,
                 json=data,
                 headers=headers,
-                timeout=120
+                timeout=30  # Ridotto da 120 a 30 secondi per maggiore reattività
             )
             
             if response.status_code == 200:
@@ -90,7 +90,7 @@ class OrfeoClient:
                 f"{self.config['base_url']}/generate",
                 json=data_direct,
                 headers=headers,
-                timeout=120
+                timeout=30  # Ridotto da 120 a 30 secondi per maggiore reattività
             )
             
             if response.status_code == 200:
