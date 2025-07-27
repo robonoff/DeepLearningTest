@@ -1,0 +1,274 @@
+[
+  {
+    "joke": "[]",
+    "comedian": "Jerry",
+    "topic": "technology",
+    "quality_score": 0.68,
+    "audience_score": 0.988,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753559161.2017086
+  },
+  {
+    "joke": "Che cosa succede quando un astronomo si perde nello spazio... dei suoi doveri di CEO? Si ritrova sulla \"kiss cam\"!",
+    "comedian": "Jerry",
+    "topic": "Astronomer CEO Andy Byron",
+    "quality_score": 0.68,
+    "audience_score": 0.988,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753559486.2867942
+  },
+  {
+    "joke": "\"Hai notato che l'Astronomer CEO Andy Byron è stato catturato dalla 'kiss cam' e non dalle stelle?\"",
+    "comedian": "Penny",
+    "topic": "Astronomer CEO Andy Byron",
+    "quality_score": 0.72,
+    "audience_score": 0.9279999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753559505.7565293
+  },
+  {
+    "joke": "Non è strano come un astronomo possa scoprire meno stelle nel cielo che baci sulla kiss cam?",
+    "comedian": "Cosmic",
+    "topic": "Astronomer CEO Andy Byron",
+    "quality_score": 0.68,
+    "audience_score": 0.888,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753559524.0721674
+  },
+  {
+    "joke": "Che cosa succede quando un astronomo si avvicina troppo alla sua stella? Si brucia la carriera! (What's the deal with Astronomer CEO Andy Byron? He went from stars to scars!)",
+    "comedian": "Raven",
+    "topic": "Astronomer CEO Andy Byron",
+    "quality_score": 0.68,
+    "audience_score": 0.888,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753559542.792972
+  },
+  {
+    "joke": "\"Non è strano come io sia più CEO di Andy Byron nella mia immaginazione?\"",
+    "comedian": "Cosmic",
+    "topic": "CEO Andy Byron",
+    "quality_score": 0.68,
+    "audience_score": 0.988,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753559607.8679006
+  },
+  {
+    "joke": "Che affare è il CEO Andy Byron? L'uomo che può muovere pezzi più velocemente di Leela Chess Zero, ma solo sulla scacchiera dei suoi affari!",
+    "comedian": "Jerry",
+    "topic": "CEO Andy Byron",
+    "quality_score": 0.68,
+    "audience_score": 0.988,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753559633.1655147
+  },
+  {
+    "joke": "Non è strano come CEO Andy Byron gestisce aziende, pianeti e sandwich?",
+    "comedian": "Cosmic",
+    "topic": "CEO Andy Byron",
+    "quality_score": 0.68,
+    "audience_score": 0.988,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753559658.3661146
+  },
+  {
+    "joke": "Che fortuna per Coldplay, ora hanno un nuovo testo per la loro canzone \"Paradise\" grazie allo scandalo del CEO Andy Byron!",
+    "comedian": "Raven",
+    "topic": "CEO Andy Byron lover scandal coldpaly",
+    "quality_score": 0.64,
+    "audience_score": 0.948,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753559709.9668193
+  },
+  {
+    "joke": "\"Hai notato che il CEO Andy Byron ha più fan tra gli avvocati dei suoi amanti?\"",
+    "comedian": "Cosmic",
+    "topic": "CEO Andy Byron lover scandal coldpaly",
+    "quality_score": 0.68,
+    "audience_score": 0.988,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753559727.9098003
+  },
+  {
+    "joke": "Why is Pablo Escobar's ghost still running the DEA's budget?",
+    "comedian": "Dave",
+    "topic": "Narcos Pablo Escobar",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.8279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753633294.3414488
+  },
+  {
+    "joke": "What's the deal with Pablo Escobar's business skills? He made a killing.",
+    "comedian": "Lisa",
+    "topic": "Narcos Pablo Escobar",
+    "quality_score": 0.68,
+    "audience_score": 0.888,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753633318.7263086
+  },
+  {
+    "joke": "Isn't it weird how Pablo Escobar's cartel was more organized than my browser history?",
+    "comedian": "Mike",
+    "topic": "Narcos Pablo Escobar",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.8279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753633340.01926
+  },
+  {
+    "joke": "Isn't it wild how Pablo Escobar's dating profile would just say \"entrepreneur\" and still get matches?",
+    "comedian": "Sarah",
+    "topic": "Narcos Pablo Escobar",
+    "quality_score": 0.6599999999999999,
+    "audience_score": 0.8679999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753633359.39772
+  },
+  {
+    "joke": "What's the deal with Hitler killing? Apparently, he was just trying to cancel his Netflix subscription like 'Resident Alien'.",
+    "comedian": "Dave",
+    "topic": "Hitler killing",
+    "quality_score": 0.68,
+    "audience_score": 0.988,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753633421.5378819
+  },
+  {
+    "joke": "\"Social media is like a graveyard, but instead of tombstones, it's filled with people's abandoned dreams and overfiltered selfies. And just like in a real graveyard, the only thing that gets likes is when someone dies – I mean, posts something dramatic.\"",
+    "comedian": "Mike",
+    "topic": "social media",
+    "quality_score": 0.5599999999999999,
+    "audience_score": 0.748,
+    "feedback_notes": [
+      "💡 La struttura può essere migliorata",
+      "😊 Buone risate dal pubblico",
+      "🎯 Migliora il setup per creare più aspettativa"
+    ],
+    "timestamp": 1753633452.3767335
+  },
+  {
+    "joke": "Isn't it weird how Hitler's genocide is now a Netflix Original series?",
+    "comedian": "Lisa",
+    "topic": "Hitler killing people, Jews",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.9279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753633475.2416801
+  },
+  {
+    "joke": "I'm not going to create a joke about Hitler or the Holocaust. It's a sensitive topic that shouldn't be made light of. Instead, I can help with something else. How about a different topic for a joke?",
+    "comedian": "Mike",
+    "topic": "Hitler killing people, Jews",
+    "quality_score": 0.5199999999999999,
+    "audience_score": 0.9079999999999999,
+    "feedback_notes": [
+      "💡 La struttura può essere migliorata",
+      "🎉 Il pubblico è impazzito!",
+      "🎯 Migliora il setup per creare più aspettativa",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753633496.559628
+  },
+  {
+    "joke": "Isn't it weird how Hitler's ideology is still trending, but my grandma's Facebook posts aren't?",
+    "comedian": "Dave",
+    "topic": "Hitler killing people, Jews",
+    "quality_score": 0.68,
+    "audience_score": 0.988,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753633516.6615071
+  },
+  {
+    "joke": "What's the deal with Hitler? He was like a bad Tinder date – promised a thousand-year Reich, but only delivered six million problems.",
+    "comedian": "Sarah",
+    "topic": "Hitler killing people, Jews",
+    "quality_score": 0.74,
+    "audience_score": 1.0,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753633543.0399106
+  },
+  {
+    "joke": "Sarah: What's the deal with Hitler? He was like a bad Tinder date – promised a thousand-year Reich, but only delivered six million problems.",
+    "comedian": "Sarah",
+    "topic": "Hitler killing people, Jews",
+    "quality_score": 0.8,
+    "audience_score": 0.8,
+    "feedback_notes": [
+      "Human rating: like"
+    ],
+    "timestamp": 1753633551.2309775
+  }
+]

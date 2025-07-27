@@ -65,6 +65,11 @@ class AdaptiveComedySystem:
         
         improvements_by_comedian = {}
         
+        # Controlla se il rating_system è disponibile
+        if not rating_system or not hasattr(rating_system, 'patterns'):
+            print("⚠️ Rating system non disponibile per l'analisi delle performance")
+            return improvements_by_comedian
+        
         for comedian, pattern in rating_system.patterns.items():
             improvements = []
             
@@ -128,6 +133,10 @@ class AdaptiveComedySystem:
     def get_enhanced_prompt(self, comedian: str, base_prompt: str, rating_system) -> str:
         """Migliora il prompt di un comico basandosi sui rating"""
         
+        # Controlla se il rating_system è disponibile
+        if not rating_system or not hasattr(rating_system, 'patterns'):
+            return base_prompt
+            
         if comedian not in rating_system.patterns:
             return base_prompt
         

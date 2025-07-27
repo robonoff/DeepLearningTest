@@ -27,7 +27,7 @@ class ComedyClubGUI:
         self.root = root
         self.root.title("🎭 AI Comedy Club Simulation with Rating")
         self.root.geometry("1400x900")
-        self.root.configure(bg='#1a1a1a')  # Dark comedy club theme
+        self.root.configure(bg='#f3ece6')  # Light comedy club theme
         
         # Initialize rating system
         if HumanRatingSystem:
@@ -57,15 +57,15 @@ class ComedyClubGUI:
         """Setup the main GUI layout"""
         
         # Main title
-        title_frame = tk.Frame(self.root, bg='#1a1a1a')
+        title_frame = tk.Frame(self.root, bg='#f3ece6')
         title_frame.pack(fill='x', padx=10, pady=5)
         
         title_label = tk.Label(
             title_frame, 
             text="🎭 AI COMEDY CLUB SIMULATION", 
             font=('Arial', 20, 'bold'),
-            fg='#FECA57',
-            bg='#1a1a1a'
+            fg="#002555",
+            bg="#f3ece6"
         )
         title_label.pack()
         
@@ -73,13 +73,13 @@ class ComedyClubGUI:
             title_frame,
             text="Four AI Comedians • Live Performance Simulation",
             font=('Arial', 12),
-            fg='#95a5a6',
-            bg='#1a1a1a'
+            fg="#002555",
+            bg='#f3ece6'
         )
         subtitle_label.pack()
         
         # Main content area - only stage (no log area)
-        main_frame = tk.Frame(self.root, bg='#1a1a1a')
+        main_frame = tk.Frame(self.root, bg='#f3ece6')
         main_frame.pack(fill='both', expand=True, padx=10, pady=5)
         
         # Only the stage area (log area removed)
@@ -90,7 +90,7 @@ class ComedyClubGUI:
     
     def setup_stage_area(self, parent):
         """Setup the visual stage area"""
-        stage_frame = tk.Frame(parent, bg='#2c3e50', relief='raised', bd=2)
+        stage_frame = tk.Frame(parent, bg='#f3ece6', relief='raised', bd=2)
         stage_frame.pack(fill='both', expand=True)  # Fill entire area
         
         # Stage title
@@ -98,8 +98,8 @@ class ComedyClubGUI:
             stage_frame,
             text="🎤 COMEDY CLUB STAGE",
             font=('Arial', 14, 'bold'),
-            fg='white',
-            bg='#000080'
+            fg="#002555",
+            bg='#f3ece6'
         )
         stage_title.pack(pady=5)
         
@@ -108,13 +108,13 @@ class ComedyClubGUI:
             stage_frame,
             text="No show running",
             font=('Arial', 10),
-            fg='#95a5a6',
-            bg='#2c3e50'
+            fg='#002555',
+            bg='#95a5a6'
         )
         self.show_info.pack(pady=2)
         
         # Comedian status area
-        self.comedian_frame = tk.Frame(stage_frame, bg='#2c3e50')
+        self.comedian_frame = tk.Frame(stage_frame, bg='#f3ece6')
         self.comedian_frame.pack(fill='x', padx=10, pady=5)
         
         # Create comedian status widgets
@@ -136,7 +136,7 @@ class ComedyClubGUI:
             status_label = tk.Label(
                 comedian_widget,
                 text=display,
-                font=('Arial', 10, 'bold'),
+                font=('Times New Roman', 10, 'bold'),
                 fg='white',
                 bg=color
             )
@@ -145,7 +145,7 @@ class ComedyClubGUI:
             activity_label = tk.Label(
                 comedian_widget,
                 text="💤 Waiting",
-                font=('Arial', 9),
+                font=('Times New Roman', 9),
                 fg='white',
                 bg=color
             )
@@ -180,7 +180,7 @@ class ComedyClubGUI:
             height=15,  # Increased height
             width=80,   # Increased width
             font=('Arial', 12),  # Larger font
-            bg='#2c3e50',
+            bg='#002555',
             fg='white',
             insertbackground='white',
             state='disabled',
@@ -189,15 +189,15 @@ class ComedyClubGUI:
         self.current_performance.pack(fill='both', expand=True, padx=10, pady=5)
         
         # Audience reaction
-        reaction_frame = tk.Frame(stage_frame, bg='#2c3e50')
+        reaction_frame = tk.Frame(stage_frame, bg='#f3ece6')
         reaction_frame.pack(fill='x', padx=10, pady=5)
         
         reaction_title = tk.Label(
             reaction_frame,
             text="👏 AUDIENCE REACTION",
             font=('Arial', 10, 'bold'),
-            fg='white',
-            bg='#2c3e50'
+            fg='#002555',
+            bg='#f3ece6'
         )
         reaction_title.pack()
         
@@ -205,8 +205,8 @@ class ComedyClubGUI:
             reaction_frame,
             text="🤐 Silence...",
             font=('Arial', 12),
-            fg='#95a5a6',
-            bg='#2c3e50',
+            fg='#002555',
+            bg='#f3ece6',
             wraplength=400
         )
         self.audience_reaction.pack(pady=5)
@@ -219,7 +219,7 @@ class ComedyClubGUI:
         if not self.rating_system:
             return
             
-        rating_frame = tk.Frame(parent, bg='#8e44ad', relief='raised', bd=2)
+        rating_frame = tk.Frame(parent, bg='#bdc3c7', relief='raised', bd=2)
         rating_frame.pack(fill='x', padx=10, pady=5)
         
         # Rating title
@@ -227,13 +227,13 @@ class ComedyClubGUI:
             rating_frame,
             text="⭐ RATE THIS JOKE ⭐",
             font=('Arial', 12, 'bold'),
-            fg='white',
-            bg='#8e44ad'
+            fg='#002555',
+            bg='#bdc3c7'
         )
         rating_title.pack(pady=5)
         
         # Rating buttons frame
-        buttons_frame = tk.Frame(rating_frame, bg='#8e44ad')
+        buttons_frame = tk.Frame(rating_frame, bg='#bdc3c7')
         buttons_frame.pack(pady=5)
         
         # Rating buttons with emojis and colors
@@ -241,7 +241,7 @@ class ComedyClubGUI:
         rating_options = [
             ("😍", "love", "#27ae60", "LOVE IT!"),
             ("👍", "like", "#2ecc71", "Like"),
-            ("😐", "meh", "#95a5a6", "Meh"),
+            ("😐", "meh", "#7f8c8d", "Meh"),
             ("👎", "dislike", "#e74c3c", "Dislike"),
             ("🤮", "hate", "#c0392b", "HATE IT!")
         ]
@@ -262,15 +262,15 @@ class ComedyClubGUI:
             self.rating_buttons[rating] = btn
         
         # Comment entry
-        comment_frame = tk.Frame(rating_frame, bg='#8e44ad')
+        comment_frame = tk.Frame(rating_frame, bg='#bdc3c7')
         comment_frame.pack(fill='x', padx=10, pady=5)
         
         tk.Label(
             comment_frame,
             text="💬 Comment (optional):",
             font=('Arial', 9),
-            fg='white',
-            bg='#8e44ad'
+            fg='#002555',
+            bg='#bdc3c7'
         ).pack(anchor='w')
         
         self.comment_entry = tk.Entry(
@@ -287,8 +287,8 @@ class ComedyClubGUI:
             rating_frame,
             text="🎭 No joke to rate yet...",
             font=('Arial', 9),
-            fg='#ecf0f1',
-            bg='#8e44ad'
+            fg='#002555',
+            bg='#bdc3c7'
         )
         self.rating_status.pack(pady=2)
     
@@ -323,7 +323,7 @@ class ComedyClubGUI:
             height=25,
             width=50,
             font=('Consolas', 9),
-            bg='#2c3e50',
+            bg='#002555',
             fg='white',
             insertbackground='white',
             state='disabled'
@@ -336,7 +336,7 @@ class ComedyClubGUI:
     
     def setup_controls(self):
         """Setup control buttons"""
-        control_frame = tk.Frame(self.root, bg='#1a1a1a')
+        control_frame = tk.Frame(self.root, bg='#f3ece6')
         control_frame.pack(fill='x', padx=10, pady=5)
         
         # Control buttons
@@ -384,15 +384,15 @@ class ComedyClubGUI:
             control_frame,
             text="Topic:",
             font=('Arial', 10),
-            fg='white',
-            bg='#1a1a1a'
+            fg='#002555',
+            bg='#f3ece6'
         ).pack(side='left', padx=(20, 5))
         
         self.topic_entry = tk.Entry(
             control_frame,
             font=('Arial', 10),
             width=25,
-            bg='#2c3e50',
+            bg='#002555',
             fg='white',
             insertbackground='white'
         )
@@ -406,9 +406,9 @@ class ComedyClubGUI:
             text="🌐 Web Search",
             variable=self.web_search_var,
             font=('Arial', 9),
-            fg='white',
-            bg='#1a1a1a',
-            selectcolor='#2c3e50'
+            fg='#002555',
+            bg='#f3ece6',
+            selectcolor='#95a5a6'
         )
         self.web_search_check.pack(side='left', padx=(10, 5))
         
@@ -419,9 +419,9 @@ class ComedyClubGUI:
             text="📺 TV/Meme Search",
             variable=self.tv_meme_var,
             font=('Arial', 9),
-            fg='white',
-            bg='#1a1a1a',
-            selectcolor='#2c3e50'
+            fg='#002555',
+            bg='#f3ece6',
+            selectcolor='#95a5a6'
         )
         self.tv_meme_check.pack(side='left', padx=5)
         
@@ -455,8 +455,8 @@ class ComedyClubGUI:
             control_frame,
             text="Ready to start",
             font=('Arial', 10),
-            fg='#95a5a6',
-            bg='#1a1a1a'
+            fg='#002555',
+            bg='#f3ece6'
         )
         self.status_label.pack(side='right', padx=10)
     
@@ -807,26 +807,26 @@ class ComedyClubGUI:
             stats_window = tk.Toplevel(self.root)
             stats_window.title("📊 Comedy Performance Statistics")
             stats_window.geometry("600x500")
-            stats_window.configure(bg='#1a1a1a')
+            stats_window.configure(bg='#f3ece6')
             
             # Title
             title_label = tk.Label(
                 stats_window,
                 text="📊 COMEDY PERFORMANCE STATISTICS",
                 font=('Arial', 16, 'bold'),
-                fg='#FECA57',
-                bg='#1a1a1a'
+                fg='#002555',
+                bg='#f3ece6'
             )
             title_label.pack(pady=10)
             
             # Create text area with scrollbar
-            text_frame = tk.Frame(stats_window, bg='#1a1a1a')
+            text_frame = tk.Frame(stats_window, bg='#f3ece6')
             text_frame.pack(fill='both', expand=True, padx=10, pady=10)
             
             stats_text = tk.Text(
                 text_frame,
                 font=('Consolas', 10),
-                bg='#2c3e50',
+                bg='#002555',
                 fg='white',
                 wrap='word',
                 state='normal'

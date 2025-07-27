@@ -7,6 +7,7 @@ import numpy as np
 import json
 import time
 import os
+import threading
 from typing import List, Dict, Optional
 
 class EnhancedJokeRAG:
@@ -22,6 +23,8 @@ class EnhancedJokeRAG:
         self.jokes_data = self._load_jokes_with_embeddings()
         self.search_cache = {}
         self.model = None
+        self._search_lock = threading.Lock()  # Lock per evitare chiamate simultanee
+        self._last_search_time = 0
         self._init_model()
         
     def _init_model(self):
@@ -105,6 +108,14 @@ class EnhancedJokeRAG:
         if cache_key in self.search_cache:
             return self.search_cache[cache_key]
         
+        # Rate limiting: evita chiamate troppo frequenti
+        with self._search_lock:
+            current_time = time.time()
+            if current_time - self._last_search_time < 1.0:  # Minimo 1 secondo tra ricerche
+                print("⏳ Rate limiting: aspetto prima della prossima ricerca...")
+                time.sleep(1.0)
+            self._last_search_time = time.time()
+        
         try:
             from ddgs import DDGS
             
@@ -118,9 +129,10 @@ class EnhancedJokeRAG:
             
             all_context_snippets = []
             
-            with DDGS() as ddgs:
-                for query in search_queries:
-                    try:
+            # Usa DDGS separati per ogni query per evitare problemi di threading
+            for query in search_queries:
+                try:
+                    with DDGS() as ddgs:
                         results = list(ddgs.text(query, max_results=max_results//len(search_queries) + 1))
                         
                         for result in results:
@@ -129,15 +141,15 @@ class EnhancedJokeRAG:
                             snippet = f"{title} - {body}..."
                             all_context_snippets.append(snippet)
                             
-                    except Exception as e:
-                        print(f"⚠️ Search query failed: {query} - {e}")
-                        continue
+                except Exception as e:
+                    print(f"⚠️ Search query failed: {query} - {e}")
+                    continue
                 
-                # Limit total context length
-                web_context = " | ".join(all_context_snippets[:6])  # Max 6 snippets
-                self.search_cache[cache_key] = web_context
-                print(f"🌐 Enhanced context retrieved for '{topic}': {len(web_context)} chars")
-                return web_context
+            # Limit total context length
+            web_context = " | ".join(all_context_snippets[:6])  # Max 6 snippets
+            self.search_cache[cache_key] = web_context
+            print(f"🌐 Enhanced context retrieved for '{topic}': {len(web_context)} chars")
+            return web_context
                 
         except ImportError:
             print("⚠️ duckduckgo-search not installed. Run: pip install duckduckgo-search")
@@ -148,6 +160,15 @@ class EnhancedJokeRAG:
     
     def search_tv_and_meme_context(self, topic: str) -> Dict[str, str]:
         """Specialized search for TV shows, memes, viral content, politics, gossip, and science"""
+        
+        # Rate limiting: evita chiamate troppo frequenti
+        with self._search_lock:
+            current_time = time.time()
+            if current_time - self._last_search_time < 1.0:  # Minimo 1 secondo tra ricerche
+                print("⏳ Rate limiting: aspetto prima della prossima ricerca...")
+                time.sleep(1.0)
+            self._last_search_time = time.time()
+        
         try:
             from ddgs import DDGS
             
@@ -174,9 +195,10 @@ class EnhancedJokeRAG:
                 ("trending_news", f"{topic} trending news viral story unusual bizarre 2025")
             ]
             
-            with DDGS() as ddgs:
-                for context_type, query in search_configs:
-                    try:
+            # Usa un nuovo DDGS per ogni ricerca per evitare problemi di threading
+            for context_type, query in search_configs:
+                try:
+                    with DDGS() as ddgs:
                         results = list(ddgs.text(query, max_results=2))
                         snippets = []
                         
@@ -187,9 +209,9 @@ class EnhancedJokeRAG:
                         
                         contexts[context_type] = " | ".join(snippets)
                         
-                    except Exception as e:
-                        print(f"⚠️ Failed to search {context_type}: {e}")
-                        continue
+                except Exception as e:
+                    print(f"⚠️ Failed to search {context_type}: {e}")
+                    continue
             
             # Print what we found for debugging
             found_contexts = [k for k, v in contexts.items() if v]
