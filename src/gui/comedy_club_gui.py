@@ -777,7 +777,7 @@ class ComedyClubGUI:
                 self.add_log(f"❌ Error loading file: {e}", "Show_Manager")
 
     def show_statistics(self):
-        """Show comedy performance statistics in a popup window"""
+        """Show comedy performance statistics in a popup window with live updates"""
         try:
             import sys
             import os
@@ -785,16 +785,21 @@ class ComedyClubGUI:
             
             from src.utils.comedy_feedback import ComedyFeedbackSystem
             
+            # Check if statistics window is already open
+            if hasattr(self, 'stats_window') and self.stats_window.winfo_exists():
+                self.stats_window.lift()  # Bring to front
+                return
+            
             # Create statistics window
-            stats_window = tk.Toplevel(self.root)
-            stats_window.title("📊 Comedy Performance Statistics")
-            stats_window.geometry("600x500")
-            stats_window.configure(bg='#f3ece6')
+            self.stats_window = tk.Toplevel(self.root)
+            self.stats_window.title("📊 Comedy Performance Statistics (LIVE)")
+            self.stats_window.geometry("600x500")
+            self.stats_window.configure(bg='#f3ece6')
             
             # Title
             title_label = tk.Label(
-                stats_window,
-                text="📊 COMEDY PERFORMANCE STATISTICS",
+                self.stats_window,
+                text="📊 COMEDY PERFORMANCE STATISTICS (LIVE)",
                 font=('Arial', 16, 'bold'),
                 fg='#002555',
                 bg='#f3ece6'
@@ -802,10 +807,10 @@ class ComedyClubGUI:
             title_label.pack(pady=10)
             
             # Create text area with scrollbar
-            text_frame = tk.Frame(stats_window, bg='#f3ece6')
+            text_frame = tk.Frame(self.stats_window, bg='#f3ece6')
             text_frame.pack(fill='both', expand=True, padx=10, pady=10)
             
-            stats_text = tk.Text(
+            self.stats_text = tk.Text(
                 text_frame,
                 font=('Consolas', 10),
                 bg='#002555',
@@ -814,11 +819,60 @@ class ComedyClubGUI:
                 state='normal'
             )
             
-            scrollbar = tk.Scrollbar(text_frame, orient='vertical', command=stats_text.yview)
-            stats_text.configure(yscrollcommand=scrollbar.set)
+            scrollbar = tk.Scrollbar(text_frame, orient='vertical', command=self.stats_text.yview)
+            self.stats_text.configure(yscrollcommand=scrollbar.set)
             
-            stats_text.pack(side='left', fill='both', expand=True)
+            self.stats_text.pack(side='left', fill='both', expand=True)
             scrollbar.pack(side='right', fill='y')
+            
+            # Close button
+            close_button = tk.Button(
+                self.stats_window,
+                text="Close",
+                command=self._close_stats_window,
+                font=('Arial', 12),
+                bg='#e74c3c',
+                fg='white',
+                padx=20,
+                pady=5
+            )
+            close_button.pack(pady=10)
+            
+            # Initialize content and start auto-refresh
+            self._update_statistics_content()
+            self._schedule_stats_update()
+            
+        except Exception as e:
+            self.add_log(f"❌ Error loading statistics: {e}", "Show_Manager")
+    
+    def _close_stats_window(self):
+        """Close statistics window and cancel updates"""
+        try:
+            if hasattr(self, 'stats_update_job'):
+                self.root.after_cancel(self.stats_update_job)
+            if hasattr(self, 'stats_window'):
+                self.stats_window.destroy()
+        except Exception as e:
+            print(f"⚠️ Error closing stats window: {e}")
+    
+    def _update_statistics_content(self):
+        """Update the content of the statistics window"""
+        try:
+            if not hasattr(self, 'stats_text') or not self.stats_window.winfo_exists():
+                return
+                    
+            import sys
+            import os
+            sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+            
+            from src.utils.comedy_feedback import ComedyFeedbackSystem
+            
+            # Store current scroll position
+            scroll_position = self.stats_text.yview()
+            
+            # Clear and update content
+            self.stats_text.config(state='normal')
+            self.stats_text.delete(1.0, tk.END)
             
             # Load and display statistics
             feedback_system = ComedyFeedbackSystem()
@@ -828,72 +882,82 @@ class ComedyClubGUI:
             for feedback in feedback_system.feedback_history:
                 all_comedians.add(feedback.get('comedian', 'Unknown'))
             
-            stats_text.insert('end', f"📋 DEBUG: Comedians found in feedback: {', '.join(sorted(all_comedians))}\n")
-            stats_text.insert('end', f"📊 Total feedback entries: {len(feedback_system.feedback_history)}\n\n")
+            self.stats_text.insert('end', f"📋 DEBUG: Comedians found in feedback: {', '.join(sorted(all_comedians))}\n")
+            self.stats_text.insert('end', f"📊 Total feedback entries: {len(feedback_system.feedback_history)}\n\n")
             
             # General leaderboard
-            stats_text.insert('end', "🏆 COMEDY LEADERBOARD\n")
-            stats_text.insert('end', "=" * 50 + "\n\n")
+            self.stats_text.insert('end', "🏆 COMEDY LEADERBOARD\n")
+            self.stats_text.insert('end', "=" * 50 + "\n\n")
             
             top_performers = feedback_system.get_top_performers(4)
             if top_performers:
                 for i, performer in enumerate(top_performers, 1):
                     medal = "🥇" if i == 1 else "🥈" if i == 2 else "🥉" if i == 3 else "🏅"
-                    stats_text.insert('end', f"{medal} {i}° {performer['comedian']}: "
-                                             f"{performer['average_score']:.2f}/1.0 "
-                                             f"({performer['performances']} performances)\n")
+                    self.stats_text.insert('end', f"{medal} {i}° {performer['comedian']}: "
+                                                 f"{performer['average_score']:.2f}/1.0 "
+                                                 f"({performer['performances']} performances)\n")
             else:
-                stats_text.insert('end', "No performance data available yet.\n")
+                self.stats_text.insert('end', "No performance data available yet.\n")
             
-            stats_text.insert('end', "\n" + "=" * 50 + "\n\n")
+            self.stats_text.insert('end', "\n" + "=" * 50 + "\n\n")
             
             # Individual comedian stats
             comedians = ["Dave", "Sarah", "Mike", "Lisa"]
             for comedian in comedians:
                 stats = feedback_system.get_comedian_stats(comedian)
                 
-                stats_text.insert('end', f"🎭 {comedian.upper()}\n")
-                stats_text.insert('end', "-" * 30 + "\n")
+                self.stats_text.insert('end', f"🎭 {comedian.upper()}\n")
+                self.stats_text.insert('end', "-" * 30 + "\n")
                 
                 if "message" in stats:
-                    stats_text.insert('end', f"   {stats['message']}\n")
+                    self.stats_text.insert('end', f"   {stats['message']}\n")
                 else:
-                    stats_text.insert('end', f"   Total Performances: {stats['total_performances']}\n")
-                    stats_text.insert('end', f"   Quality Average: {stats['average_quality']:.2f}/1.0\n")
-                    stats_text.insert('end', f"   Audience Score: {stats['average_audience_score']:.2f}/1.0\n")
-                    stats_text.insert('end', f"   Best Topic: {stats['best_topic']}\n")
-                    stats_text.insert('end', f"   Trend: {stats['improvement_trend']}\n")
+                    self.stats_text.insert('end', f"   Total Performances: {stats['total_performances']}\n")
+                    self.stats_text.insert('end', f"   Quality Average: {stats['average_quality']:.2f}/1.0\n")
+                    self.stats_text.insert('end', f"   Audience Score: {stats['average_audience_score']:.2f}/1.0\n")
+                    self.stats_text.insert('end', f"   Best Topic: {stats['best_topic']}\n")
+                    self.stats_text.insert('end', f"   Trend: {stats['improvement_trend']}\n")
                     if stats['best_joke']:
                         best_joke = stats['best_joke'][:80] + "..." if len(stats['best_joke']) > 80 else stats['best_joke']
-                        stats_text.insert('end', f"   Best Joke: {best_joke}\n")
+                        self.stats_text.insert('end', f"   Best Joke: {best_joke}\n")
                 
-                stats_text.insert('end', "\n")
+                self.stats_text.insert('end', "\n")
             
             # System info
-            stats_text.insert('end', "🔧 SYSTEM INFO\n")
-            stats_text.insert('end', "-" * 30 + "\n")
-            stats_text.insert('end', "   RAG System: ✅ Active with Jester Dataset\n")
-            stats_text.insert('end', "   Comedy Tools: ✅ Advanced Reasoning\n")
-            stats_text.insert('end', "   Feedback System: ✅ Iterative Learning\n")
-            stats_text.insert('end', f"   Web Search: {'✅ Enabled' if self.web_search_var.get() else '❌ Disabled'}\n")
+            self.stats_text.insert('end', "🔧 SYSTEM INFO\n")
+            self.stats_text.insert('end', "-" * 30 + "\n")
+            self.stats_text.insert('end', "   RAG System: ✅ Active with Jester Dataset\n")
+            self.stats_text.insert('end', "   Comedy Tools: ✅ Advanced Reasoning\n")
+            self.stats_text.insert('end', "   Feedback System: ✅ Iterative Learning\n")
+            self.stats_text.insert('end', f"   Web Search: {'✅ Enabled' if self.web_search_var.get() else '❌ Disabled'}\n")
             
-            stats_text.config(state='disabled')
+            # Add last update timestamp
+            import time
+            self.stats_text.insert('end', f"\n🕒 Last updated: {time.strftime('%H:%M:%S')}\n")
             
-            # Close button
-            close_button = tk.Button(
-                stats_window,
-                text="Close",
-                command=stats_window.destroy,
-                font=('Arial', 12),
-                bg='#e74c3c',
-                fg='white',
-                padx=20,
-                pady=5
-            )
-            close_button.pack(pady=10)
+            self.stats_text.config(state='disabled')
             
+            # Restore scroll position if user hasn't scrolled to bottom
+            if scroll_position[1] < 1.0:
+                self.stats_text.yview_moveto(scroll_position[0])
+                
         except Exception as e:
-            self.add_log(f"❌ Error loading statistics: {e}", "Show_Manager")
+            print(f"⚠️ Error updating statistics: {e}")
+    
+    def _schedule_stats_update(self):
+        """Schedule the next statistics update"""
+        if hasattr(self, 'stats_window'):
+            try:
+                if self.stats_window.winfo_exists():
+                    self.stats_update_job = self.root.after(3000, self._auto_update_stats)  # Update every 3 seconds
+            except tk.TclError:
+                # Window was closed
+                pass
+    
+    def _auto_update_stats(self):
+        """Auto-update statistics and schedule next update"""
+        self._update_statistics_content()
+        self._schedule_stats_update()
     
     def rate_current_joke(self, rating: str):
         """Rate the current joke or response"""
@@ -977,6 +1041,10 @@ class ComedyClubGUI:
             # Add rating to log with enhanced info
             joke_type = "response" if self.current_joke_data.get('type') == 'response' else "joke"
             self.add_log(f"⭐ Rated {comedian}'s {joke_type}: {rating_text.get(rating, rating)}", "Rating System")
+            
+            # AGGIUNTO: Aggiorna immediatamente le statistiche se la finestra è aperta
+            if hasattr(self, 'stats_window') and self.stats_window.winfo_exists():
+                self._update_statistics_content()
             
         else:
             messagebox.showerror("Error", "Failed to save rating!")

@@ -1,1 +1,437 @@
-[]
+[
+  {
+    "joke": "Isn't it weird how crazy psychologists are just, like, regular therapists with better excuses for being messed up? *shrugs*",
+    "comedian": "Mike",
+    "topic": "crazy psichologists",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.8279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753647590.3390641
+  },
+  {
+    "joke": "\"What's the deal with crazy psychologists? They're just like my ex - diagnosing me with issues I don't have, and charging me for it.\"",
+    "comedian": "Sarah",
+    "topic": "crazy psichologists",
+    "quality_score": 0.68,
+    "audience_score": 0.888,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753647738.6394815
+  },
+  {
+    "joke": "Why do crazy psychologists make great partners? They're already insane about you!",
+    "comedian": "Dave",
+    "topic": "crazy psichologists",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.8279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753647953.5529978
+  },
+  {
+    "joke": "Isn't it weird how crazy psychologists are just, well, us, but with better insurance?",
+    "comedian": "Lisa",
+    "topic": "crazy psichologists",
+    "quality_score": 0.68,
+    "audience_score": 0.888,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648319.6365366
+  },
+  {
+    "joke": "\"Have you ever noticed that crazy psychologists are just like regular therapists, but with more notes... on themselves?\" *chuckles and shrugs*",
+    "comedian": "Mike",
+    "topic": "crazy psichologists",
+    "quality_score": 0.74,
+    "audience_score": 1.0,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648349.8012052
+  },
+  {
+    "joke": "Isn't it weird how crazy psychologists are just like my ex - they'll analyze you, charge by the hour, and still manage to mess with your head?",
+    "comedian": "Sarah",
+    "topic": "crazy psichologists",
+    "quality_score": 0.5800000000000001,
+    "audience_score": 0.888,
+    "feedback_notes": [
+      "💡 La struttura può essere migliorata",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648362.2764852
+  },
+  {
+    "joke": "Sarah: Isn't it weird how crazy psychologists are just like my ex - they'll analyze you, charge by the hour, and still manage to mess with your head?",
+    "comedian": "Sarah",
+    "topic": "crazy psichologists",
+    "quality_score": 0.5,
+    "audience_score": 0.5,
+    "feedback_notes": [
+      "Human rating: meh"
+    ],
+    "timestamp": 1753648368.5923882
+  },
+  {
+    "joke": "I love how Sarah compares crazy psychologists to her ex, but honestly, at least the psychologists give you a couch to lie on while they're messing with your head - my ex just gave me a bunch of emotional baggage and a hefty text message bill. And have you noticed how both will always find a way to make you question your own sanity, not theirs?",
+    "comedian": "Dave",
+    "topic": "crazy psichologists",
+    "quality_score": 0.8,
+    "audience_score": 0.8,
+    "feedback_notes": [
+      "Human rating: like"
+    ],
+    "timestamp": 1753648392.535645
+  },
+  {
+    "joke": "That's clever, but I think what makes them truly great partners is that they can diagnose their own craziness in you, essentially making your relationship a never-ending therapy session – and who needs personal growth when you can just project your issues onto each other? It's like they say, a match made in a straitjacket is a love that will last a lifetime!",
+    "comedian": "Lisa",
+    "topic": "crazy psichologists",
+    "quality_score": 0.2,
+    "audience_score": 0.2,
+    "feedback_notes": [
+      "Human rating: dislike"
+    ],
+    "timestamp": 1753648444.3364167
+  },
+  {
+    "joke": "What's the deal with Trump dodging Epstein questions? *shrugs* Guess you could say he's a master of 'alternate reality' therapy – and his patients are the entire country! *winks*",
+    "comedian": "Mike",
+    "topic": "crazy psichologistsTrump dodging Epstein’s allegations",
+    "quality_score": 0.64,
+    "audience_score": 0.948,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648477.7417657
+  },
+  {
+    "joke": "\"Why is Trump's alibi for Epstein's parties always 'I was at a different scandal'?\"",
+    "comedian": "Mike",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.9279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648549.327424
+  },
+  {
+    "joke": "Isn't it weird how Trump's denials are longer than his attention span in a relationship?",
+    "comedian": "Sarah",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.9279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648601.2398856
+  },
+  {
+    "joke": "Isn't it weird how Trump's denials of Epstein ties are more convincing than his hairline?",
+    "comedian": "Dave",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.9279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648635.571281
+  },
+  {
+    "joke": "Isn't it weird how Trump's denials are like quantum entanglement – instantly connected to more scandals?",
+    "comedian": "Lisa",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.8279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648661.3555713
+  },
+  {
+    "joke": "\"Trump's denials of Epstein ties? Sounds like my uncle at Thanksgiving – 'I'm not drunk, I'm just passionately expressing my lack of memory!'\"",
+    "comedian": "Mike",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.9279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648811.5411487
+  },
+  {
+    "joke": "\"Trump's denial of Epstein ties? I'm no expert, but I've had more convincing breakups on Tinder.\"",
+    "comedian": "Sarah",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.68,
+    "audience_score": 0.988,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648839.5020165
+  },
+  {
+    "joke": "Why is Trump dodging Epstein's allegations like a Tinder date? Because both are all about avoiding the truth and hoping the other person doesn't swipe left on their reputation.",
+    "comedian": "Dave",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.9279999999999998,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648863.8269572
+  },
+  {
+    "joke": "Isn't it weird how Trump's denials are like Schrödinger's scandal – both hoax and guilty until observed?",
+    "comedian": "Lisa",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.68,
+    "audience_score": 0.888,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🎉 Il pubblico è impazzito!",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753648907.6996014
+  },
+  {
+    "joke": "Lisa: Isn't it weird how Trump's denials are like Schrödinger's scandal – both hoax and guilty until observed?",
+    "comedian": "Lisa",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.8,
+    "audience_score": 0.8,
+    "feedback_notes": [
+      "Human rating: like"
+    ],
+    "timestamp": 1753648925.0171998
+  },
+  {
+    "joke": "I love how Lisa just applied quantum mechanics to Trump's scandals, but let's take it further - his denials are like black holes, they suck in all the truth and leave us with an event horizon of plausible ignorance. And honestly, at this point, his guilt or innocence is as uncertain as the location of his tax returns.",
+    "comedian": "Mike",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.8,
+    "audience_score": 0.8,
+    "feedback_notes": [
+      "Human rating: like"
+    ],
+    "timestamp": 1753648961.4615002
+  },
+  {
+    "joke": "\"I love how Mike's uncle has found a way to make blackout drinking sound like a philosophical movement – and honestly, Trump's denials are so convincing, I'm starting to think he's not just passionately expressing his lack of memory, but also running for president of the 'I'm-not-drunk-I'm-just-politically-experienced' party. It seems like Mike's uncle has inadvertently become Trump's new speechwriter!\"",
+    "comedian": "Sarah",
+    "topic": "Trump dodging Epstein’s allegations",
+    "quality_score": 0.8,
+    "audience_score": 0.8,
+    "feedback_notes": [
+      "Human rating: like"
+    ],
+    "timestamp": 1753649066.7497034
+  },
+  {
+    "joke": "Why did Trump's tariffs go to therapy? They had border issues.",
+    "comedian": "Lisa",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.6649999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652002.7410774
+  },
+  {
+    "joke": "\"Trump's tariffs are like bad dates – they're expensive, hurt everyone involved, and somehow still manage to make China look good.\"",
+    "comedian": "Sarah",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.6349999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico",
+      "🎯 Migliora il setup per creare più aspettativa",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652033.0743423
+  },
+  {
+    "joke": "What's the deal with Trump's tariffs? He's making America great again, one expensive taco at a time! *shrugs and chuckles*",
+    "comedian": "Mike",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.68,
+    "audience_score": 0.6769999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652104.2354035
+  },
+  {
+    "joke": "Isn't it weird how Trump's tariffs are like his hair – both overpriced and made in China?",
+    "comedian": "Dave",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.6349999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652123.093093
+  },
+  {
+    "joke": "Isn't it weird how Trump's tariffs are like a bad boyfriend - they're expensive, hurt everyone, and still manage to make America pay?",
+    "comedian": "Lisa",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.6349999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652282.2703917
+  },
+  {
+    "joke": "\"What's the deal with Trump's tariffs? He's taxing us like we're his ex-wives.\"",
+    "comedian": "Sarah",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.68,
+    "audience_score": 0.6769999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652305.1831582
+  },
+  {
+    "joke": "What's the deal with Trump's tariffs? He's taxing our patience... and everything else! (shrugs)",
+    "comedian": "Mike",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.68,
+    "audience_score": 0.6769999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652325.6168287
+  },
+  {
+    "joke": "\"Trump's tariffs are like his hair – they're both getting higher, but nobody knows how they'll stick together.\"",
+    "comedian": "Dave",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.64,
+    "audience_score": 0.6489999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico",
+      "🎯 Migliora il setup per creare più aspettativa",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652345.9191768
+  },
+  {
+    "joke": "Dave: \"Trump's tariffs are like his hair – they're both getting higher, but nobody knows how they'll stick together.\"",
+    "comedian": "Dave",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.2,
+    "audience_score": 0.2,
+    "feedback_notes": [
+      "Human rating: dislike"
+    ],
+    "timestamp": 1753652349.4968295
+  },
+  {
+    "joke": "I'd say Trump's tariffs and hair have one more thing in common - they're both artificially propped up, but eventually, the whole thing is going to come crashing down. And when that happens, we'll find out if his ego can withstand a recession-sized comb-over.",
+    "comedian": "Lisa",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.5,
+    "audience_score": 0.5,
+    "feedback_notes": [
+      "Human rating: meh"
+    ],
+    "timestamp": 1753652366.4519646
+  },
+  {
+    "joke": "I'd say, \"Well, Dave, it seems Trump's tariffs and hair have one more thing in common – they're both prone to being brushed off by critics, but somehow still manage to hold their ground.\" And maybe add, \"But let's hope his economic policies don't end up getting a comb-over, covering up the real issues!\"",
+    "comedian": "Sarah",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.5,
+    "audience_score": 0.5,
+    "feedback_notes": [
+      "Human rating: meh"
+    ],
+    "timestamp": 1753652395.5691874
+  },
+  {
+    "joke": "\"I love how Dave's joke perfectly combs through the chaos of Trump's economic policies, and I'd add that just like his hair, those tariffs are a real 'bad dye' job for the economy. It seems Trump's trying to glue his legacy together with tariffs, but it's just a sticky situation that's bound to fall apart.\"",
+    "comedian": "Mike",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.5,
+    "audience_score": 0.5,
+    "feedback_notes": [
+      "Human rating: meh"
+    ],
+    "timestamp": 1753652556.0340338
+  },
+  {
+    "joke": "I love how Mike thinks Trump's tariffs are just taxing our patience, but honestly, at this point, I'm pretty sure we're being taxed on our sanity too – like, there's a tariff on common sense and a trade war with reality. And you know what they say, when life gives you tariffs, make tariff-ade!",
+    "comedian": "Dave",
+    "topic": "Donald Trump economics tariff meme",
+    "quality_score": 0.2,
+    "audience_score": 0.2,
+    "feedback_notes": [
+      "Human rating: dislike"
+    ],
+    "timestamp": 1753652569.2388911
+  },
+  {
+    "joke": "\"Hey, you know who's still killing it? Hitler – in our collective anxiety, that is.\"",
+    "comedian": "Dave",
+    "topic": "Hitler killing the world",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.5349999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🤔 Reazione tiepida del pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652606.6924994
+  }
+]

@@ -36,7 +36,7 @@ We aimed to build a system where AI comedians could:
 
 The project is built on a stack of modern AI tools and techniques.
 
-1.  **Core Language Model**: `llama3.2:1b` (running on a DGX node via port forwarding) provides the core generative power.
+1.  **Core Language Model**: `llama3.3:latest` (running on a orfeo DGX partition node via port forwarding) provides the core generative power. 
 2.  **Multi-Agent System**: A custom Python framework manages the state, interactions, and performance flow of four distinct comedian agents.
 3.  **Enhanced Prompting (RAG)**: To provide comedians with inspiration and context.
 4.  **Adaptive Learning**: A feedback loop to allow the system to learn and evolve.
@@ -102,22 +102,10 @@ The system learns from feedback using an `AdaptiveComedySystem`.
 
 This is how a topic becomes a joke on stage.
 
-```mermaid
-graph TD
-    A[User selects Topic] --> B{Comedy Club System};
-    B --> C[Selects Comedian];
-    C --> D{RAG Pipeline};
-    D --> E[1. Retrieve Jokes<br><em>(Vector Database)</em>];
-    D --> F[2. Get Web Context<br><em>(Live Search)</em>];
-    subgraph "LLM Prompt"
-        E --> G;
-        F --> G[Context + Style];
-    end
-    G --> H[LLM Generates Joke<br><em>(llama3.2)</em>];
-    H --> I[🎤 Joke is Performed in GUI];
-    I --> J[User Rates Joke];
-    J --> K[Adaptive System Learns];
-```
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; align-items: center;">
+  <img src="images/workflow.png" alt="default" width="65%" />
+</div>
+
 
 ---
 
@@ -133,7 +121,9 @@ The simulation is controlled through a custom GUI built with Tkinter. It provide
 
 # GUI
 
-*(Image of the GUI will be added here)*
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; align-items: center;">
+  <img src="images/gui.jpeg" alt="default" width="65%" />
+</div>
 
 ---
 

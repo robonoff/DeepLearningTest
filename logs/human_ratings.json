@@ -49,6 +49,436 @@
       "comment": null,
       "timestamp": 1753637656.9416323,
       "context": {}
+    },
+    {
+      "joke": "Sarah: \"What's the deal with crazy psychologists? They're just like my ex - diagnosing me with issues I don't have, and charging me for it.\"",
+      "comedian": "Sarah",
+      "topic": "crazy psichologists",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753647807.3784866,
+      "context": {}
+    },
+    {
+      "joke": "I'd say that's spot on, Mike - after all, who needs personal growth when you can just prescribe yourself a raise and call it 'self-care'? And I guess that's why they're the only professionals where 'transference' is just code for 'I'm projecting my own issues onto you, but don't worry, it's $200 an hour'.",
+      "comedian": "Sarah",
+      "topic": "crazy psichologists",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753647942.8590775,
+      "context": {
+        "is_response": true,
+        "responding_to": "Mike",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "Dave: Why do crazy psychologists make great partners? They're already insane about you!",
+      "comedian": "Dave",
+      "topic": "crazy psichologists",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753647966.9469056,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: Isn't it weird how crazy psychologists are just, well, us, but with better insurance?",
+      "comedian": "Lisa",
+      "topic": "crazy psichologists",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753648334.4212592,
+      "context": {}
+    },
+    {
+      "joke": "Mike: \"Have you ever noticed that crazy psychologists are just like regular therapists, but with more notes... on themselves?\" *chuckles and shrugs*",
+      "comedian": "Mike",
+      "topic": "crazy psichologists",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753648355.8213336,
+      "context": {}
+    },
+    {
+      "joke": "Sarah: Isn't it weird how crazy psychologists are just like my ex - they'll analyze you, charge by the hour, and still manage to mess with your head?",
+      "comedian": "Sarah",
+      "topic": "crazy psichologists",
+      "rating": "meh",
+      "rating_score": 0.0,
+      "comment": null,
+      "timestamp": 1753648368.5896194,
+      "context": {}
+    },
+    {
+      "joke": "I love how Sarah compares crazy psychologists to her ex, but honestly, at least the psychologists give you a couch to lie on while they're messing with your head - my ex just gave me a bunch of emotional baggage and a hefty text message bill. And have you noticed how both will always find a way to make you question your own sanity, not theirs?",
+      "comedian": "Dave",
+      "topic": "crazy psichologists",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753648392.5332549,
+      "context": {
+        "is_response": true,
+        "responding_to": "Sarah",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "That's clever, but I think what makes them truly great partners is that they can diagnose their own craziness in you, essentially making your relationship a never-ending therapy session – and who needs personal growth when you can just project your issues onto each other? It's like they say, a match made in a straitjacket is a love that will last a lifetime!",
+      "comedian": "Lisa",
+      "topic": "crazy psichologists",
+      "rating": "dislike",
+      "rating_score": -1.0,
+      "comment": null,
+      "timestamp": 1753648444.333771,
+      "context": {
+        "is_response": true,
+        "responding_to": "Dave",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "Mike: \"Why is Trump's alibi for Epstein's parties always 'I was at a different scandal'?\"",
+      "comedian": "Mike",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753648576.5106828,
+      "context": {}
+    },
+    {
+      "joke": "Sarah: Isn't it weird how Trump's denials are longer than his attention span in a relationship?",
+      "comedian": "Sarah",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753648621.0148263,
+      "context": {}
+    },
+    {
+      "joke": "Dave: Isn't it weird how Trump's denials of Epstein ties are more convincing than his hairline?",
+      "comedian": "Dave",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "meh",
+      "rating_score": 0.0,
+      "comment": null,
+      "timestamp": 1753648647.8869905,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: Isn't it weird how Trump's denials are like quantum entanglement – instantly connected to more scandals?",
+      "comedian": "Lisa",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753648673.48711,
+      "context": {}
+    },
+    {
+      "joke": "I'd say that's clever, but Trump's denials are more like black holes - they suck in all the truth and leave us with a void of accountability. And just like quantum entanglement, every time he denies something, it seems to simultaneously prove his guilt in an alternate universe of facts!",
+      "comedian": "Sarah",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753648714.2236974,
+      "context": {
+        "is_response": true,
+        "responding_to": "Lisa",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "\"I guess that's what they mean by 'multitasking' – Trump can simultaneously deny attending one scandal while actively creating another. It's like he has a PhD in scandal-juggling, where his dissertation was on 'The Art of Being Elsewhere'.\"",
+      "comedian": "Lisa",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753648796.2724187,
+      "context": {
+        "is_response": true,
+        "responding_to": "Mike",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "Mike: \"Trump's denials of Epstein ties? Sounds like my uncle at Thanksgiving – 'I'm not drunk, I'm just passionately expressing my lack of memory!'\"",
+      "comedian": "Mike",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753648825.672278,
+      "context": {}
+    },
+    {
+      "joke": "Sarah: \"Trump's denial of Epstein ties? I'm no expert, but I've had more convincing breakups on Tinder.\"",
+      "comedian": "Sarah",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753648848.7997458,
+      "context": {}
+    },
+    {
+      "joke": "Dave: Why is Trump dodging Epstein's allegations like a Tinder date? Because both are all about avoiding the truth and hoping the other person doesn't swipe left on their reputation.",
+      "comedian": "Dave",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753648889.143783,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: Isn't it weird how Trump's denials are like Schrödinger's scandal – both hoax and guilty until observed?",
+      "comedian": "Lisa",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753648925.015869,
+      "context": {}
+    },
+    {
+      "joke": "I love how Lisa just applied quantum mechanics to Trump's scandals, but let's take it further - his denials are like black holes, they suck in all the truth and leave us with an event horizon of plausible ignorance. And honestly, at this point, his guilt or innocence is as uncertain as the location of his tax returns.",
+      "comedian": "Mike",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753648961.4570622,
+      "context": {
+        "is_response": true,
+        "responding_to": "Lisa",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "\"I love how Mike's uncle has found a way to make blackout drinking sound like a philosophical movement – and honestly, Trump's denials are so convincing, I'm starting to think he's not just passionately expressing his lack of memory, but also running for president of the 'I'm-not-drunk-I'm-just-politically-experienced' party. It seems like Mike's uncle has inadvertently become Trump's new speechwriter!\"",
+      "comedian": "Sarah",
+      "topic": "Trump dodging Epstein’s allegations",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753649066.745512,
+      "context": {
+        "is_response": true,
+        "responding_to": "Mike",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "Test joke per aggiornamento dinamico",
+      "comedian": "TestComedian",
+      "topic": "test",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": "Test rating per aggiornamento dinamico",
+      "timestamp": 1753651838.022736,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: Why did Trump's tariffs go to therapy? They had border issues.",
+      "comedian": "Lisa",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753652016.9007297,
+      "context": {}
+    },
+    {
+      "joke": "Sarah: \"Trump's tariffs are like bad dates – they're expensive, hurt everyone involved, and somehow still manage to make China look good.\"",
+      "comedian": "Sarah",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "dislike",
+      "rating_score": -1.0,
+      "comment": null,
+      "timestamp": 1753652089.061109,
+      "context": {}
+    },
+    {
+      "joke": "Mike: What's the deal with Trump's tariffs? He's making America great again, one expensive taco at a time! *shrugs and chuckles*",
+      "comedian": "Mike",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753652110.317044,
+      "context": {}
+    },
+    {
+      "joke": "Dave: Isn't it weird how Trump's tariffs are like his hair – both overpriced and made in China?",
+      "comedian": "Dave",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "dislike",
+      "rating_score": -1.0,
+      "comment": null,
+      "timestamp": 1753652127.3012426,
+      "context": {}
+    },
+    {
+      "joke": "\"I guess that's what they mean by 'trump-ing' up the prices, but honestly, who needs affordable tacos when you can have a wall... of debt? Now that's making America grate again, one overpriced taco at a time!\"",
+      "comedian": "Lisa",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753652147.109492,
+      "context": {
+        "is_response": true,
+        "responding_to": "Mike",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "I'd say Mike is 'taco-'ing about the tariffs all wrong - Trump's policies are more like making America grate again, one cheese-less nacho at a time! It seems his economic recipe is a real corn-y problem, and we're all just trying to ketchup with the costs.",
+      "comedian": "Sarah",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "dislike",
+      "rating_score": -1.0,
+      "comment": null,
+      "timestamp": 1753652169.1174376,
+      "context": {
+        "is_response": true,
+        "responding_to": "Mike",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "\"That's rich, coming from a country where the only thing more unstable than the borders is Trump's ego – I guess you could say his tariffs are just trying to wallow in their own issues.\" I'd add, \"But honestly, therapy for tariffs? That's just a tax on sanity.\"",
+      "comedian": "Mike",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "dislike",
+      "rating_score": -1.0,
+      "comment": null,
+      "timestamp": 1753652196.901889,
+      "context": {
+        "is_response": true,
+        "responding_to": "Lisa",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "I love how Mike's taco comment nails the absurdity of Trump's tariffs – it's like he's trying to make America great again, one overpriced burrito at a time, and I guess that's just the saucy truth! It seems Trump's economic plan is all about seasoning our wallets with a pinch of protectionism and a whole lot of extra guac.",
+      "comedian": "Dave",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "dislike",
+      "rating_score": -1.0,
+      "comment": null,
+      "timestamp": 1753652258.4786246,
+      "context": {
+        "is_response": true,
+        "responding_to": "Mike",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "Lisa: Isn't it weird how Trump's tariffs are like a bad boyfriend - they're expensive, hurt everyone, and still manage to make America pay?",
+      "comedian": "Lisa",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "meh",
+      "rating_score": 0.0,
+      "comment": null,
+      "timestamp": 1753652288.20656,
+      "context": {}
+    },
+    {
+      "joke": "Sarah: \"What's the deal with Trump's tariffs? He's taxing us like we're his ex-wives.\"",
+      "comedian": "Sarah",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753652309.5666492,
+      "context": {}
+    },
+    {
+      "joke": "Mike: What's the deal with Trump's tariffs? He's taxing our patience... and everything else! (shrugs)",
+      "comedian": "Mike",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753652329.6148787,
+      "context": {}
+    },
+    {
+      "joke": "Dave: \"Trump's tariffs are like his hair – they're both getting higher, but nobody knows how they'll stick together.\"",
+      "comedian": "Dave",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "dislike",
+      "rating_score": -1.0,
+      "comment": null,
+      "timestamp": 1753652349.4947815,
+      "context": {}
+    },
+    {
+      "joke": "I'd say Trump's tariffs and hair have one more thing in common - they're both artificially propped up, but eventually, the whole thing is going to come crashing down. And when that happens, we'll find out if his ego can withstand a recession-sized comb-over.",
+      "comedian": "Lisa",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "meh",
+      "rating_score": 0.0,
+      "comment": null,
+      "timestamp": 1753652366.4476035,
+      "context": {
+        "is_response": true,
+        "responding_to": "Dave",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "I'd say, \"Well, Dave, it seems Trump's tariffs and hair have one more thing in common – they're both prone to being brushed off by critics, but somehow still manage to hold their ground.\" And maybe add, \"But let's hope his economic policies don't end up getting a comb-over, covering up the real issues!\"",
+      "comedian": "Sarah",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "meh",
+      "rating_score": 0.0,
+      "comment": null,
+      "timestamp": 1753652395.5670784,
+      "context": {
+        "is_response": true,
+        "responding_to": "Dave",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "\"I love how Dave's joke perfectly combs through the chaos of Trump's economic policies, and I'd add that just like his hair, those tariffs are a real 'bad dye' job for the economy. It seems Trump's trying to glue his legacy together with tariffs, but it's just a sticky situation that's bound to fall apart.\"",
+      "comedian": "Mike",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "meh",
+      "rating_score": 0.0,
+      "comment": null,
+      "timestamp": 1753652556.0323272,
+      "context": {
+        "is_response": true,
+        "responding_to": "Dave",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "I love how Mike thinks Trump's tariffs are just taxing our patience, but honestly, at this point, I'm pretty sure we're being taxed on our sanity too – like, there's a tariff on common sense and a trade war with reality. And you know what they say, when life gives you tariffs, make tariff-ade!",
+      "comedian": "Dave",
+      "topic": "Donald Trump economics tariff meme",
+      "rating": "dislike",
+      "rating_score": -1.0,
+      "comment": null,
+      "timestamp": 1753652569.2328753,
+      "context": {
+        "is_response": true,
+        "responding_to": "Mike",
+        "interaction_type": "comedy_battle"
+      }
     }
   ],
   "patterns": {
@@ -56,46 +486,105 @@
       "comedian": "Mike",
       "successful_elements": [
         "question_format",
+        "long_joke",
+        "medium_joke",
+        "complex_setup"
+      ],
+      "failed_elements": [
+        "question_format",
+        "complex_setup",
         "long_joke"
       ],
-      "failed_elements": [],
       "preferred_topics": [
-        "Extreme Veganism"
+        "Extreme Veganism",
+        "crazy psichologists",
+        "Trump dodging Epstein’s allegations",
+        "Donald Trump economics tariff meme"
       ],
-      "avg_rating": 0.5,
-      "total_ratings": 2,
-      "last_updated": 1753637266.4182513
+      "avg_rating": 1.0,
+      "total_ratings": 10,
+      "last_updated": 1753652556.0323405
     },
     "Lisa": {
       "comedian": "Lisa",
       "successful_elements": [
         "question_format",
-        "medium_joke"
+        "medium_joke",
+        "complex_setup",
+        "long_joke"
       ],
       "failed_elements": [
         "question_format",
-        "medium_joke"
+        "medium_joke",
+        "complex_setup",
+        "long_joke"
       ],
       "preferred_topics": [
-        "Extreme veganism"
+        "Extreme veganism",
+        "crazy psichologists",
+        "Trump dodging Epstein’s allegations",
+        "Donald Trump economics tariff meme"
       ],
-      "avg_rating": -0.5,
-      "total_ratings": 2,
-      "last_updated": 1753637656.9416823
+      "avg_rating": 0.6363636363636364,
+      "total_ratings": 11,
+      "last_updated": 1753652366.4476414
     },
     "Sarah": {
       "comedian": "Sarah",
       "successful_elements": [
         "question_format",
-        "medium_joke"
+        "medium_joke",
+        "complex_setup",
+        "long_joke"
+      ],
+      "failed_elements": [
+        "medium_joke",
+        "long_joke"
+      ],
+      "preferred_topics": [
+        "Extreme Veganism",
+        "crazy psichologists",
+        "Trump dodging Epstein’s allegations",
+        "Donald Trump economics tariff meme"
+      ],
+      "avg_rating": 0.8333333333333334,
+      "total_ratings": 12,
+      "last_updated": 1753652395.5670893
+    },
+    "Dave": {
+      "comedian": "Dave",
+      "successful_elements": [
+        "question_format",
+        "medium_joke",
+        "complex_setup",
+        "long_joke"
+      ],
+      "failed_elements": [
+        "question_format",
+        "medium_joke",
+        "long_joke",
+        "complex_setup"
+      ],
+      "preferred_topics": [
+        "crazy psichologists",
+        "Trump dodging Epstein’s allegations"
+      ],
+      "avg_rating": -0.125,
+      "total_ratings": 8,
+      "last_updated": 1753652569.232906
+    },
+    "TestComedian": {
+      "comedian": "TestComedian",
+      "successful_elements": [
+        "short_joke"
       ],
       "failed_elements": [],
       "preferred_topics": [
-        "Extreme Veganism"
+        "test"
       ],
       "avg_rating": 1.0,
       "total_ratings": 1,
-      "last_updated": 1753637288.193761
+      "last_updated": 1753651838.02275
     }
   }
 }

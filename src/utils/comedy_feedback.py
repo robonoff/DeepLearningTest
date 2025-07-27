@@ -49,32 +49,32 @@ class ComedyFeedbackSystem:
     def _load_audience_preferences(self) -> Dict[str, float]:
         """Carica le preferenze simulate del pubblico"""
         return {
-            "observational": 0.8,  # Il pubblico ama le osservazioni
-            "wordplay": 0.7,      # Giochi di parole apprezzati
-            "storytelling": 0.9,   # Storie coinvolgenti sono molto apprezzate
-            "absurd": 0.6,        # Umorismo assurdo più di nicchia
+            "observational": 0.6,  # Più realistico
+            "wordplay": 0.5,      # Più difficile da apprezzare
+            "storytelling": 0.7,   # Storie coinvolgenti
+            "absurd": 0.4,        # Umorismo assurdo di nicchia
             "relatable_topics": ["work", "technology", "food", "relationships"],
-            "timing_preference": 0.8,  # Preferenza per battute ben tempizzate
-            "originality_weight": 0.9   # Il pubblico premia l'originalità
+            "timing_preference": 0.6,  # Più selettivo
+            "originality_weight": 0.7   # Meno generoso
         }
     
     def simulate_audience_reaction(self, joke: str, comedian: str, topic: str, 
                                  comedy_analysis: Any) -> float:
         """Simula la reazione del pubblico basata su vari fattori"""
         
-        # Score base dalla qualità della battuta
-        base_score = comedy_analysis.overall_score
+        # Score base dalla qualità della battuta (più critico)
+        base_score = max(0.2, comedy_analysis.overall_score * 0.7)  # Range 0.2-0.7 invece di 0-1
         
-        # Bonus per stile preferito dal pubblico
-        style_bonus = self.audience_preferences.get(comedy_analysis.humor_type, 0.5) * 0.2
+        # Bonus per stile preferito dal pubblico (ridotto)
+        style_bonus = self.audience_preferences.get(comedy_analysis.humor_type, 0.3) * 0.15
         
-        # Bonus per topic relatable
-        topic_bonus = 0.1 if topic.lower() in self.audience_preferences["relatable_topics"] else 0
+        # Bonus per topic relatable (ridotto)
+        topic_bonus = 0.05 if topic.lower() in self.audience_preferences["relatable_topics"] else 0
         
-        # Bonus per originalità
-        originality_bonus = comedy_analysis.originality * self.audience_preferences["originality_weight"] * 0.15
+        # Bonus per originalità (più selettivo)
+        originality_bonus = comedy_analysis.originality * self.audience_preferences["originality_weight"] * 0.1
         
-        # Penalità per battute troppo lunghe o troppo corte
+        # Penalità per battute troppo lunghe o troppo corte (più severa)
         length_penalty = 0
         word_count = len(joke.split())
         if word_count > 40:
