@@ -1,0 +1,101 @@
+{
+  "ratings": [
+    {
+      "joke": "Mike: \"What's the deal with extreme vegans? They're so passionate, they'll save a cow, but not their social life – that's been butchered for years!\" *chuckles and shrugs*",
+      "comedian": "Mike",
+      "topic": "Extreme veganism",
+      "rating": "meh",
+      "rating_score": 0.0,
+      "comment": null,
+      "timestamp": 1753637105.481093,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: \"What's the deal with extreme vegans? I'm one, and I'm so extra, I'm starting to think plants are judging me for eating them.\"",
+      "comedian": "Lisa",
+      "topic": "Extreme veganism",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753637125.0890386,
+      "context": {}
+    },
+    {
+      "joke": "Mike: Isn't it weird how extreme vegans are so passionate about saving animals, but I've seen them kill a conversation at a party faster than a carnivore at a steakhouse? *shrugs and raises an eyebrow*",
+      "comedian": "Mike",
+      "topic": "Extreme Veganism",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753637266.4182348,
+      "context": {}
+    },
+    {
+      "joke": "Sarah: Why is it that extreme vegans are like my ex? They're always beefing with me.",
+      "comedian": "Sarah",
+      "topic": "Extreme Veganism",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753637288.1937459,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: Why do extreme vegans make great paleontologists? Because they're already accustomed to digging up bones of contention.",
+      "comedian": "Lisa",
+      "topic": "Extreme Veganism",
+      "rating": "hate",
+      "rating_score": -2.0,
+      "comment": null,
+      "timestamp": 1753637656.9416323,
+      "context": {}
+    }
+  ],
+  "patterns": {
+    "Mike": {
+      "comedian": "Mike",
+      "successful_elements": [
+        "question_format",
+        "long_joke"
+      ],
+      "failed_elements": [],
+      "preferred_topics": [
+        "Extreme Veganism"
+      ],
+      "avg_rating": 0.5,
+      "total_ratings": 2,
+      "last_updated": 1753637266.4182513
+    },
+    "Lisa": {
+      "comedian": "Lisa",
+      "successful_elements": [
+        "question_format",
+        "medium_joke"
+      ],
+      "failed_elements": [
+        "question_format",
+        "medium_joke"
+      ],
+      "preferred_topics": [
+        "Extreme veganism"
+      ],
+      "avg_rating": -0.5,
+      "total_ratings": 2,
+      "last_updated": 1753637656.9416823
+    },
+    "Sarah": {
+      "comedian": "Sarah",
+      "successful_elements": [
+        "question_format",
+        "medium_joke"
+      ],
+      "failed_elements": [],
+      "preferred_topics": [
+        "Extreme Veganism"
+      ],
+      "avg_rating": 1.0,
+      "total_ratings": 1,
+      "last_updated": 1753637288.193761
+    }
+  }
+}

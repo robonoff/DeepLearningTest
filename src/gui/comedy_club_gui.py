@@ -12,7 +12,10 @@ import time
 from datetime import datetime
 from typing import Dict, List, Optional
 import random
+import warnings
 
+
+warnings.filterwarnings("ignore", category=FutureWarning)
 # Import our human rating system
 try:
     from src.utils.human_rating import HumanRatingSystem
@@ -136,7 +139,7 @@ class ComedyClubGUI:
             status_label = tk.Label(
                 comedian_widget,
                 text=display,
-                font=('Times New Roman', 10, 'bold'),
+                font=('Times New Roman', 12, 'bold'),
                 fg='white',
                 bg=color
             )
@@ -145,7 +148,7 @@ class ComedyClubGUI:
             activity_label = tk.Label(
                 comedian_widget,
                 text="💤 Waiting",
-                font=('Times New Roman', 9),
+                font=('Times New Roman', 11),
                 fg='white',
                 bg=color
             )
@@ -179,7 +182,7 @@ class ComedyClubGUI:
             perf_frame,
             height=15,  # Increased height
             width=80,   # Increased width
-            font=('Arial', 12),  # Larger font
+            font=('Arial', 16),  # Larger font for better readability
             bg='#002555',
             fg='white',
             insertbackground='white',
@@ -260,27 +263,6 @@ class ComedyClubGUI:
             )
             btn.pack(side='left', padx=3)
             self.rating_buttons[rating] = btn
-        
-        # Comment entry
-        comment_frame = tk.Frame(rating_frame, bg='#bdc3c7')
-        comment_frame.pack(fill='x', padx=10, pady=5)
-        
-        tk.Label(
-            comment_frame,
-            text="💬 Comment (optional):",
-            font=('Arial', 9),
-            fg='#002555',
-            bg='#bdc3c7'
-        ).pack(anchor='w')
-        
-        self.comment_entry = tk.Entry(
-            comment_frame,
-            font=('Arial', 9),
-            bg='#34495e',
-            fg='white',
-            insertbackground='white'
-        )
-        self.comment_entry.pack(fill='x', pady=2)
         
         # Rating status
         self.rating_status = tk.Label(
@@ -917,8 +899,6 @@ class ComedyClubGUI:
         """Rate the current joke or response"""
         if not self.current_joke_data or not self.rating_system:
             return
-            
-        comment = self.comment_entry.get().strip() if hasattr(self, 'comment_entry') else ""
         
         # Enhanced context for responses
         context = {}
@@ -932,7 +912,7 @@ class ComedyClubGUI:
             self.current_joke_data['comedian'],
             self.current_joke_data.get('topic', 'general'),
             rating,
-            comment if comment else None,
+            None,  # No comment
             context=context
         )
         
@@ -990,10 +970,6 @@ class ComedyClubGUI:
                 joke_type = "Response" if self.current_joke_data.get('type') == 'response' else "Joke"
                 comedian = self.current_joke_data['comedian']
                 self.rating_status.config(text=f"✅ {joke_type} by {comedian}: {rating_text.get(rating, rating)}")
-            
-            # Clear comment
-            if hasattr(self, 'comment_entry'):
-                self.comment_entry.delete(0, tk.END)
             
             # Disable rating buttons until next joke
             self.disable_rating_buttons()

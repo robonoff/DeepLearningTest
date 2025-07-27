@@ -1,17 +1,66 @@
-#virtualenvironment
-
+# Virtual environments
 *venv
+*venv/
 /dl-env
+/dl-env/
+.env
+.venv
+.venv/
+env/
+ENV/
+venv/
+VENV/
 
+# Environment files
 *.env
+.env*
+config/set_env.sh
+
+# Python cache
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*/__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
 
 # macOS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Papers and documents
+papers/
+papers/*
+*.pdf
+*.doc
+*.docx
+
+# Logs and temporary files
+logs/
+logs/*
+*.log
+*.log*
+*.tmp
+*.temp
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.directory
+desktop.ini
 
 # Config files
 config/set_env.sh
-
-# Ignora i file compilati o temporanei
-*.pyc
-__pycache__/
-*.log
+config/*.env
