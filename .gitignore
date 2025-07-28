@@ -66,5 +66,4 @@ config/set_env.sh
 config/*.env
 
 #Markdown files
-
-.SYSTEM
+SYSTEM_ARCHITECTURE.md
