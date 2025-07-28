@@ -1,4 +1,4 @@
-# 🎭 AI Comedy ## 🚀 Quick Start
+# 🎭 AI Comedy Club 🚀 Quick Start
 
 ### Prerequisites
 
