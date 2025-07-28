@@ -116,7 +116,7 @@ For all the information about the project, please refer to the slides folder. He
 
 #### Requirements: marp (Markdown presentation ecosystem)
 
-#### 4. **Export to HTML**
+#### **Export to HTML**
 For VSCode users, install the extension trough VSCode GUI.
 Then install the required tools -- [follow this documentation as well](https://github.com/marp-team/marp-cli):
 
