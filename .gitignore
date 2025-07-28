@@ -42,6 +42,14 @@ papers/*
 *.doc
 *.docx
 
+# Examples directory
+examples/
+examples/*
+
+# Config directory
+config/
+config/*
+
 # Logs and temporary files
 logs/
 logs/*
