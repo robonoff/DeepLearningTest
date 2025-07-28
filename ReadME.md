@@ -5,10 +5,12 @@
 1. **Configure Orfeo Access:**
    Create a `.env` file in the root directory with your Orfeo credentials:
    ```bash
-   TOKEN=your_jwt_token_here
-   ORFEO_MODEL=llama3.3:latest
-   ORFEO_BASE_URL=your_orfeo_base_url
+   TOKEN=<your-token-of-any-model>
+   ORFEO_MODEL=<model>
+   ORFEO_BASE_URL=<optional>
    ```
+
+We used a pre-trained model hosted in a container that is in a cluster facility GPU resource.
 
 2. **Install Python Dependencies:**
    ```bash
@@ -23,16 +25,15 @@ An interactive comedy club simulation where multiple AI agents with different co
 - **Real-time Interaction**: Comedians react to each other's jokes dynamically
 - **Enhanced RAG System**: Intelligent joke retrieval with web search capabilities
 - **Advanced Web Search**: TV shows, memes, political content integration
-- **Mock mode when Orfeo is unavailable
 - **Beautiful Terminal UI**: Rich visual presentation with colors and formatting
 - **Performance Analytics**: Track comedian effectiveness over time
-- **Uses Orfeo cluster with llama3.3:latest model for superior performance
+- **Uses Orfeo cluster** with llama3.3:latest model for superior performance
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### Prerequisites (only in case of local usage on your own laptop)
 
-1. **Install Ollama:**
+1. **Install Ollama**
    ```bash
    # Download from https://ollama.ai or use homebrew
    brew install ollama
@@ -51,61 +52,72 @@ An interactive comedy club simulation where multiple AI agents with different co
 ### Running the Comedy Club
 
 #### 🎨 GUI Mode (Recommended)
-Start the visual interface with real-time performance display:
+Start the visual interface with real-time performance display and human rating system:
 ```bash
-python main.py
+python start_gui_rag.py
 ```
 
 **GUI Features:**
-- Live comedian status indicators
-- Real-time performance display with colored text
-- Visual audience reaction simulation
-- Complete show logging with timestamps
+- Live comedian status indicators with real-time statistics
+- Interactive human rating system (😍 Love, 👍 Like, 😐 Meh, 👎 Dislike, 🤮 Hate)
+- Visual audience reaction simulation with dual scoring system
+- Complete show logging with timestamps and performance analytics
 - Color-coded comedian identification
 - Interactive buttons to start/stop shows
+- Adaptive learning system based on human feedback
 
 #### 🖥️ Terminal Text Mode
-Run the text-based simulation in your terminal:
+Run the text-based simulation with RAG enhancement:
 ```bash
-python main.py --mode text
+python main_clean_rag.py --mode interactive
 ```
 
+**Available modes:**
+- `interactive`: Interactive comedy show with user input
+- `show`: Automated comedy show
+- `test`: Test RAG system and Orfeo connection
+- `joke`: Single joke generation test
+
 **Text Mode Features:**
-- Full comedy show in terminal output
-- Detailed performance transcripts
-- Comedian reactions and audience feedback
-- Automatic JSON logging
+- Full comedy show in terminal output with RAG enhancement
+- Detailed performance transcripts with quality/audience scores
+- Comedian reactions and audience feedback simulation
+- Automatic JSON logging with adaptive learning data
 - Optimized for headless environments
 
 #### 🧪 Test Your Setup
 
-Test your Orfeo connection and model availability:
+Test your Orfeo connection and RAG system:
 
 ```bash
-python tests/test_enhanced_rag.py
+python main_clean_rag.py --mode test
 ```
 
 This test verifies:
-- Orfeo connectivity verification
-- RAG system functionality
-- Web search integration
+- Orfeo connectivity and JWT token authentication
+- RAG system functionality with 230k+ jokes dataset
+- Web search integration for topical content
+- Enhanced joke retrieval and embedding system
 
 ## 📁 Project Structure
 
 ```
-├── main.py                      # 🚀 Unified entry point for all modes
+├── main_clean_rag.py           # 🚀 Terminal entry point with RAG + Orfeo
+├── start_gui_rag.py            # 🎨 GUI launcher with rating system
 ├── src/
 │   ├── core/
 │   │   ├── comedy_club_clean.py    # Main ComedyClub class with Orfeo integration
 │   │   └── orfeo_client_new.py     # Orfeo client for llama3.3:latest
 │   ├── agents/
-│   │   └── comedians.py        # Comedian personalities and system prompts
+│   │   └── comedians.py        # 4 comedian personalities (Dave, Sarah, Mike, Lisa)
 │   ├── gui/
-│   │   └── comedy_club_gui.py  # Tkinter-based visual interface
+│   │   └── comedy_club_gui.py  # Tkinter GUI with human rating system
 │   └── utils/
-│       ├── enhanced_joke_rag.py    # RAG system with web search
-│       ├── comedy_feedback.py      # Performance tracking system
-│       └── comedy_tools.py         # Advanced comedy reasoning tools
+│       ├── enhanced_joke_rag.py    # RAG system with 230k+ jokes + web search
+│       ├── comedy_feedback.py      # Dual scoring system (quality + audience)
+│       ├── human_rating.py         # Human rating system with adaptive learning
+│       ├── adaptive_comedy.py      # Adaptive learning from human feedback
+│       └── comedy_tools.py         # Advanced comedy analysis tools
 ├── examples/
 │   ├── simple_comedy_club.py   # Simplified version for learning
 │   └── mock_comedy_club.py     # Demo with pre-written jokes
@@ -125,28 +137,33 @@ This test verifies:
 
 ### Key Components
 
-- **`main_clean_rag.py`**: Main entry point with RAG-enhanced comedy system
-- **`src/core/`**: Heart of the simulation with Orfeo integration
-- **`src/agents/`**: All comedian personalities with unique humor styles
-- **`src/gui/`**: Full-featured GUI with real-time updates and rating system
+- **`main_clean_rag.py`**: Terminal entry point with RAG-enhanced comedy system and Orfeo integration
+- **`start_gui_rag.py`**: GUI launcher with human rating system and live statistics
+- **`src/core/`**: Heart of the simulation with Orfeo cluster integration (llama3.3:latest)
+- **`src/agents/`**: 4 unique comedian personalities with distinct humor styles
+- **`src/gui/`**: Full-featured GUI with real-time updates, human rating, and adaptive learning
+- **`src/utils/`**: Enhanced RAG system, dual scoring, human feedback, and adaptive learning
 - **`examples/`**: Standalone examples for learning and testing
-- **`logs/`**: Auto-generated JSON logs of all performances and ratings
+- **`logs/`**: Auto-generated performance logs, ratings, and learning patterns
 
 ## 🎪 How It Works
 
 ### System Architecture
-1. **Agent Initialization**: Four comedian agents are created with unique personalities, humor styles, and system prompts
-2. **Performance Engine**: The ComedyClub orchestrates multi-round comedy shows with RAG enhancement
-3. **LLM Integration**: Direct API calls to Orfeo cluster with llama3.3:latest for superior comedy generation
-4. **Real-time Display**: GUI or text interface shows live performances with color-coded comedians
-5. **Reaction System**: Comedians generate reactions to each other's performances
-6. **Automatic Logging**: All shows are saved as structured JSON with timestamps and metadata
-7. **Graceful Fallback**: System automatically switches to mock mode if Ollama is unavailable
+1. **Agent Initialization**: Four comedian agents (Dave, Sarah, Mike, Lisa) with unique personalities and humor styles
+2. **RAG Enhancement**: 230k+ jokes dataset with sentence embeddings and web search integration
+3. **Performance Engine**: ComedyClub orchestrates multi-round shows with enhanced joke generation
+4. **Dual Scoring System**: Quality score (technical analysis) + Audience score (simulated public reaction)
+5. **Human Rating System**: 5-level rating system (😍 Love to 🤮 Hate) with adaptive learning
+6. **LLM Integration**: Direct API calls to Orfeo cluster with llama3.3:latest
+7. **Real-time Display**: GUI shows live performances, statistics, and human ratings
+8. **Adaptive Learning**: System learns from human feedback to improve comedian prompts
+9. **Automatic Logging**: All shows, ratings, and learning patterns saved as structured JSON
 
 ### Performance Flow
 ```
-Topic Generation → Comedian Performance → Audience Reaction → 
-Comedian Reactions → Logging → Next Round
+Topic Selection → RAG Joke Retrieval → Enhanced Comedian Performance → 
+Quality Analysis → Audience Simulation → Human Rating → 
+Adaptive Learning → Statistics Update → Next Round
 ```
 
 ### Technical Implementation
@@ -462,19 +479,19 @@ This project is for educational and research purposes. Feel free to adapt and ex
 
 Choose your preferred way to run the AI Comedy Club:
 
-### 🎨 For Visual Experience:
+### 🎨 For Visual Experience with Human Rating:
 ```bash
-python main.py
+python start_gui_rag.py
 ```
 
-### 🖥️ For Terminal Experience:  
+### 🖥️ For Terminal Experience with RAG:  
 ```bash
-python main.py --mode text
+python main_clean_rag.py --mode interactive
 ```
 
 ### 🧪 For Testing Setup:
 ```bash
-python main.py --mode test
+python main_clean_rag.py --mode test
 ```
 
 ---

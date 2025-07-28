@@ -479,6 +479,100 @@
         "responding_to": "Mike",
         "interaction_type": "comedy_battle"
       }
+    },
+    {
+      "joke": "Dave: \"Hey, you know who's still killing it? Hitler – in our collective anxiety, that is.\"",
+      "comedian": "Dave",
+      "topic": "Hitler killing the world",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753652868.8828945,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: Isn't it weird how Hitler's apocalypse is trending on TikTok?",
+      "comedian": "Lisa",
+      "topic": "Hitler killing the world",
+      "rating": "meh",
+      "rating_score": 0.0,
+      "comment": null,
+      "timestamp": 1753652894.5628223,
+      "context": {}
+    },
+    {
+      "joke": "Sarah: \"Hey, if Hitler had killed the world, I guess Tinder would've been a lot less crowded.\"",
+      "comedian": "Sarah",
+      "topic": "Hitler killing the world",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753652912.5225093,
+      "context": {}
+    },
+    {
+      "joke": "\"I mean, what's next, Stalin's dance challenges on Instagram? It's like the world has finally found a way to make genocide go viral, because apparently, that's what it takes for us to pay attention to history.\"",
+      "comedian": "Dave",
+      "topic": "Hitler killing the world",
+      "rating": "meh",
+      "rating_score": 0.0,
+      "comment": null,
+      "timestamp": 1753652945.08256,
+      "context": {
+        "is_response": true,
+        "responding_to": "Lisa",
+        "interaction_type": "comedy_battle"
+      }
+    },
+    {
+      "joke": "Mike: \"Why do Trump's tariffs sound like my divorce? Because they're both about who gets screwed and who pays more.\"",
+      "comedian": "Mike",
+      "topic": "Trump tarrifs",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753657703.4267633,
+      "context": {}
+    },
+    {
+      "joke": "Sarah: What's the deal with Trump tariffs? He's taxing our love lives – now foreign relationships are 25% more expensive!",
+      "comedian": "Sarah",
+      "topic": "Trump tarrifs",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753657760.010418,
+      "context": {}
+    },
+    {
+      "joke": "Dave: \"Trump's tariffs are like his hair – they're both overpriced and made in China.\"",
+      "comedian": "Dave",
+      "topic": "Trump tarrifs",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753657795.2670147,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: Isn't it weird how Hitler's war crimes are like TikTok challenges - they're trending again, but this time with more genocide and less Renegade dance?",
+      "comedian": "Lisa",
+      "topic": "Hitler war crimes",
+      "rating": "dislike",
+      "rating_score": -1.0,
+      "comment": null,
+      "timestamp": 1753657839.3631086,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: \"Hitler's war crimes were so heinous, even TikTok wouldn't give him a duet.\"",
+      "comedian": "Lisa",
+      "topic": "Hitler war crimes",
+      "rating": "dislike",
+      "rating_score": -1.0,
+      "comment": null,
+      "timestamp": 1753657869.3232906,
+      "context": {}
     }
   ],
   "patterns": {
@@ -499,11 +593,12 @@
         "Extreme Veganism",
         "crazy psichologists",
         "Trump dodging Epstein’s allegations",
-        "Donald Trump economics tariff meme"
+        "Donald Trump economics tariff meme",
+        "Trump tarrifs"
       ],
       "avg_rating": 1.0,
-      "total_ratings": 10,
-      "last_updated": 1753652556.0323405
+      "total_ratings": 11,
+      "last_updated": 1753657703.4268055
     },
     "Lisa": {
       "comedian": "Lisa",
@@ -517,7 +612,8 @@
         "question_format",
         "medium_joke",
         "complex_setup",
-        "long_joke"
+        "long_joke",
+        "dark_humor"
       ],
       "preferred_topics": [
         "Extreme veganism",
@@ -525,9 +621,9 @@
         "Trump dodging Epstein’s allegations",
         "Donald Trump economics tariff meme"
       ],
-      "avg_rating": 0.6363636363636364,
-      "total_ratings": 11,
-      "last_updated": 1753652366.4476414
+      "avg_rating": 0.35714285714285715,
+      "total_ratings": 14,
+      "last_updated": 1753657869.3233228
     },
     "Sarah": {
       "comedian": "Sarah",
@@ -535,7 +631,8 @@
         "question_format",
         "medium_joke",
         "complex_setup",
-        "long_joke"
+        "long_joke",
+        "dark_humor"
       ],
       "failed_elements": [
         "medium_joke",
@@ -545,11 +642,13 @@
         "Extreme Veganism",
         "crazy psichologists",
         "Trump dodging Epstein’s allegations",
-        "Donald Trump economics tariff meme"
+        "Donald Trump economics tariff meme",
+        "Hitler killing the world",
+        "Trump tarrifs"
       ],
-      "avg_rating": 0.8333333333333334,
-      "total_ratings": 12,
-      "last_updated": 1753652395.5670893
+      "avg_rating": 1.0,
+      "total_ratings": 14,
+      "last_updated": 1753657760.0104535
     },
     "Dave": {
       "comedian": "Dave",
@@ -557,7 +656,8 @@
         "question_format",
         "medium_joke",
         "complex_setup",
-        "long_joke"
+        "long_joke",
+        "dark_humor"
       ],
       "failed_elements": [
         "question_format",
@@ -567,11 +667,13 @@
       ],
       "preferred_topics": [
         "crazy psichologists",
-        "Trump dodging Epstein’s allegations"
+        "Trump dodging Epstein’s allegations",
+        "Hitler killing the world",
+        "Trump tarrifs"
       ],
-      "avg_rating": -0.125,
-      "total_ratings": 8,
-      "last_updated": 1753652569.232906
+      "avg_rating": 0.18181818181818182,
+      "total_ratings": 11,
+      "last_updated": 1753657795.2670407
     },
     "TestComedian": {
       "comedian": "TestComedian",

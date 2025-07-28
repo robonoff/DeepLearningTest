@@ -64,3 +64,7 @@ desktop.ini
 # Config files
 config/set_env.sh
 config/*.env
+
+#Markdown files
+
+.SYSTEM

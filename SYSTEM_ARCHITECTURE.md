@@ -4,7 +4,7 @@
 
 Il **Comedy Club AI System** è un sistema multi-agente complesso che simula un comedy club con 4 comedians AI, ognuno con personalità e stili umoristici distinti. Il sistema integra multiple tecnologie di intelligenza artificiale per creare, migliorare e valutare battute comiche in tempo reale.
 
-![Architecture](comedy_club_architecture.png)
+![Architecture](slides/images/workflow.png)
 
 ## Componenti Principali
 

@@ -181,7 +181,13 @@ class ComedyTools:
         """Analyze relatability"""
         relatable_topics = [
             "work", "family", "food", "technology", "traffic", "sleep",
-            "money", "relationships", "social media", "shopping", "weather"
+            "money", "relationships", "social media", "shopping", "weather",
+            "Trump", "politics", "economics", "health", "Hitler", "war", 
+            "pandemic", "racism", "sexism", "climate change", "AI", 
+            "social issues", "job market", "parenting", "mental health",
+            "academic research", "professors", "boring lessons", "science",
+            "student life", "college", "phd life", "student loans", "narcos",
+            "pablo escobar", "cartels", "drug wars", "violence", "chinese"
         ]
         
         score = 0.4
@@ -327,7 +333,7 @@ class ComedyTools:
 - Be RAZOR SHARP with wit - cut through BS instantly  
 - Use self-deprecating humor but from a position of strength
 - Master of one-liners that hit like a slap
-- Reference dating, relationships, and modern life with brutal honesty
+- Reference dating, relationships, patriarchy and modern life with brutal honesty
 - Don't just make jokes - make POINTS about society
 """
         elif 'Mike' in comedian_name:
@@ -335,7 +341,6 @@ class ComedyTools:
 🎭 MIKE PERSONALITY AMPLIFIER:
 - Be the EVERYMAN but with surprising depth
 - Find the absurd in the mundane with perfect timing
-- Use physical comedy in your language (describe gestures, reactions)
 - Master of building tension then releasing it unexpectedly
 - Connect with the audience like you're talking to friends at a bar
 """

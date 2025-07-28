@@ -433,5 +433,159 @@
       "🤝 Rendi la battuta più universale e relatable"
     ],
     "timestamp": 1753652606.6924994
+  },
+  {
+    "joke": "Isn't it weird how Hitler's apocalypse is trending on TikTok?",
+    "comedian": "Lisa",
+    "topic": "Hitler killing the world",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.5349999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🤔 Reazione tiepida del pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652887.103466
+  },
+  {
+    "joke": "\"Hey, if Hitler had killed the world, I guess Tinder would've been a lot less crowded.\"",
+    "comedian": "Sarah",
+    "topic": "Hitler killing the world",
+    "quality_score": 0.5800000000000001,
+    "audience_score": 0.607,
+    "feedback_notes": [
+      "💡 La struttura può essere migliorata",
+      "😊 Buone risate dal pubblico",
+      "🎯 Migliora il setup per creare più aspettativa",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652906.5267909
+  },
+  {
+    "joke": "\"Hitler's killing spree – who needs a Netflix subscription when you've got history?\" *shrugs and raises an eyebrow*",
+    "comedian": "Mike",
+    "topic": "Hitler killing the world",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.6349999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753652930.0506701
+  },
+  {
+    "joke": "\"I mean, what's next, Stalin's dance challenges on Instagram? It's like the world has finally found a way to make genocide go viral, because apparently, that's what it takes for us to pay attention to history.\"",
+    "comedian": "Dave",
+    "topic": "Hitler killing the world",
+    "quality_score": 0.5,
+    "audience_score": 0.5,
+    "feedback_notes": [
+      "Human rating: meh"
+    ],
+    "timestamp": 1753652945.085445
+  },
+  {
+    "joke": "\"Trump's ego is so huge, I'm starting to think he's not a politician, but a participation trophy.\"",
+    "comedian": "Dave",
+    "topic": "Donald Trump",
+    "quality_score": 0.64,
+    "audience_score": 0.5489999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🤔 Reazione tiepida del pubblico",
+      "🎯 Migliora il setup per creare più aspettativa",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753654349.1357038
+  },
+  {
+    "joke": "\"Why do Trump's tariffs sound like my divorce? Because they're both about who gets screwed and who pays more.\"",
+    "comedian": "Mike",
+    "topic": "Trump tarrifs",
+    "quality_score": 0.6199999999999999,
+    "audience_score": 0.6349999999999999,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753657684.527911
+  },
+  {
+    "joke": "What's the deal with Trump tariffs? He's taxing our love lives – now foreign relationships are 25% more expensive!",
+    "comedian": "Sarah",
+    "topic": "Trump tarrifs",
+    "quality_score": 0.7,
+    "audience_score": 0.691,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico"
+    ],
+    "timestamp": 1753657724.975589
+  },
+  {
+    "joke": "\"Trump's tariffs are like his hair – they're both overpriced and made in China.\"",
+    "comedian": "Dave",
+    "topic": "Trump tarrifs",
+    "quality_score": 0.5800000000000001,
+    "audience_score": 0.507,
+    "feedback_notes": [
+      "💡 La struttura può essere migliorata",
+      "🤔 Reazione tiepida del pubblico",
+      "🎯 Migliora il setup per creare più aspettativa",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753657789.6930828
+  },
+  {
+    "joke": "\"What's the deal with Trump tariffs? It's like he's trying to make America grate again... on the world's cheese plate.\"",
+    "comedian": "Lisa",
+    "topic": "Trump tarrifs",
+    "quality_score": 0.68,
+    "audience_score": 0.577,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🤔 Reazione tiepida del pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753657809.6617122
+  },
+  {
+    "joke": "Isn't it weird how Hitler's war crimes are like TikTok challenges - they're trending again, but this time with more genocide and less Renegade dance?",
+    "comedian": "Lisa",
+    "topic": "Hitler war crimes",
+    "quality_score": 0.7,
+    "audience_score": 0.591,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🤔 Reazione tiepida del pubblico"
+    ],
+    "timestamp": 1753657831.986312
+  },
+  {
+    "joke": "Isn't it weird how Hitler's war crimes are still trending, but my ex's toxic behavior isn't considered a crime against humanity?",
+    "comedian": "Sarah",
+    "topic": "Hitler war crimes",
+    "quality_score": 0.7,
+    "audience_score": 0.691,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "😊 Buone risate dal pubblico"
+    ],
+    "timestamp": 1753657861.3811228
+  },
+  {
+    "joke": "Isn't it weird how Hitler's crimes are still trending, but my tweets get suspended for less?",
+    "comedian": "Dave",
+    "topic": "Hitler war crimes",
+    "quality_score": 0.68,
+    "audience_score": 0.577,
+    "feedback_notes": [
+      "👍 Buona struttura comica",
+      "🤔 Reazione tiepida del pubblico",
+      "🤝 Rendi la battuta più universale e relatable"
+    ],
+    "timestamp": 1753657885.0256019
   }
 ]
