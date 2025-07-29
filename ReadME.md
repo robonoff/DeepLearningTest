@@ -10,7 +10,7 @@
    ORFEO_BASE_URL=<optional>
    ```
 
-We used a pre-trained model hosted in a container that is in a cluster facility GPU resource, so that's why we use a baseurl.
+We used a pre-trained model (llama3.3:latest) hosted in a container that is in a cluster facility GPU resource, so that's why we use a baseurl.
 
 2. **Install Python Dependencies:**
    ```bash
