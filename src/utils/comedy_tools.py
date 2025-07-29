@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Comedy Tools: Strumenti avanzati per il ragionamento comico degli agenti  
 Implementa tecniche di analisi e generazione dell'umorismo
@@ -320,7 +319,7 @@ class ComedyTools:
         
         if 'Dave' in comedian_name:
             personality_boost = """
-🎭 DAVE PERSONALITY AMPLIFIER:
+  DAVE PERSONALITY AMPLIFIER:
 - Be EDGY and push boundaries (but stay clever)
 - Use unexpected perspectives that shock then make people think
 - Reference personal experiences with a dark twist
@@ -329,7 +328,7 @@ class ComedyTools:
 """
         elif 'Sarah' in comedian_name:
             personality_boost = """
-🎭 SARAH PERSONALITY AMPLIFIER:
+  SARAH PERSONALITY AMPLIFIER:
 - Be RAZOR SHARP with wit - cut through BS instantly  
 - Use self-deprecating humor but from a position of strength
 - Master of one-liners that hit like a slap
@@ -338,7 +337,7 @@ class ComedyTools:
 """
         elif 'Mike' in comedian_name:
             personality_boost = """
-🎭 MIKE PERSONALITY AMPLIFIER:
+  MIKE PERSONALITY AMPLIFIER:
 - Be the EVERYMAN but with surprising depth
 - Find the absurd in the mundane with perfect timing
 - Master of building tension then releasing it unexpectedly
@@ -346,7 +345,7 @@ class ComedyTools:
 """
         elif 'Lisa' in comedian_name:
             personality_boost = """
-🎭 LISA PERSONALITY AMPLIFIER:
+  LISA PERSONALITY AMPLIFIER:
 - Be INTELLECTUALLY TWISTED - smart humor with dark edges
 - Use scientific/academic references in unexpected ways
 - Master of wordplay and linguistic manipulation
@@ -362,18 +361,18 @@ class ComedyTools:
             enhanced = adaptive_system.get_enhanced_prompt(comedian_name, base_for_feedback, adaptive_system.rating_system if hasattr(adaptive_system, 'rating_system') else None)
             if enhanced != base_for_feedback:
                 adaptive_feedback = f"""
-🎯 AUDIENCE FEEDBACK & LEARNING:
+    AUDIENCE FEEDBACK & LEARNING:
 {enhanced.replace(base_for_feedback, '').strip()}
 """
 
         # Build advanced prompt with personality boost
         prompt = f"""
-🎪 ADVANCED COMEDY REASONING SYSTEM WITH PERSONALITY INJECTION
+ADVANCED COMEDY REASONING SYSTEM WITH PERSONALITY INJECTION
 
-👤 PERSONA: {comedian_name} - {comedian_persona.get('tone', 'neutral')} comedian
-🎨 STYLE: {style}
-⚡ TECHNIQUE: {chosen_technique} - {self.comedy_techniques[chosen_technique]}
-🎯 TOPIC: {topic}
+PERSONA: {comedian_name} - {comedian_persona.get('tone', 'neutral')} comedian
+STYLE: {style}
+TECHNIQUE: {chosen_technique} - {self.comedy_techniques[chosen_technique]}
+TOPIC: {topic}
 
 {personality_boost}
 
@@ -382,12 +381,12 @@ class ComedyTools:
 {adaptive_feedback}
 
 🧠 CREATIVE PROCESS:
-1. 🔍 OBSERVATION: What's the most interesting/absurd/controversial aspect of "{topic}"?
-2. 🌶️ CURRENT RELEVANCE: How does the current context make this topic EXPLOSIVE?
-3. 🎭 CHARACTER ANGLE: How does YOUR specific comedic personality attack this topic?
-4. 🎪 SETUP: Use template "{template}" but TWIST it with your personality
-5. 💥 TWIST: Apply "{chosen_technique}" to create genuine surprise/shock/laughter
-6. ⏰ TIMING: Keep under 25 words but make every word COUNT
+1. OBSERVATION: What's the most interesting/absurd/controversial aspect of "{topic}"?
+2. CURRENT RELEVANCE: How does the current context make this topic EXPLOSIVE?
+3. CHARACTER ANGLE: How does YOUR specific comedic personality attack this topic?
+4. SETUP: Use template "{template}" but TWIST it with your personality
+5. TWIST: Apply "{chosen_technique}" to create genuine surprise/shock/laughter
+6. TIMING: Keep under 25 words but make every word COUNT
 
 🎯 SPECIFIC OBJECTIVES:
 - BE ORIGINAL: Avoid obvious cliches - find the angle no one else would
@@ -398,7 +397,7 @@ class ComedyTools:
 
 ⚠️ CRITICAL: RESPOND ONLY IN ENGLISH. BE GENUINELY FUNNY, NOT JUST TRYING TO BE FUNNY.
 
-🎤 GENERATE A JOKE THAT EMBODIES YOUR CHARACTER AND MAKES PEOPLE ACTUALLY LAUGH:
+GENERATE A JOKE THAT EMBODIES YOUR CHARACTER AND MAKES PEOPLE ACTUALLY LAUGH:
 """
         
         return prompt

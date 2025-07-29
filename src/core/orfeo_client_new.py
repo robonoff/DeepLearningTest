@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Client per comunicare con llama3.3:latest su cluster Orfeo
 """

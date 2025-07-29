@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Comedy Club Visual Interface with Human Rating System
 Creates an animated visualization of the comedy club with joke rating capabilities
@@ -20,7 +19,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 try:
     from src.utils.human_rating import HumanRatingSystem
 except ImportError:
-    print("⚠️ Human rating system not found. Some features may be limited.")
+    print("Human rating system not found. Some features may be limited.")
     HumanRatingSystem = None
 
 class ComedyClubGUI:
@@ -28,7 +27,7 @@ class ComedyClubGUI:
     
     def __init__(self, root):
         self.root = root
-        self.root.title("🎭 AI Comedy Club Simulation with Rating")
+        self.root.title("AI Comedy Club Simulation with Rating")
         self.root.geometry("1400x900")
         self.root.configure(bg='#f3ece6')  # Light comedy club theme
         

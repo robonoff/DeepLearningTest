@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Joke Categorization System for Comedy Club Agents
 Categorizes jokes from shortjokes.csv into different humor styles for agent training

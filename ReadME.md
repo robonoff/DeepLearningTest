@@ -1,6 +1,7 @@
 # 🎭 AI Comedy ## 🚀 Quick Start
 
-### Prerequisites
+## Prerequisites
+### Our setup
 
 1. **Configure Orfeo Access:**
    Create a `.env` file in the root directory with your Orfeo credentials:
@@ -19,19 +20,8 @@ We used a pre-trained model hosted in a container that is in a cluster facility 
 
 An interactive comedy club simulation where multiple AI agents with different comedy styles perform jokes and react to each other using Orfeo cluster with llama3.3:latest model.
 
-## ✨ Key Features
 
-- **Four Unique Comedy Agents**: Each with distinct personalities and comedy styles
-- **Real-time Interaction**: Comedians react to each other's jokes dynamically
-- **Enhanced RAG System**: Intelligent joke retrieval with web search capabilities
-- **Advanced Web Search**: TV shows, memes, political content integration
-- **Beautiful Terminal UI**: Rich visual presentation with colors and formatting
-- **Performance Analytics**: Track comedian effectiveness over time
-- **Uses Orfeo cluster** with llama3.3:latest model for superior performance
-
-## 🚀 Quick Start
-
-### Prerequisites (only in case of local usage on your own laptop)
+###  Only in case of local usage on your own laptop
 
 1. **Install Ollama**
    ```bash
@@ -48,6 +38,19 @@ An interactive comedy club simulation where multiple AI agents with different co
    ```bash
    pip install -r requirements.txt
    ```
+
+
+## ✨ Key Features
+
+- **Four Unique Comedy Agents**: Each with distinct personalities and comedy styles
+- **Real-time Interaction**: Comedians react to each other's jokes dynamically
+- **Enhanced RAG System**: Intelligent joke retrieval with web search capabilities
+- **Advanced Web Search**: TV shows, memes, political content integration
+- **Beautiful Terminal UI**: Rich visual presentation with colors and formatting
+- **Performance Analytics**: Track comedian effectiveness over time
+- **Uses Orfeo cluster** with llama3.3:latest model for superior performance
+
+
 
 ### Running the Comedy Club
 
@@ -72,8 +75,8 @@ python start_gui_rag.py
 
 **Public Repository Structure:**
 ```
-├── main_clean_rag.py           # 🚀 Terminal entry point with RAG + Orfeo
-├── start_gui_rag.py            # 🎨 GUI launcher with rating system
+├── main_clean_rag.py           # Terminal entry point with RAG + Orfeo
+├── start_gui_rag.py            # GUI launcher with rating system
 ├── src/
 │   ├── core/
 │   │   ├── comedy_club_clean.py    # Main ComedyClub class with Orfeo integration
@@ -97,17 +100,9 @@ python start_gui_rag.py
 ├── slides/
 │   ├── slides.md              # Presentation slides (Marp format)
 │   └── images/                # Presentation images and diagrams
-├── logs/                       # 📊 Generated performance logs (auto-created)
-├── requirements.txt            # 📋 Python dependencies
-└── README.md                   # � This documentation
-```
-
-**Local Development (gitignored):**
-```
-├── examples/                   # � Simplified examples for learning
-├── config/                     # 🔧 Configuration files and credentials
-├── papers/                     # � Research papers and documentation
-└── .env                        # � Environment variables and tokens
+├── logs/                       # Generated performance logs (auto-created)
+├── requirements.txt            # Python dependencies to install
+└── README.md                  
 ```
 
 ## 📊 SLIDES VISUALISATION

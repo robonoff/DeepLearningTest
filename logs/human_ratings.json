@@ -573,6 +573,56 @@
       "comment": null,
       "timestamp": 1753657869.3232906,
       "context": {}
+    },
+    {
+      "joke": "Mike: \"Ozzy needed assistance in rehearsals, no surprise, I need assistance getting out of bed.\"",
+      "comedian": "Mike",
+      "topic": "Ozzy Osbourne",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753693425.136484,
+      "context": {}
+    },
+    {
+      "joke": "Sarah: What's the deal with Ozzy using Viagra? Guess you could say he was dying to perform.",
+      "comedian": "Sarah",
+      "topic": "Ozzy Osbourne",
+      "rating": "meh",
+      "rating_score": 0.0,
+      "comment": null,
+      "timestamp": 1753693463.3523147,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: Isn't it weird how Ozzy's death was more harmonious than his music?",
+      "comedian": "Lisa",
+      "topic": "Ozzy Osbourne",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753693498.0404692,
+      "context": {}
+    },
+    {
+      "joke": "Lisa: Why do AI, therapists, and exes have one thing in common? They all listen to you, judge you, and eventually replace you.",
+      "comedian": "Lisa",
+      "topic": "Technology",
+      "rating": "like",
+      "rating_score": 1.0,
+      "comment": null,
+      "timestamp": 1753698550.0051844,
+      "context": {}
+    },
+    {
+      "joke": "Mike: Isn't it weird how Larry Ellison went from funding farming to AI surveillance, because who needs food when you can watch everyone?",
+      "comedian": "Mike",
+      "topic": "Larry Ellison",
+      "rating": "love",
+      "rating_score": 2.0,
+      "comment": null,
+      "timestamp": 1753786185.0645545,
+      "context": {}
     }
   ],
   "patterns": {
@@ -594,11 +644,13 @@
         "crazy psichologists",
         "Trump dodging Epstein’s allegations",
         "Donald Trump economics tariff meme",
-        "Trump tarrifs"
+        "Trump tarrifs",
+        "Ozzy Osbourne",
+        "Larry Ellison"
       ],
-      "avg_rating": 1.0,
-      "total_ratings": 11,
-      "last_updated": 1753657703.4268055
+      "avg_rating": 1.1538461538461537,
+      "total_ratings": 13,
+      "last_updated": 1753786185.0645924
     },
     "Lisa": {
       "comedian": "Lisa",
@@ -619,11 +671,13 @@
         "Extreme veganism",
         "crazy psichologists",
         "Trump dodging Epstein’s allegations",
-        "Donald Trump economics tariff meme"
+        "Donald Trump economics tariff meme",
+        "Ozzy Osbourne",
+        "Technology"
       ],
-      "avg_rating": 0.35714285714285715,
-      "total_ratings": 14,
-      "last_updated": 1753657869.3233228
+      "avg_rating": 0.5,
+      "total_ratings": 16,
+      "last_updated": 1753698550.0052185
     },
     "Sarah": {
       "comedian": "Sarah",
@@ -646,9 +700,9 @@
         "Hitler killing the world",
         "Trump tarrifs"
       ],
-      "avg_rating": 1.0,
-      "total_ratings": 14,
-      "last_updated": 1753657760.0104535
+      "avg_rating": 0.9333333333333333,
+      "total_ratings": 15,
+      "last_updated": 1753693463.3523505
     },
     "Dave": {
       "comedian": "Dave",

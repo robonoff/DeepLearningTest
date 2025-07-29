@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Adaptive Comedy System: Sistema di apprendimento per migliorare i comici
 """

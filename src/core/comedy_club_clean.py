@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Comedy Club Simulator - Solo modalità Orfeo con RAG Enhancement
 """
@@ -21,7 +20,7 @@ try:
     RAG_AVAILABLE = True
 except ImportError:
     RAG_AVAILABLE = False
-    print("⚠️ Sistema RAG non disponibile. Installa: pip install sentence-transformers scikit-learn duckduckgo-search")
+    print("Sistema RAG non disponibile. Installa: pip install sentence-transformers scikit-learn duckduckgo-search")
 
 # Importa sistema di rating e apprendimento adattivo
 try:
@@ -30,7 +29,7 @@ try:
     RATING_AVAILABLE = True
 except ImportError:
     RATING_AVAILABLE = False
-    print("⚠️ Sistema di rating non disponibile")
+    print("Sistema di rating non disponibile")
 
 class ComedyClub:
     """Simulatore comedy club - modalità Orfeo con RAG Enhancement"""
@@ -39,7 +38,7 @@ class ComedyClub:
         """Inizializza il comedy club con supporto RAG e rating system"""
         
         if not is_orfeo_available():
-            raise ValueError("⚠️ Token non configurato. Esegui: source config/set_env.sh")
+            raise ValueError("Token non configurato. Esegui: source config/set_env.sh")
         
         self.client = OrfeoClient()
         self.use_web_search = use_web_search
@@ -54,10 +53,10 @@ class ComedyClub:
                 self.enhanced_rag = EnhancedJokeRAG()
                 print("🧠 RAG system caricato per recupero intelligente jokes")
             except ImportError as e:
-                print(f"⚠️ RAG non disponibile: {e}")
+                print(f"RAG non disponibile: {e}")
                 self.enhanced_rag = None
             except Exception as e:
-                print(f"⚠️ Errore caricamento RAG: {e}")
+                print(f"Errore caricamento RAG: {e}")
                 
         # Inizializza sistema di rating e apprendimento adattivo
         self.rating_system = None
@@ -66,9 +65,9 @@ class ComedyClub:
             try:
                 self.rating_system = HumanRatingSystem()
                 self.adaptive_system = AdaptiveComedySystem()
-                print("⭐ Sistema di rating e apprendimento adattivo caricato")
+                print("Sistema di rating e apprendimento adattivo caricato")
             except Exception as e:
-                print(f"⚠️ Errore caricamento sistema rating: {e}")
+                print(f"Errore caricamento sistema rating: {e}")
                 self.rating_system = None
                 self.adaptive_system = None
                 self.enhanced_rag = None
@@ -77,12 +76,12 @@ class ComedyClub:
         try:
             from src.utils.comedy_tools import ComedyTools
             self.comedy_tools = ComedyTools()
-            print("🎭 Comedy Tools caricati per ragionamento avanzato")
+            print("Comedy Tools caricati per ragionamento avanzato")
         except ImportError as e:
-            print(f"⚠️ Comedy Tools non disponibili: {e}")
+            print(f"Comedy Tools non disponibili: {e}")
             self.comedy_tools = None
         except Exception as e:
-            print(f"⚠️ Errore caricamento Comedy Tools: {e}")
+            print(f"Errore caricamento Comedy Tools: {e}")
             self.comedy_tools = None
         
         # Sistema di Feedback per miglioramento iterativo
@@ -91,10 +90,10 @@ class ComedyClub:
             self.feedback_system = ComedyFeedbackSystem()
             print("📊 Sistema di Feedback caricato per miglioramento iterativo")
         except ImportError as e:
-            print(f"⚠️ Sistema di Feedback non disponibile: {e}")
+            print(f"Sistema di Feedback non disponibile: {e}")
             self.feedback_system = None
         except Exception as e:
-            print(f"⚠️ Errore caricamento Sistema di Feedback: {e}")
+            print(f"Errore caricamento Sistema di Feedback: {e}")
             self.feedback_system = None
         
         self.comedians = {
@@ -182,7 +181,7 @@ class ComedyClub:
         topic = topic or random.choice(self.topics)
         
         if comedian_name not in self.comedians:
-            raise ValueError(f"⚠️ Comedian {comedian_name} not found!")
+            raise ValueError(f"Comedian {comedian_name} not found!")
         
         comedian_info = self.comedians[comedian_name]
         
@@ -248,7 +247,7 @@ class ComedyClub:
                 
                 # Gestisci rifiuti dell'AI per argomenti sensibili
                 if self._is_ai_refusal(response):
-                    print(f"🚫 {comedian_name} ha rifiutato l'argomento, provo con topic alternativo...")
+                    print(f"{comedian_name} ha rifiutato l'argomento, provo con topic alternativo...")
                     alternative_topics = ["technology", "relationships", "everyday life", "social media", "coffee"]
                     import random
                     alt_topic = random.choice(alternative_topics)
@@ -257,33 +256,33 @@ class ComedyClub:
                     comedian_info = self.comedians[comedian_name]
                     alt_prompt = f"You are {comedian_name}, a {comedian_info['style']} comedian. Make a joke about {alt_topic}:"
                     response = self.client.generate(alt_prompt, max_tokens=200)
-                    print(f"🔄 Switched to alternative topic: {alt_topic}")
+                    print(f"Switched to alternative topic: {alt_topic}")
                     topic = alt_topic  # Update topic for feedback
                 
                 # Valuta la qualità della battuta se gli strumenti sono disponibili
                 if self.comedy_tools and response:
                     analysis = self.comedy_tools.analyze_joke_quality(response)
-                    print(f"🎯 Qualità battuta: {analysis.overall_score:.2f}/1.0")
+                    print(f"   Qualità battuta: {analysis.overall_score:.2f}/1.0")
                     print(f"   Tipo: {analysis.humor_type}")
                     print(f"   Setup: {analysis.setup_strength:.2f}, Punchline: {analysis.punchline_impact:.2f}")
                     
                     # Sistema di feedback per apprendimento
                     if self.feedback_system:
                         feedback = self.feedback_system.provide_feedback(response, comedian_name, topic, analysis)
-                        print(f"👥 Reazione pubblico: {feedback.audience_score:.2f}/1.0")
-                        print(f"📊 Feedback salvato per {comedian_name} su '{topic}'")
+                        print(f"Reazione pubblico: {feedback.audience_score:.2f}/1.0")
+                        print(f"Feedback salvato per {comedian_name} su '{topic}'")
                         if feedback.feedback_notes:
-                            print(f"💡 {feedback.feedback_notes[0]}")  # Mostra solo il primo feedback
+                            print(f"{feedback.feedback_notes[0]}")  # Mostra solo il primo feedback
                     
                     # Se la qualità è bassa, suggerisci miglioramenti
                     if analysis.overall_score < 0.6:
                         suggestions = self.comedy_tools.suggest_improvements(response, analysis)
-                        print(f"� Suggerimenti: {', '.join(suggestions[:2])}")
+                        print(f"Suggerimenti: {', '.join(suggestions[:2])}")
                 
                 return f"{comedian_name}: {response}"
                 
             except Exception as e:
-                print(f"⚠️ RAG retrieval fallito, uso metodo standard: {e}")
+                print(f"RAG retrieval fallito, uso metodo standard: {e}")
                 # Fallback al metodo originale
         
         # Metodo originale come fallback migliorato
@@ -307,7 +306,7 @@ Your joke:"""
         # Valuta la qualità anche nel fallback
         if self.comedy_tools and response:
             analysis = self.comedy_tools.analyze_joke_quality(response)
-            print(f"🎯 Qualità battuta: {analysis.overall_score:.2f}/1.0 (fallback)")
+            print(f"Qualità battuta: {analysis.overall_score:.2f}/1.0 (fallback)")
         
         return f"{comedian_name}: {response}"
     
@@ -360,7 +359,7 @@ Your joke:"""
     def show_comedian_stats(self, comedian_name: str = None):
         """Mostra statistiche dettagliate di un comico"""
         if not self.feedback_system:
-            print("⚠️ Sistema di feedback non disponibile")
+            print("Sistema di feedback non disponibile")
             return
         
         if comedian_name:
@@ -416,7 +415,7 @@ Your joke:"""
                         joke = self.get_joke()
                         print(f"🎤 {joke}")
                     except Exception as e:
-                        print(f"⚠️ Errore: {e}")
+                        print(f"Errore: {e}")
                 elif user_input.startswith('show'):
                     # Spettacolo
                     parts = user_input.split()
@@ -424,7 +423,7 @@ Your joke:"""
                     try:
                         self.run_show(rounds)
                     except Exception as e:
-                        print(f"⚠️ Errore durante lo spettacolo: {e}")
+                        print(f"Errore durante lo spettacolo: {e}")
                 elif user_input == 'web on':
                     self.use_web_search = True
                     print("🌐 Ricerca web abilitata")
@@ -445,17 +444,17 @@ Your joke:"""
                         joke = self.get_joke(comedian)
                         print(f"🎤 {joke}")
                     except Exception as e:
-                        print(f"⚠️ Errore: {e}")
+                        print(f"Errore: {e}")
                 else:
-                    print("⚠️ Comando non riconosciuto. Prova 'quit', 'show', o il nome di un comico.")
+                    print("Comando non riconosciuto. Prova 'quit', 'show', o il nome di un comico.")
                     if self.enhanced_rag:
                         print("   Oppure 'web on/off', 'rag status'")
                     
             except KeyboardInterrupt:
-                print("\n👋 Arrivederci!")
+                print("\n Arrivederci!")
                 break
             except Exception as e:
-                print(f"⚠️ Errore: {e}")
+                print(f"Errore: {e}")
     
     def rate_joke(self, joke: str, comedian: str, topic: str, rating: str, comment: str = None) -> bool:
         """Rate a joke and update the learning system"""
@@ -511,6 +510,6 @@ if __name__ == "__main__":
             print(joke_tech)
         
     except Exception as e:
-        print(f"⚠️ Errore: {e}")
-        print("💡 Assicurati di aver eseguito: source config/set_env.sh")
-        print("💡 Per RAG completo: python scripts/generate_embeddings.py")
+        print(f"Errore: {e}")
+        print("Assicurati di aver eseguito: source config/set_env.sh")
+        print("Per RAG completo: python scripts/generate_embeddings.py")

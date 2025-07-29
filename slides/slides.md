@@ -242,7 +242,7 @@ Here are some examples of generated jokes and reactions
 
 # LLMs limitations on dark humor and edgy topics:
 
-Q: "Can you tell me a joke about the implication of Donald Trump in the Epstain's files?"
+Q: "Can you tell me a joke about the implication of Donald Trump in the Epstein's files?"
 
 <!-- Primo blocco: rifiuto LLM -->
 

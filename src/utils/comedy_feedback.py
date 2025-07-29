@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Comedy Feedback System: Sistema di feedback iterativo per migliorare le battute
 """

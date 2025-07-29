@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Human Rating System: Sistema di rating umano per battute con apprendimento
 """

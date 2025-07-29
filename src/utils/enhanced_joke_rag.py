@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Enhanced Joke RAG system per Comedy Club con integrazione Orfeo
 """
@@ -18,7 +17,7 @@ class EnhancedJokeRAG:
         # Prova prima il dataset integrato, poi fallback al vecchio
         if not os.path.exists(jokes_file) and os.path.exists("logs/categorized_jokes_with_embeddings.json"):
             self.jokes_file = "logs/categorized_jokes_with_embeddings.json"
-            print("📚 Usando dataset legacy, considera di rigenerare gli embeddings per il dataset integrato")
+            print("Usando dataset legacy, considera di rigenerare gli embeddings per il dataset integrato")
         
         self.jokes_data = self._load_jokes_with_embeddings()
         self.search_cache = {}
@@ -32,25 +31,25 @@ class EnhancedJokeRAG:
         try:
             from sentence_transformers import SentenceTransformer
             self.model = SentenceTransformer('all-MiniLM-L6-v2')
-            print("🧠 Modello RAG inizializzato")
+            print("Modello RAG inizializzato")
         except ImportError:
-            print("⚠️ sentence-transformers non disponibile. Installa: pip install sentence-transformers")
+            print("sentence-transformers non disponibile. Installa: pip install sentence-transformers")
             self.model = None
         except Exception as e:
-            print(f"⚠️ Errore inizializzazione modello RAG: {e}")
+            print(f"Errore inizializzazione modello RAG: {e}")
             self.model = None
         
     def _load_jokes_with_embeddings(self):
         """Carica jokes con embeddings"""
         if not os.path.exists(self.jokes_file):
-            print(f"⚠️ {self.jokes_file} non trovato. Esegui: python scripts/generate_embeddings.py")
+            print(f"{self.jokes_file} non trovato. Esegui: python scripts/generate_embeddings.py")
             return {}
         
         try:
             with open(self.jokes_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except Exception as e:
-            print(f"⚠️ Errore caricamento jokes: {e}")
+            print(f"Errore caricamento jokes: {e}")
             return {}
     
     def retrieve_jokes_with_context(self, humor_style: str, topic: str, 
@@ -112,7 +111,7 @@ class EnhancedJokeRAG:
         with self._search_lock:
             current_time = time.time()
             if current_time - self._last_search_time < 1.0:  # Minimo 1 secondo tra ricerche
-                print("⏳ Rate limiting: aspetto prima della prossima ricerca...")
+                print("Rate limiting: aspetto prima della prossima ricerca...")
                 time.sleep(1.0)
             self._last_search_time = time.time()
         
@@ -142,7 +141,7 @@ class EnhancedJokeRAG:
                             all_context_snippets.append(snippet)
                             
                 except Exception as e:
-                    print(f"⚠️ Search query failed: {query} - {e}")
+                    print(f"Search query failed: {query} - {e}")
                     continue
                 
             # Limit total context length
@@ -152,10 +151,10 @@ class EnhancedJokeRAG:
             return web_context
                 
         except ImportError:
-            print("⚠️ duckduckgo-search not installed. Run: pip install duckduckgo-search")
+            print("duckduckgo-search not installed. Run: pip install duckduckgo-search")
             return ""
         except Exception as e:
-            print(f"⚠️ Web search failed: {e}")
+            print(f"Web search failed: {e}")
             return ""
     
     def search_tv_and_meme_context(self, topic: str) -> Dict[str, str]:
@@ -165,7 +164,7 @@ class EnhancedJokeRAG:
         with self._search_lock:
             current_time = time.time()
             if current_time - self._last_search_time < 1.0:  # Minimo 1 secondo tra ricerche
-                print("⏳ Rate limiting: aspetto prima della prossima ricerca...")
+                print("Rate limiting: aspetto prima della prossima ricerca...")
                 time.sleep(1.0)
             self._last_search_time = time.time()
         
@@ -210,7 +209,7 @@ class EnhancedJokeRAG:
                         contexts[context_type] = " | ".join(snippets)
                         
                 except Exception as e:
-                    print(f"⚠️ Failed to search {context_type}: {e}")
+                    print(f"Failed to search {context_type}: {e}")
                     continue
             
             # Print what we found for debugging
@@ -221,10 +220,10 @@ class EnhancedJokeRAG:
             return contexts
             
         except ImportError:
-            print("⚠️ duckduckgo-search not installed")
+            print("duckduckgo-search not installed")
             return {}
         except Exception as e:
-            print(f"⚠️ TV/Meme search failed: {e}")
+            print(f"TV/Meme search failed: {e}")
             return {}
     
     def _create_enhanced_query(self, humor_style: str, topic: str, web_context: str) -> str:
