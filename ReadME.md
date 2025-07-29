@@ -147,4 +147,4 @@ live-server .
 - [Jester dataset](https://www.kaggle.com/datasets/vikashrajluhaniwal/jester-17m-jokes-ratings-dataset)
 - [Sciagents repo](https://github.com/lamm-mit/SciAgentsDiscovery)
 - [Agent hospital paper](https://arxiv.org/abs/2405.02957)
-- For future improvements &larr; [The CARLIN Method article](https://gregrobison.medium.com/the-carlin-method-teaching-ai-how-to-be-genuinely-funny-2bd5e45deaf2)
+- For future improvements &rarr; [The CARLIN Method article](https://gregrobison.medium.com/the-carlin-method-teaching-ai-how-to-be-genuinely-funny-2bd5e45deaf2)
