@@ -11,7 +11,7 @@
    ORFEO_BASE_URL=<optional>
    ```
 
-We used a pre-trained model hosted in a container that is in a cluster facility GPU resource, so that's why we use a baseurl.
+We used a pre-trained model (llama3.3:latest) hosted in a container that is in a cluster facility GPU resource, so that's why we use a baseurl.
 
 2. **Install Python Dependencies:**
    ```bash
@@ -142,4 +142,4 @@ live-server .
 - [Jester dataset](https://www.kaggle.com/datasets/vikashrajluhaniwal/jester-17m-jokes-ratings-dataset)
 - [Sciagents repo](https://github.com/lamm-mit/SciAgentsDiscovery)
 - [Agent hospital paper](https://arxiv.org/abs/2405.02957)
-- [The CARLIN Method article](https://gregrobison.medium.com/the-carlin-method-teaching-ai-how-to-be-genuinely-funny-2bd5e45deaf2)
+- For future improvements &rarr; [The CARLIN Method article](https://gregrobison.medium.com/the-carlin-method-teaching-ai-how-to-be-genuinely-funny-2bd5e45deaf2)
