@@ -1,4 +1,4 @@
-# 🎭 AI Comedy ## 🚀 Quick Start
+# 🎭 AI Comedy Club 🚀 Quick Start
 
 ## Prerequisites
 ### Our setup
@@ -86,7 +86,7 @@ python start_gui_rag.py
 │   ├── gui/
 │   │   └── comedy_club_gui.py  # Tkinter GUI with human rating system
 │   └── utils/
-│       ├── enhanced_joke_rag.py    # RAG system with 230k+ jokes + web search
+│       ├── enhanced_joke_rag.py    # RAG system with 1Mln+ jokes + web search
 │       ├── comedy_feedback.py      # Dual scoring system (quality + audience)
 │       ├── human_rating.py         # Human rating system with adaptive learning
 │       ├── adaptive_comedy.py      # Adaptive learning from human feedback
@@ -94,7 +94,7 @@ python start_gui_rag.py
 ├── tests/
 │   └── test_enhanced_rag.py    # Orfeo connectivity and RAG tests
 ├── datasets/
-│   └── [joke datasets]         # 230k+ jokes and categorized content
+│   └── [joke datasets]         # 1Mln+ jokes and categorized content
 ├── scripts/
 │   └── [utility scripts]       # Data processing and setup scripts
 ├── slides/
